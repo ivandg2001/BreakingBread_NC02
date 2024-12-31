@@ -1,4 +1,4 @@
-package PackageGraphics;
+package PackageResponsabile;
 
 public class RiepilogoOrdineFinestra {
 }
