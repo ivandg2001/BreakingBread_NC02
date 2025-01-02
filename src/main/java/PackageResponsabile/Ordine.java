@@ -156,7 +156,6 @@ public class Ordine {
         this.responsabileID = responsabileID;
     }
 
-
     /**
      * Ritorna l'id del lotto associato all'ordine
      * @return id lotto
@@ -164,7 +163,6 @@ public class Ordine {
     public int getLottoID() {
         return lottoID;
     }
-
 
     /**
      * Ritorna l'id del responsabile associato all'ordine
