@@ -32,17 +32,17 @@ public class Sostanza {
 
     /**
      * Costruttore parametrico che inizializza i campi
-     * @param ID id sostanza
      * @param nome nome sostanza
      * @param formula formula della sostanza
      * @param costoUnitario costo unitario della sostanza
      */
-    public Sostanza(int ID, String nome, String formula, double costoUnitario) {
-        this.ID = ID;
+    public Sostanza(String nome, String formula, double costoUnitario) {
         this.nome = nome;
         this.formula = formula;
         this.costoUnitario = costoUnitario;
     }
+
+
     /**
      * Restituisce il nome della sostanza
      *
@@ -109,7 +109,7 @@ public class Sostanza {
      * Ritorna l'id della sostanza
      * @return id sostanza
      */
-    public Integer getID() {
+    public int getID() {
         return ID;
     }
 }

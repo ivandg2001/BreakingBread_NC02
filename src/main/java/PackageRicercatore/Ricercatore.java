@@ -27,14 +27,9 @@ public class Ricercatore {
     private String password;
 
     /**
-     * Lista dei prelievi effettuati dal ricercatore
-     */
-    private ArrayList<Prelievo> prelievi;
-
-    /**
      * Team a cui appartiene il ricercatore
      */
-    private Team team;
+    private int teamID;
 
     /**
      * Costruttore predefinito
@@ -46,15 +41,14 @@ public class Ricercatore {
      * @param nome nome del ricercatore
      * @param username username del ricercatore
      * @param password password del ricercatore
-     * @param prelievi preliev effettuati dal ricercatore
-     * @param team team a cui appartiene il ricercatore
+     * @param teamID id del team a cui appartiene il ricercatore
      */
-    public Ricercatore(String nome , String username , String password , ArrayList<Prelievo> prelievi , Team team){
+    public Ricercatore(String nome , String username , String password , int teamID){
         this.nome = nome;
         this.password = password;
         this.username = username;
-        this.team = team;
-        this.prelievi = prelievi;
+        this.teamID = teamID;
+
     }
 
     /**
@@ -63,14 +57,6 @@ public class Ricercatore {
      */
     public int getID() {
         return this.ID;
-    }
-
-    /**
-     * Ritorna la lista dei prelievi effettuati dal ricercatore
-     * @return lista dei prelievi
-     */
-    public List<Prelievo> getPrelievi() {
-        return this.prelievi;
     }
 
     /**
@@ -98,22 +84,6 @@ public class Ricercatore {
     }
 
     /**
-     * Ritorna il team a cui appatiene il ricercatore
-     * @return team ricercatore
-     */
-    public Team getTeam() {
-        return this.team;
-    }
-
-    /**
-     * Setta i prelievi effettuati dal ricecatore
-     * @param prelievi relievi del ricercatore
-     */
-    public void setPrelievi(ArrayList<Prelievo> prelievi) {
-        this.prelievi = prelievi;
-    }
-
-    /**
      * Setta il nome del ricercatore
      * @param nome nome ricercatore
      */
@@ -130,18 +100,34 @@ public class Ricercatore {
     }
 
     /**
-     * Setta il team a cui fa parte il ricercatore
-     * @param team Oggetto team
-     */
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    /**
      * Setta lo username del ricercatore
      * @param username username ricercatore
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * setta ID del ricercatore
+     * @param ID id del ricercatore
+     */
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    /**
+     * Setta ID del team a cui e' associato il responsabile
+     * @param teamID id del team
+     */
+    public void setTeamID(int teamID) {
+        this.teamID = teamID;
+    }
+
+    /**
+     * Ritorna l'ID del team a cui e' associato il responsabile
+     * @return id del team
+     */
+    public int getTeamID() {
+        return teamID;
     }
 }

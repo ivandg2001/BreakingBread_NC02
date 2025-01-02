@@ -30,7 +30,7 @@ public class Lotto {
     /**
      * Sostanza contenuta nel lotto, si fa riferimento all'ID
      */
-    private Sostanza sostanza;
+    private int sostanzaID;
 
 
     /**
@@ -44,11 +44,11 @@ public class Lotto {
      * Costruttore parametrico per inizializzare i campi dell'entità
      * @param dataScadenza data di scadenza del lotto
      * @param quantita quantità rimanente della sostanza nel lotto
-     * @param sostanza ID della sostanza contenuta nel lotto
+     * @param sostanzaID ID della sostanza contenuta nel lotto
      */
-    public Lotto(LocalDate dataScadenza , double quantita , Sostanza sostanza){
+    public Lotto(LocalDate dataScadenza , double quantita , int sostanzaID){
         this.dataScadenza = dataScadenza;
-        this.sostanza = sostanza;
+        this.sostanzaID = sostanzaID;
         this.quantita = quantita;
     }
 
@@ -58,6 +58,14 @@ public class Lotto {
      */
     public Integer getID() {
         return this.ID;
+    }
+
+    /**
+     * Setta id del lotto
+     * @param ID id lotto
+     */
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     /**
@@ -90,26 +98,18 @@ public class Lotto {
     public void setQuantita(double quantita) {this.quantita = quantita;}
 
     /**
-     * Ritorna la sostanza contenuta ne lotto
-     * @return oggetto sostanza
+     * Setta l'id della sostanza associata al lotto
+     * @param sostanzaID id sostanza
      */
-    public Sostanza getSostanza() {
-        return this.sostanza;
+    public void setSostanzaID(int sostanzaID) {
+        this.sostanzaID = sostanzaID;
     }
 
     /**
-     * Setta la sostanza contenuta nel lotto
-     * @param sostanza oggetto sostanza
+     * Ritorna l'id della sostanza associata al lotto
+     * @return id sostanza
      */
-    public void setSostanza(Sostanza sostanza) {
-        this.sostanza = sostanza;
-    }
-
-    /**
-     * Setta id del lotto
-     * @param ID id lotto
-     */
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getSostanzaID() {
+        return this.sostanzaID;
     }
 }

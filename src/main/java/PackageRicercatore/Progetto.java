@@ -6,11 +6,9 @@ package PackageRicercatore;
  */
 public class Progetto {
 
-
     /**
      * Id del progetto
      */
-
     private int ID;
 
     /**
@@ -21,7 +19,7 @@ public class Progetto {
     /**
      * Team a cui è stato assegnato il progetto.
      */
-    private Team team;
+    private int teamID;
 
     /**
      * Costruttore predefinito.
@@ -31,11 +29,11 @@ public class Progetto {
     /**
      * Costruttore parametrico che inizializza i campi.
      * @param nomeProgetto nome del progetto
-     * @param team team a cui è assegnato il progetto
+     * @param teamID team a cui è assegnato il progetto
      */
-    public Progetto(String nomeProgetto , Team team){
+    public Progetto(String nomeProgetto , int teamID){
         this.nomeProgetto = nomeProgetto;
-        this.team = team;
+        this.teamID = teamID;
     }
 
     /**
@@ -47,14 +45,6 @@ public class Progetto {
     }
 
     /**
-     * Ritorna il team a cui è assegnato il progetto
-     * @return team progetto
-     */
-    public Team getTeam() {
-        return this.team;
-    }
-
-    /**
      * Ritorna il nome del progetto
      * @return nome progetto
      */
@@ -62,13 +52,6 @@ public class Progetto {
         return this.nomeProgetto;
     }
 
-    /**
-     * Setta il team a cui è assegnato il progetto
-     * @param team team progetto
-     */
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 
     /**
      * Setta il nome del progetto
@@ -76,5 +59,29 @@ public class Progetto {
      */
     public void setNomeProgetto(String nomeProgetto) {
         this.nomeProgetto = nomeProgetto;
+    }
+
+    /**
+     * Setta l'id del progetto
+     * @param ID id progetto
+     */
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    /**
+     * Setta l'id del team associato al progetto
+     * @param teamID id del team
+     */
+    public void setTeamID(int teamID) {
+        this.teamID = teamID;
+    }
+
+    /**
+     * Ritorna l'id del team associato al progetto
+     * @return id del progetto
+     */
+    public int getTeamID() {
+        return this.teamID;
     }
 }

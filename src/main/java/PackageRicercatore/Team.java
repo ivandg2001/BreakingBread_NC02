@@ -19,16 +19,6 @@ public class Team {
     private String nomeTeam;
 
     /**
-     * Lista dei ricercatori che fanno parte di questo team
-     */
-    private ArrayList<Ricercatore> ricercatori;
-
-    /**
-     * Lista dei progetti assegnati a questo team
-     */
-    private ArrayList<Progetto> progetti;
-
-    /**
      * Costruttore predefinito
      */
     public Team(){}
@@ -36,13 +26,9 @@ public class Team {
     /**
      * Costruttore parametrico che inizializza i campi
      * @param nomeTeam nome del team
-     * @param ricercatori lista di oggetti ricercatore
-     * @param progetti lista di oggetti progetto
      */
-    public Team(String nomeTeam , ArrayList<Ricercatore> ricercatori , ArrayList<Progetto> progetti){
+    public Team(String nomeTeam){
         this.nomeTeam = nomeTeam;
-        this.progetti = progetti;
-        this.ricercatori = ricercatori;
     }
 
     /**
@@ -62,22 +48,6 @@ public class Team {
     }
 
     /**
-     * Ritorna la lista dei progetti assegnati al Team
-     * @return lista progetti
-     */
-    public List<Progetto> getProgetti() {
-        return this.progetti;
-    }
-
-    /**
-     * Ritorna la lista dei ricercatori che appartengono al Team
-     * @return lista ricercatori
-     */
-    public List<Ricercatore> getRicercatori() {
-        return this.ricercatori;
-    }
-
-    /**
      * Setta il nome del Team
      * @param nomeTeam nome Team
      */
@@ -86,18 +56,10 @@ public class Team {
     }
 
     /**
-     * Setta la lista dei progetti ssegnati al Team
-     * @param progetti lista progetti
+     * Setta l'id del Team
+     * @param ID id Team
      */
-    public void setProgetti(ArrayList<Progetto> progetti) {
-        this.progetti = progetti;
-    }
-
-    /**
-     * Setta la lista dei ricercatori che appartengono al Team
-     * @param ricercatori lista ricercatori
-     */
-    public void setRicercatori(ArrayList<Ricercatore> ricercatori) {
-        this.ricercatori = ricercatori;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

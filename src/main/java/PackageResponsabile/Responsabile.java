@@ -61,6 +61,14 @@ public class Responsabile {
     }
 
     /**
+     * Setta id del responsabile
+     * @param ID id responsabile
+     */
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    /**
      * Ritorna il nome del responsabile
      *
      * @return Nome del del responsabile, formato String
@@ -115,16 +123,5 @@ public class Responsabile {
     }
 
 
-    public Integer getID() {
-        return ID;
-    }
-
-    /**
-     * Setta id del responsabile
-     * @param ID id responsabile
-     */
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 }
 
