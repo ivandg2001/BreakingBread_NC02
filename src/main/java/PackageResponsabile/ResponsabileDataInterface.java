@@ -6,6 +6,6 @@ import java.sql.SQLException;
 
 public interface ResponsabileDataInterface {
 
-    public void creaOrdine(Ordine ordine , Lotto lotto) throws SQLException;
+    public void creaOrdine(Ordine ordine) throws SQLException;
 
 }

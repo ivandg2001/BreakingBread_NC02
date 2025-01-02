@@ -26,7 +26,7 @@ public class Team {
     /**
      * Lista dei progetti associati al team
      */
-    private ArrayList<Progetto> progetti
+    private ArrayList<Progetto> progetti;
 
     /**
      * Costruttore predefinito

@@ -1,6 +1,6 @@
 package PackageResponsabile;
 
-import PackageArmadietto.Lotto;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,19 +18,17 @@ public class ResponsabileDAO implements ResponsabileDataInterface{
         VALUES (?, ?, ?, ?, ?);
     """;
 
-    creaLotto
 
-    public void creaOrdine(Ordine ordine , Lotto lotto) throws SQLException {
 
-        creaLotto
+    public void creaOrdine(Ordine ordine) throws SQLException {
 
         try (Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDINE_SQL)) {
 
             preparedStatement.setDate(1, java.sql.Date.valueOf(ordine.getDataOrdine()));
             preparedStatement.setDouble(2, ordine.getCosto());
-            preparedStatement.setInt(3, ordine.getLottoID());
-            preparedStatement.setInt(4, ordine.getResponsabileID());
+            preparedStatement.setInt(3, ordine.getLotto().getID());
+            preparedStatement.setInt(4, ordine.getResponsabile().getID());
             preparedStatement.setInt(5, ordine.getPriorita());
 
             preparedStatement.executeUpdate();
