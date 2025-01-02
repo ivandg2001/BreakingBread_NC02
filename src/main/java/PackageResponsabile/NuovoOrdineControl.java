@@ -8,9 +8,7 @@ import java.util.ArrayList;
 
 public class NuovoOrdineControl {
 
-    public NuovoOrdineControl() {}
-
-    public void creaNuovoOrdine() {
+    public static void creaNuovoOrdine(Responsabile responsabile) {
 
 
 
@@ -49,7 +47,7 @@ public class NuovoOrdineControl {
      *
      * @return 1 se la compilazione del form è avvenuta con successo; 0 se la funzionalità è stata annullata; -1 se la compilazione va ripetuta.
      */
-    private int creaFormOrdine() {
+    private static int creaFormOrdine() {
         return 0;
     }
 
@@ -58,14 +56,14 @@ public class NuovoOrdineControl {
      *
      * @return true se il nuovo ordine viene confermato, false se viene rifiutato
      */
-    private boolean creaRiepilogoOrdine() {
+    private static boolean creaRiepilogoOrdine() {
         return false;
     }
 
     /**
      * Crea popup di conferma di avvenuto inserimento del nuovo ordine nel sistema
      */
-    private void creaPopup() {
+    private static void creaPopup() {
         return;
     }
 }
