@@ -1,5 +1,6 @@
 package PackageArmadietto;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ArmadiettoFacade {
@@ -17,10 +18,12 @@ public class ArmadiettoFacade {
 
     // elenco servizi
 
-    // implementato da Armadietto
+    /**
+     * Metodo che permette di ottenre la lista di tutte le sostanze resenti nell'armadietto
+     * @return lista sostanze
+     */
     public ArrayList<Sostanza> getListaSostanze() {
-        // TODO
-        return null;
+        return this.armadietto.getListaSostanze();
     }
 
     public String getNomeSostanza() {

@@ -1,5 +1,6 @@
 package PackageArmadietto;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,5 +51,24 @@ public class Armadietto {
      */
     public void addLotto(Lotto lotto){
         this.lotti.add(lotto);
+    }
+
+    /**
+     * Metodoche permette di ricevere la lista di tutte le sostanze
+     * @return lista delle sostanze
+     */
+    public ArrayList<Sostanza> getListaSostanze(){
+
+        SostanzaDataInterface sdi = new SostanzaDAO();
+
+        ArrayList<Sostanza> sostanze = new ArrayList<>();
+
+        try {
+            sostanze = sdi.getListaSostanze();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return sostanze;
     }
 }

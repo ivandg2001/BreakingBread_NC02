@@ -6,6 +6,8 @@ import PackageArmadietto.Sostanza;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
+
 public class NuovoOrdineControl {
 
     public NuovoOrdineControl() {}
@@ -42,22 +44,22 @@ public class NuovoOrdineControl {
             }
         }
 
-        OrdineForm ordineForm = new OrdineForm();
-        ordineForm
+        //OrdineForm ordineForm = new OrdineForm();
+        //ordineForm
 
         //info dal form
 
 
         // creazione dell'oggetto ordine
         //Lotto lotto = new Lotto(temp);
-        LocalDate today = LocalDate.now();
+       // LocalDate today = LocalDate.now();
         //Ordine ordine = new Ordine(today, 12.3, responsabile, lotto);
 
         // crea schermata di riepilogo
-        String nomeSostanza = armadiettoFacade.getNomeSostanza();
-        String formulaChimica = armadiettoFacade.getFormulaChimicaSostanza();
-        Double purezza = armadiettoFacade.getPurezzaSostanza();
-        int priorita = 8;
+        //String nomeSostanza = armadiettoFacade.getNomeSostanza();
+       // String formulaChimica = armadiettoFacade.getFormulaChimicaSostanza();
+        //Double purezza = armadiettoFacade.getPurezzaSostanza();
+        //int priorita = 8;
         // Stampa schermata di riepilogo
 
         // Inserimento dell'ordine nel sistema
@@ -92,3 +94,5 @@ public class NuovoOrdineControl {
         return;
     }
 }
+
+

@@ -22,22 +22,34 @@ public class SostanzaDAO implements SostanzaDataInterface {
     private static final String DB_PASSWORD = "ivan2001";
 
     /**
-     * Colonna id sostanza
+     * Query SQL per l'inserimento di una sostanza
      */
-    private static final String COLUMN_ID = "id";
-    /**
-     * Colonna nome sostanza
-     */
-    private static final String COLUMN_NOME = "nome";
-    /**
-     * Colonna formula sostanza
-     */
-    private static final String COLUMN_FORMULA = "formula";
-    /**
-     * Colonna costo unitario sostanza
-     */
-    private static final String COLUMN_COSTO_UNITARIO = "costo_unitario";
+    private static final String INSERT_QUERY = "INSERT INTO sostanza (nome, formula, costo_unitario) VALUES (?, ?, ?)";
 
+    /**
+     * Query SQL per la ricerca di una sostanza per nome
+     */
+    private static final String SELECT_BY_NOME_QUERY = "SELECT * FROM sostanza WHERE nome = ?";
+
+    /**
+     * Query SQL per la ricerca di una sostanza per ID
+     */
+    private static final String SELECT_BY_ID_QUERY = "SELECT * FROM sostanza WHERE id = ?";
+
+    /**
+     * Query SQL per l'aggiornamento di una sostanza
+     */
+    private static final String UPDATE_QUERY = "UPDATE sostanza SET nome = ?, formula = ?, costo_unitario = ? WHERE id = ?";
+
+    /**
+     * Query SQL per la cancellazione di una sostanza
+     */
+    private static final String DELETE_QUERY = "DELETE FROM sostanza WHERE id = ?";
+
+    /**
+     * Query SQL per ottenere tutte le sostanze
+     */
+    private static final String SELECT_ALL_QUERY = "SELECT * FROM sostanza";
 
     /**
      * Metodo che inserisce una sostanza nel Database
@@ -46,10 +58,8 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public void addSostanza(Sostanza sostanza) throws SQLException {
-        String query = "INSERT INTO sostanza (" + COLUMN_NOME + ", " + COLUMN_FORMULA + ", " + COLUMN_COSTO_UNITARIO + ") VALUES (?, ?, ?)";
-
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
 
             preparedStatement.setString(1, sostanza.getNome());
             preparedStatement.setString(2, sostanza.getFormula());
@@ -70,20 +80,18 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public Sostanza getSostanzaByNome(String nome) throws SQLException {
-        String query = "SELECT * FROM sostanza WHERE " + COLUMN_NOME + " = ?";
-
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_NOME_QUERY)) {
 
             preparedStatement.setString(1, nome);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 Sostanza sostanza = new Sostanza();
-                sostanza.setID(rs.getInt(COLUMN_ID));
-                sostanza.setNome(rs.getString(COLUMN_NOME));
-                sostanza.setFormula(rs.getString(COLUMN_FORMULA));
-                sostanza.setCostoUnitario(rs.getDouble(COLUMN_COSTO_UNITARIO));
+                sostanza.setID(rs.getInt("id"));
+                sostanza.setNome(rs.getString("nome"));
+                sostanza.setFormula(rs.getString("formula"));
+                sostanza.setCostoUnitario(rs.getDouble("costo_unitario"));
                 return sostanza;
             } else {
                 return null;
@@ -102,20 +110,18 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public Sostanza getSostanzaByID(int id) throws SQLException {
-        String query = "SELECT * FROM sostanza WHERE " + COLUMN_ID + " = ?";
-
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_QUERY)) {
 
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 Sostanza sostanza = new Sostanza();
-                sostanza.setID(rs.getInt(COLUMN_ID));
-                sostanza.setNome(rs.getString(COLUMN_NOME));
-                sostanza.setFormula(rs.getString(COLUMN_FORMULA));
-                sostanza.setCostoUnitario(rs.getDouble(COLUMN_COSTO_UNITARIO));
+                sostanza.setID(rs.getInt("id"));
+                sostanza.setNome(rs.getString("nome"));
+                sostanza.setFormula(rs.getString("formula"));
+                sostanza.setCostoUnitario(rs.getDouble("costo_unitario"));
                 return sostanza;
             } else {
                 return null;
@@ -133,10 +139,8 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public void updateSostanza(Sostanza sostanza) throws SQLException {
-        String query = "UPDATE sostanza SET " + COLUMN_NOME + " = ?, " + COLUMN_FORMULA + " = ?, " + COLUMN_COSTO_UNITARIO + " = ? WHERE " + COLUMN_ID + " = ?";
-
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY)) {
 
             preparedStatement.setString(1, sostanza.getNome());
             preparedStatement.setString(2, sostanza.getFormula());
@@ -157,10 +161,8 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public void deleteSostanza(int id) throws SQLException {
-        String query = "DELETE FROM sostanza WHERE " + COLUMN_ID + " = ?";
-
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY)) {
 
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
@@ -178,22 +180,19 @@ public class SostanzaDAO implements SostanzaDataInterface {
     @Override
     public ArrayList<Sostanza> getListaSostanze() throws SQLException {
         ArrayList<Sostanza> sostanze = new ArrayList<>();
-        String query = "SELECT * FROM sostanza";
-
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
+             ResultSet rs = statement.executeQuery(SELECT_ALL_QUERY)) {
 
             while (rs.next()) {
                 Sostanza sostanza = new Sostanza();
-                sostanza.setID(rs.getInt(COLUMN_ID));
-                sostanza.setNome(rs.getString(COLUMN_NOME));
-                sostanza.setFormula(rs.getString(COLUMN_FORMULA));
-                sostanza.setCostoUnitario(rs.getDouble(COLUMN_COSTO_UNITARIO));
+                sostanza.setID(rs.getInt("id"));
+                sostanza.setNome(rs.getString("nome"));
+                sostanza.setFormula(rs.getString("formula"));
+                sostanza.setCostoUnitario(rs.getDouble("costo_unitario"));
 
                 sostanze.add(sostanza);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
