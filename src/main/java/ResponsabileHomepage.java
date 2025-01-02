@@ -1,4 +1,5 @@
 import PackageResponsabile.NuovoOrdineButton;
+import PackageResponsabile.Responsabile;
 
 import javax.swing.*;
 
@@ -12,6 +13,9 @@ public class ResponsabileHomepage {
         JPanel panel = new JPanel();
         NuovoOrdineButton nuovoOrdineButton = new NuovoOrdineButton();
         panel.add(nuovoOrdineButton);
+
+        // Prendere responsabile da database
+        //Responsabile responsabile = new Responsabile();
 
         this.frame.updateCenter(panel);
         this.frame.loadUpdates();
