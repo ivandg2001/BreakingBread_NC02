@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import PackageResponsabile.NuovoOrdineButton;
 
 import javax.swing.*;
@@ -17,7 +16,4 @@ public class ResponsabileHomepage {
         this.frame.updateCenter(panel);
         this.frame.loadUpdates();
     }
-=======
-public class ResponsabileHomepage {
->>>>>>> 86def912c28d8cb152c5fc3a85a393b04035a073
 }

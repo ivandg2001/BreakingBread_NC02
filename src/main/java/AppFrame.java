@@ -1,5 +1,3 @@
-package PackageGraphics;
-
 import javax.swing.*;
 import java.awt.*;
 
