@@ -40,7 +40,8 @@ public class AppFrame {
      * @param panel il pannello che verrà posizionato nella parte alta del frame
      */
     public void updateNorth(JPanel panel) {
-        this.frame.remove(this.northPanel);
+        if (this.northPanel != null)
+            this.frame.remove(this.northPanel);
         this.northPanel = panel;
         this.frame.add(this.northPanel, BorderLayout.NORTH);
     }
@@ -51,7 +52,8 @@ public class AppFrame {
      * @param panel il pannello che verrà posizionato nella parte bassa del frame
      */
     public void updateSouth(JPanel panel) {
-        this.frame.remove(this.southPanel);
+        if (this.southPanel != null)
+            this.frame.remove(this.southPanel);
         this.southPanel = panel;
         this.frame.add(this.southPanel, BorderLayout.SOUTH);
     }
@@ -62,7 +64,8 @@ public class AppFrame {
      * @param panel il pannello che verrà posizionato al centro del frame
      */
     public void updateCenter(JPanel panel) {
-        this.frame.remove(this.centerPanel);
+        if (this.centerPanel != null)
+            this.frame.remove(this.centerPanel);
         this.centerPanel = panel;
         this.frame.add(this.centerPanel, BorderLayout.CENTER);
     }

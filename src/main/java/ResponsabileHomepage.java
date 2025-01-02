@@ -1,3 +1,5 @@
+import PackageResponsabile.NuovoOrdineButton;
+
 import javax.swing.*;
 
 public class ResponsabileHomepage {
@@ -8,7 +10,8 @@ public class ResponsabileHomepage {
 
     public void display() {
         JPanel panel = new JPanel();
-        panel.add(getNuovoOrdineButton());
+        NuovoOrdineButton nuovoOrdineButton = new NuovoOrdineButton();
+        panel.add(nuovoOrdineButton);
 
         this.frame.updateCenter(panel);
         this.frame.loadUpdates();

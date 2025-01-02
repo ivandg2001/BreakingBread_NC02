@@ -17,23 +17,23 @@ public class Homepage {
         this.frame.loadUpdates();
     }
 
-    private static JButton getResponsabileButton() {
+    private JButton getResponsabileButton() {
         JButton button = new JButton("Responsabile");
 
         button.addActionListener(e -> {
-            ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage();
+            ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame);
             responsabileHomepage.display();
         });
 
         return button;
     }
 
-    private static JButton getRicercatoreButton() {
+    private JButton getRicercatoreButton() {
         JButton button = new JButton("Ricercatore");
 
         button.addActionListener(e -> {
             RicercatoreHomepage ricercatoreHomepage = new RicercatoreHomepage();
-            ricercatoreHomepage.display();
+            //ricercatoreHomepage.display();
         });
 
         return button;
