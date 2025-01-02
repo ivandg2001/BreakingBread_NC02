@@ -19,6 +19,16 @@ public class Team {
     private String nomeTeam;
 
     /**
+     * Lista dei ricercatori associati al Team
+     */
+    private ArrayList<Ricercatore> ricercatori;
+
+    /**
+     * Lista dei progetti associati al team
+     */
+    private ArrayList<Progetto> progetti
+
+    /**
      * Costruttore predefinito
      */
     public Team(){}
@@ -61,5 +71,37 @@ public class Team {
      */
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    /**
+     * Setta i progetti associati al Team
+     * @param progetti lista progetti
+     */
+    public void setProgetti(ArrayList<Progetto> progetti) {
+        this.progetti = progetti;
+    }
+
+    /**
+     * Ritorna la lista dei progetti associati al Team
+     * @return lista progetti
+     */
+    public ArrayList<Progetto> getProgetti() {
+        return this.progetti;
+    }
+
+    /**
+     * Setta la lista dei ricercatori associati al Team
+     * @param ricercatori lista ricercatori
+     */
+    public void setRicercatori(ArrayList<Ricercatore> ricercatori) {
+        this.ricercatori = ricercatori;
+    }
+
+    /**
+     * Ritorna la lista dei ricercatori associati al Team
+     * @return lista ricercatori
+     */
+    public ArrayList<Ricercatore> getRicercatori() {
+        return this.ricercatori;
     }
 }

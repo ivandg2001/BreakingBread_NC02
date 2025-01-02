@@ -30,33 +30,48 @@ public class Lotto {
     /**
      * Sostanza contenuta nel lotto, si fa riferimento all'ID
      */
-    private int sostanzaID;
+    private Sostanza sostanza;
 
+    /**
+     * Preleivi effettuati sul lotto
+     */
+    private ArrayList<Prelievo> prelievi;
+
+    /**
+     * Ordine associato al lotto
+     */
+    private Ordine ordine;
+
+    /**
+     * Armadietto dove si trova il lotto
+     */
+    private Armadietto armadietto;
 
     /**
      * Costruttore predefinito
      */
     public Lotto() {
-
+        this.prelievi = new ArrayList<>();
     }
 
     /**
      * Costruttore parametrico per inizializzare i campi dell'entità
      * @param dataScadenza data di scadenza del lotto
      * @param quantita quantità rimanente della sostanza nel lotto
-     * @param sostanzaID ID della sostanza contenuta nel lotto
+     * @param sostanza sostanza contenuta nel lotto
      */
-    public Lotto(LocalDate dataScadenza , double quantita , int sostanzaID){
+    public Lotto(LocalDate dataScadenza , double quantita , Sostanza sostanza){
         this.dataScadenza = dataScadenza;
-        this.sostanzaID = sostanzaID;
+        this.sostanza = sostanza;
         this.quantita = quantita;
+        this.prelievi = new ArrayList<>();
     }
 
     /**
      * Restituisce l'id del lotto
      * @return ID del lotto
      */
-    public Integer getID() {
+    public int getID() {
         return this.ID;
     }
 
@@ -99,17 +114,65 @@ public class Lotto {
 
     /**
      * Setta l'id della sostanza associata al lotto
-     * @param sostanzaID id sostanza
+     * @param sostanza id sostanza
      */
-    public void setSostanzaID(int sostanzaID) {
-        this.sostanzaID = sostanzaID;
+    public void setSostanza(Sostanza sostanza) {
+        this.sostanza = sostanza;
     }
 
     /**
      * Ritorna l'id della sostanza associata al lotto
      * @return id sostanza
      */
-    public int getSostanzaID() {
-        return this.sostanzaID;
+    public Sostanza getSostanza() {
+        return this.sostanza;
+    }
+
+    /**
+     * Setta l'ordine associato al lotto
+     * @param ordine ordine lotto
+     */
+    public void setOrdine(Ordine ordine) {
+        this.ordine = ordine;
+    }
+
+    /**
+     * Ritorna l'ordine associato al lotto
+     * @return ordine lotto
+     */
+    public Ordine getOrdine() {
+        return this.ordine;
+    }
+
+    /**
+     * Setta i prelievi associati al lotto
+     * @param prelievi prelievi lotto
+     */
+    public void setPrelievi(ArrayList<Prelievo> prelievi) {
+        this.prelievi = prelievi;
+    }
+
+    /**
+     * Ritorna i prelievi associati al lotto
+     * @return prelievi lotto
+     */
+    public ArrayList<Prelievo> getPrelievi() {
+        return this.prelievi;
+    }
+
+    /**
+     * Seta l'armadietto contenente il lotto
+     * @param armadietto armadietto
+     */
+    public void setArmadietto(Armadietto armadietto) {
+        this.armadietto = armadietto;
+    }
+
+    /**
+     * Ritorn l'armadietto contenente il lotto
+     * @return armadietto
+     */
+    public Armadietto getArmadietto() {
+        return armadietto;
     }
 }

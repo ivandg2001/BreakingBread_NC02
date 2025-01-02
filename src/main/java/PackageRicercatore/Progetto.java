@@ -19,7 +19,7 @@ public class Progetto {
     /**
      * Team a cui è stato assegnato il progetto.
      */
-    private int teamID;
+    private Team team;
 
     /**
      * Costruttore predefinito.
@@ -31,9 +31,8 @@ public class Progetto {
      * @param nomeProgetto nome del progetto
      * @param teamID team a cui è assegnato il progetto
      */
-    public Progetto(String nomeProgetto , int teamID){
+    public Progetto(String nomeProgetto){
         this.nomeProgetto = nomeProgetto;
-        this.teamID = teamID;
     }
 
     /**
@@ -70,18 +69,18 @@ public class Progetto {
     }
 
     /**
-     * Setta l'id del team associato al progetto
-     * @param teamID id del team
+     * Setta il team associato al progetto
+     * @param team team progetto
      */
-    public void setTeamID(int teamID) {
-        this.teamID = teamID;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     /**
-     * Ritorna l'id del team associato al progetto
-     * @return id del progetto
+     * Ritorna il Team associato al progetto
+     * @return team progetto
      */
-    public int getTeamID() {
-        return this.teamID;
+    public Team getTeam() {
+        return team;
     }
 }

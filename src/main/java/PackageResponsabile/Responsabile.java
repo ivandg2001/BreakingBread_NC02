@@ -28,12 +28,15 @@ public class Responsabile {
      */
     private String username;
 
-
+    /**
+     * Ordini effettuati dal responsabile
+     */
+    private ArrayList<Ordine> ordini;
     /**
      * Costruttore predefinito, serve a JPA
      */
     public Responsabile() {
-
+        this.ordini = new ArrayList<>();
     }
 
     /**
@@ -47,6 +50,7 @@ public class Responsabile {
         this.nome = nome;
         this.password = password;
         this.username = username;
+        this.ordini = new ArrayList<>();
     }
 
     //--Getters and Setters--
@@ -56,7 +60,7 @@ public class Responsabile {
      *
      * @return id responsabile
      */
-    public int getId() {
+    public int getID() {
         return this.ID;
     }
 
@@ -122,6 +126,20 @@ public class Responsabile {
         this.username = username;
     }
 
+    /**
+     * Setta gli ordini associati al responsabile
+     * @param ordini ordini responsabile
+     */
+    public void setOrdini(ArrayList<Ordine> ordini) {
+        this.ordini = ordini;
+    }
 
+    /**
+     * Ritorna gli ordini effettuati dal responsabile
+     * @return Ordini responsabile
+     */
+    public ArrayList<Ordine> getOrdini() {
+        return ordini;
+    }
 }
 

@@ -29,25 +29,30 @@ public class Ricercatore {
     /**
      * Team a cui appartiene il ricercatore
      */
-    private int teamID;
+    private Team team;
+
+    /**
+     * Lista dei rpelievi effettuati dal ricercatore
+     */
+    private ArrayList<Prelievo> prelievi;
 
     /**
      * Costruttore predefinito
      */
-    public Ricercatore(){}
+    public Ricercatore(){
+        this.prelievi = new ArrayList<>();
+    }
 
     /***
      * Costruttore parametrico che inizializza i campi
      * @param nome nome del ricercatore
      * @param username username del ricercatore
      * @param password password del ricercatore
-     * @param teamID id del team a cui appartiene il ricercatore
      */
-    public Ricercatore(String nome , String username , String password , int teamID){
+    public Ricercatore(String nome , String username , String password){
         this.nome = nome;
         this.password = password;
         this.username = username;
-        this.teamID = teamID;
 
     }
 
@@ -116,18 +121,34 @@ public class Ricercatore {
     }
 
     /**
-     * Setta ID del team a cui e' associato il responsabile
-     * @param teamID id del team
+     * Setta la lista dei prelievi effettuati dal ricercatore
+     * @param prelievi lista prelievi
      */
-    public void setTeamID(int teamID) {
-        this.teamID = teamID;
+    public void setPrelievi(ArrayList<Prelievo> prelievi) {
+        this.prelievi = prelievi;
     }
 
     /**
-     * Ritorna l'ID del team a cui e' associato il responsabile
-     * @return id del team
+     * Ritorna la lista dei prelievi effettuati dal ricercatore
+     * @return lista preleivi
      */
-    public int getTeamID() {
-        return teamID;
+    public ArrayList<Prelievo> getPrelievi() {
+        return this.prelievi;
+    }
+
+    /**
+     * Setta il team associato al ricercatore
+     * @param team team ricercatore
+     */
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    /**
+     * Ritorna il team associato al ricercatore
+     * @return team ricercatore
+     */
+    public Team getTeam() {
+        return this.team;
     }
 }

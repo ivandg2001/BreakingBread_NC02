@@ -30,12 +30,12 @@ public class Ordine {
     /**
      * Responsabile che ha effettuato l'ordine
      */
-    private int responsabileID;
+    private Responsabile responsabile;
 
     /**
      * Lotto inserito nell'ordine
      */
-    private int lottoID;
+    private Lotto lotto;
 
     /**
      * Priorita' dell'ordine
@@ -54,13 +54,11 @@ public class Ordine {
      * Costruttore parametrico per inizializzare i campi dell'entità.
      *
      * @param dataOrdine   data in cui è stato effettuato l'ordine.
-     * @param responsabileID responsaile che ha effettuto l'ordine
-     * @param lottoID        lotto ordinato
+     * @param priorita priorita' data all'ordine
+     * @param costo costo dell'ordine
      */
-    public Ordine(LocalDate dataOrdine,  int responsabileID, int lottoID , int priorita , double costo) {
+    public Ordine(LocalDate dataOrdine,  int priorita , double costo) {
         this.dataOrdine = dataOrdine;
-        this.responsabileID = responsabileID;
-        this.lottoID = lottoID;
         this.priorita = priorita;
         this.costo = costo;
     }
@@ -141,34 +139,34 @@ public class Ordine {
     }
 
     /**
-     * Setta id del lotto associato all'ordine
-     * @param lottoID id lotto
+     * Setta il lotto associato all'ordine
+     * @param lotto lotto ordine
      */
-    public void setLottoID(int lottoID) {
-        this.lottoID = lottoID;
+    public void setLotto(Lotto lotto) {
+        this.lotto = lotto;
     }
 
     /**
-     * Setta l'id del responsabile associato all'ordine
-     * @param responsabileID
+     * Ritorna il lotto associato a questo ordine
+     * @return lotto ordine
      */
-    public void setResponsabileID(int responsabileID) {
-        this.responsabileID = responsabileID;
+    public Lotto getLotto() {
+        return this.lotto;
     }
 
     /**
-     * Ritorna l'id del lotto associato all'ordine
-     * @return id lotto
+     * Setta il responsabile associato all'ordine
+     * @param responsabile responsabile ordine
      */
-    public int getLottoID() {
-        return lottoID;
+    public void setResponsabile(Responsabile responsabile) {
+        this.responsabile = responsabile;
     }
 
     /**
-     * Ritorna l'id del responsabile associato all'ordine
-     * @return id responsabile
+     * Ritorna il responsabile associato all'ordine
+     * @return responsabile ordine
      */
-    public int getResponsabileID() {
-        return responsabileID;
+    public Responsabile getResponsabile() {
+        return this.responsabile;
     }
 }

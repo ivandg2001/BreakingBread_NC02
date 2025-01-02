@@ -28,12 +28,12 @@ public class Prelievo {
     /**
      * Lotto su cui è stato effettuato il prelievo
      */
-    private int lottoID;
+    private Lotto lotto;
 
     /**
      * ricercatore che ha effettuato l'ordine
      */
-    private int ricercatoreID;
+    private Ricercatore ricercatore;
 
     /**
      * Costruttore predefinito
@@ -43,15 +43,11 @@ public class Prelievo {
     /**
      * Costruttore parametrico per inizializzare i campi
      * @param data Data in cui è stato effettuato il prelievo
-     * @param lottoID Lotto su cui è stato effettuato il prelievo
      * @param quantita quantita' prelevata con il prelievo
-     * @param ricercatoreID id del ricercatore
      */
-    public Prelievo(LocalDate data , int lottoID , double quantita , int ricercatoreID){
+    public Prelievo(LocalDate data ,  double quantita ){
         this.data = data;
-        this.lottoID = lottoID;
         this.quantita = quantita;
-        this.ricercatoreID = ricercatoreID;
     }
 
     /**
@@ -87,14 +83,6 @@ public class Prelievo {
     }
 
     /**
-     * Setta l'id del lotto associato al prelievo
-     * @param lottoID id del lotto
-     */
-    public void setLottoID(int lottoID) {
-        this.lottoID = lottoID;
-    }
-
-    /**
      * Setta la data in cui e' stato effettuato il prelievo
      * @param data data del prelievo
      */
@@ -103,34 +91,42 @@ public class Prelievo {
     }
 
     /**
-     * Setta l'id del ricercatore
-     * @param ricercatoreID
-     */
-    public void setRicercatoreID(int ricercatoreID) {
-        this.ricercatoreID = ricercatoreID;
-    }
-
-    /**
-     * Ritorna l'id del lotto associato al prelievo
-     * @return id del lotto
-     */
-    public int getLottoID() {
-        return this.lottoID;
-    }
-
-    /**
-     * Ritorna l'id del ricercatore assoviato al prelievo
-     * @return id ricercatore
-     */
-    public int getRicercatoreID() {
-        return this.ricercatoreID;
-    }
-
-    /**
      * Ritorna la data in cui e' stato effettuato il prelievo
      * @return data del prelievo
      */
     public LocalDate getData() {
         return this.data;
+    }
+
+    /**
+     * Setta il lotto associato al prelievo
+     * @param lotto lotto prelievo
+     */
+    public void setLotto(Lotto lotto) {
+        this.lotto = lotto;
+    }
+
+    /**
+     * Ritorna il lotto associato al prelievo
+     * @return lotto prelievo
+     */
+    public Lotto getLotto() {
+        return this.lotto;
+    }
+
+    /**
+     * Setta il ricercatore associato al prelievo
+     * @param ricercatore ricercatore prelievo
+     */
+    public void setRicercatore(Ricercatore ricercatore) {
+        this.ricercatore = ricercatore;
+    }
+
+    /**
+     * Ritorna il ricercatore associato al prelievo
+     * @return ricercatore prelievo
+     */
+    public Ricercatore getRicercatore() {
+        return this.ricercatore;
     }
 }

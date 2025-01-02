@@ -1,5 +1,6 @@
 package PackageArmadietto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,10 @@ public class Sostanza {
      */
     private double costoUnitario;
 
+    /**
+     * Lista dei lotti che contengono la sostanza
+     */
+    private ArrayList<Lotto> lotti;
 
     /**
      * Costruttore vuoto
@@ -42,6 +47,21 @@ public class Sostanza {
         this.costoUnitario = costoUnitario;
     }
 
+    /**
+     * Setta la lista dei lotti che contengono la sostanza
+     * @param lotti lista lotti
+     */
+    public void setLotti(ArrayList<Lotto> lotti) {
+        this.lotti = lotti;
+    }
+
+    /**
+     * Ritorna la lista dei lotti che contengono la sostanza
+     * @return lista lotti
+     */
+    public ArrayList<Lotto> getLotti() {
+        return this.lotti;
+    }
 
     /**
      * Restituisce il nome della sostanza
