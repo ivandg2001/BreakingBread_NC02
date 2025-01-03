@@ -28,7 +28,7 @@ public interface LottoDataInterface {
      *
      * @return Una lista di oggetti Lotto.
      */
-    ArrayList<Lotto> getAllLotti();
+    ArrayList<Lotto> getListaLotti();
 
     /**
      * Aggiorna le informazioni di un lotto nel database.

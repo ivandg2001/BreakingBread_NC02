@@ -9,6 +9,10 @@ import java.util.List;
 public class Sostanza {
 
     /**
+     * Variabile statica che mantiene a livello di classe un interfaccia al DAO della sostanza
+     */
+    public static final SostanzaDataInterface sostanzaDataInterface = new SostanzaDAO();
+    /**
      * ID usato per identificare singolarmente le sostanze nel database
      */
     private int ID;
@@ -131,5 +135,31 @@ public class Sostanza {
      */
     public int getID() {
         return ID;
+    }
+
+    /**
+     * Metodo che gestisce la persistenza per l'oggetto Sostanza, inserisce la sostanza nel database
+     */
+    public void storeSostanza(){
+        sostanzaDataInterface.addSostanza(this);
+    }
+
+    /**
+     * Metodo che gestisce la persistenza per l'oggetto Sostanza, carica un oggetto sostanza dal database
+     * @param id id della sostanza
+     * @return Sostanza
+     */
+    public static Sostanza loadSostanzaByID(int id){
+        return sostanzaDataInterface.getSostanzaByID(id);
+    }
+
+    public static Sostanza loadSostanzaByNome(String nome){
+        return sostanzaDataInterface.getSostanzaByNome(nome);
+    }
+    /**
+     * Metodo che gestisce la persistenza per l'oggetto Sostanza, aggiorna un oggetto sostanza nel database
+     */
+    public void updateSostanza(){
+        sostanzaDataInterface.updateSostanza(this);
     }
 }

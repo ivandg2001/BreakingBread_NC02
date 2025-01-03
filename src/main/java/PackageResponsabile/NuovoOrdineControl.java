@@ -1,6 +1,7 @@
 package PackageResponsabile;
 
 import PackageArmadietto.ArmadiettoFacade;
+import PackageArmadietto.ArmadiettoGetDataInterface;
 import PackageArmadietto.Sostanza;
 
 import java.time.LocalDate;

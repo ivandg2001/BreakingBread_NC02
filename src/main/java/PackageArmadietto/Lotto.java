@@ -15,6 +15,11 @@ import java.util.ArrayList;
 public class Lotto {
 
     /**
+     * Variabile statica che mantiene a livello di classe un interfaccia al DAO del lotto
+     */
+    private final static LottoDataInterface lottoDataInterface = new LottoDAO();
+
+    /**
      * ID usato per identificare singolarmente i lotti
      */
     private int ID;
@@ -33,7 +38,7 @@ public class Lotto {
     private Sostanza sostanza;
 
     /**
-     * Preleivi effettuati sul lotto
+     * Prelievi effettuati sul lotto
      */
     private ArrayList<Prelievo> prelievi;
 
@@ -110,7 +115,13 @@ public class Lotto {
      *
      * @param quantita quantità di sostanza nel lotto
      */
-    public void setQuantita(double quantita) {this.quantita = quantita;}
+    public void setQuantita(double quantita) {
+
+        if( quantita < 0){
+            throw new IllegalArgumentException("Quantita negativa");
+        }
+
+        this.quantita = quantita;}
 
     /**
      * Setta l'id della sostanza associata al lotto
@@ -174,5 +185,30 @@ public class Lotto {
      */
     public Armadietto getArmadietto() {
         return armadietto;
+    }
+
+    //--Persistenza--
+
+    /**
+     * Metodo che gestisce la persistenza per l'oggetto lotto, inserisce il lotto nel database
+     */
+    public void storeLotto(){
+        lottoDataInterface.setLotto(this);
+    }
+
+    /**
+     * Metodo statico che gestisce la persistenza per l'oggetto lotto, carica un oggetto lotto dal database
+     * @param id id del lotto da caricare
+     * @return Oggetto lotto
+     */
+    public static Lotto loadLotto(int id){
+        return lottoDataInterface.getLottoById(id);
+    }
+
+    /**
+     * Metodo che gestisce la persistenza per l'oggetto lotto, fa un'update sull'oggetto lotto
+     */
+    public void update(){
+        lottoDataInterface.updateLotto(this);
     }
 }

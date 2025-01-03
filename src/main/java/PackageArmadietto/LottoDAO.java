@@ -102,7 +102,7 @@ public class LottoDAO implements LottoDataInterface {
      * @return Una lista di oggetti Lotto.
      */
     @Override
-    public ArrayList<Lotto> getAllLotti() {
+    public ArrayList<Lotto> getListaLotti() {
         ArrayList<Lotto> lotti = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_LOTTI);

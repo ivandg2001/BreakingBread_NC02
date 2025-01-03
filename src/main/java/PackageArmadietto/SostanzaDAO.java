@@ -54,10 +54,10 @@ public class SostanzaDAO implements SostanzaDataInterface {
     /**
      * Metodo che inserisce una sostanza nel Database
      * @param sostanza Oggetto sostanza
-     * @throws SQLException Eccezione SQL
+     * @return true se l'inserimento è avvenuto con successo, false altrimenti.
      */
     @Override
-    public void addSostanza(Sostanza sostanza) throws SQLException {
+    public boolean addSostanza(Sostanza sostanza) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
 
@@ -65,10 +65,11 @@ public class SostanzaDAO implements SostanzaDataInterface {
             preparedStatement.setString(2, sostanza.getFormula());
             preparedStatement.setDouble(3, sostanza.getCostoUnitario());
 
-            preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
+            return false;
         }
     }
 
@@ -76,10 +77,9 @@ public class SostanzaDAO implements SostanzaDataInterface {
      * Metodo per cercare una sostanza utilizzando il nome
      * @param nome nome della sostanza
      * @return Oggetto sostanza
-     * @throws SQLException Eccezione SQL
      */
     @Override
-    public Sostanza getSostanzaByNome(String nome) throws SQLException {
+    public Sostanza getSostanzaByNome(String nome) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_NOME_QUERY)) {
 
@@ -93,23 +93,21 @@ public class SostanzaDAO implements SostanzaDataInterface {
                 sostanza.setFormula(rs.getString("formula"));
                 sostanza.setCostoUnitario(rs.getDouble("costo_unitario"));
                 return sostanza;
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
         }
+
+        return null;
     }
 
     /**
      * Metodo per cercare una sostanza utilizzando l'id
      * @param id id della sostanza
      * @return Oggetto sostanza
-     * @throws SQLException Eccezione SQL
      */
     @Override
-    public Sostanza getSostanzaByID(int id) throws SQLException {
+    public Sostanza getSostanzaByID(int id){
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_QUERY)) {
 
@@ -123,22 +121,21 @@ public class SostanzaDAO implements SostanzaDataInterface {
                 sostanza.setFormula(rs.getString("formula"));
                 sostanza.setCostoUnitario(rs.getDouble("costo_unitario"));
                 return sostanza;
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
         }
+
+        return null;
     }
 
     /**
      * Metodo per l'aggiornamento di un oggeto sostanza nel Database
      * @param sostanza Oggetto sostanza
-     * @throws SQLException Eccezione SQL
+     * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
      */
     @Override
-    public void updateSostanza(Sostanza sostanza) throws SQLException {
+    public boolean updateSostanza(Sostanza sostanza){
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY)) {
 
@@ -147,38 +144,39 @@ public class SostanzaDAO implements SostanzaDataInterface {
             preparedStatement.setDouble(3, sostanza.getCostoUnitario());
             preparedStatement.setInt(4, sostanza.getID());
 
-            preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
+            return false;
         }
     }
 
     /**
      * Metodo per eliminare una sostanza
      * @param id id della sostanza da eliminare
-     * @throws SQLException Eccezione SQL
+     * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
     @Override
-    public void deleteSostanza(int id) throws SQLException {
+    public boolean deleteSostanza(int id){
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY)) {
 
             preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
+            return false;
         }
     }
 
     /**
      * Metodo che ritorna una lista contenente tutte le sostanze del Database
      * @return Lista delle sostanze
-     * @throws SQLException Eccezione SQL
      */
     @Override
-    public ArrayList<Sostanza> getListaSostanze() throws SQLException {
+    public ArrayList<Sostanza> getListaSostanze(){
         ArrayList<Sostanza> sostanze = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              Statement statement = connection.createStatement();
@@ -195,7 +193,6 @@ public class SostanzaDAO implements SostanzaDataInterface {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
         }
 
         return sostanze;

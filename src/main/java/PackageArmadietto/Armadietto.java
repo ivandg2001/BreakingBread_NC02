@@ -10,15 +10,22 @@ import java.util.List;
 public class Armadietto {
 
     /**
-     * Lista dei lotti presenti nel laboratorio
+     * Lista dei lotti presenti nell'armadietto
      */
     private ArrayList<Lotto> lotti;
+
+
+    /**
+     * Variabile statica per l'interfaccia al DAO Lotto
+     */
+    public static final LottoDataInterface lottoDataInterface = new LottoDAO();
+
 
     /**
      * Costruttore predefinito
      */
     public Armadietto(){
-        this.lotti = new ArrayList<Lotto>();
+        this.lotti = lottoDataInterface.getListaLotti();
     }
 
     /**
@@ -33,8 +40,8 @@ public class Armadietto {
      * Ritorna la lista dei lotti
      * @return lista lotti
      */
-    public List<Lotto> getLotti() {
-        return lotti;
+    public ArrayList<Lotto> getLotti() {
+        return this.lotti;
     }
 
     /**
@@ -47,28 +54,12 @@ public class Armadietto {
 
     /**
      * Metodo che permette di aggiungere un lotto alla lista dei lotti
-     * @param lotto
+     * @param lotto oggetto lotto
      */
     public void addLotto(Lotto lotto){
         this.lotti.add(lotto);
     }
 
-    /**
-     * Metodoche permette di ricevere la lista di tutte le sostanze
-     * @return lista delle sostanze
-     */
-    public ArrayList<Sostanza> getListaSostanze(){
 
-        SostanzaDataInterface sdi = new SostanzaDAO();
 
-        ArrayList<Sostanza> sostanze = new ArrayList<>();
-
-        try {
-            sostanze = sdi.getListaSostanze();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return sostanze;
-    }
 }
