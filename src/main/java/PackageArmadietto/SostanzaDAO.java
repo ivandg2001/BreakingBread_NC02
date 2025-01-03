@@ -51,6 +51,8 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     private static final String SELECT_ALL_QUERY = "SELECT * FROM sostanza";
 
+    private static final String SELECT_ALL_NAMES = "SELECT nome FROM sostanza";
+
     /**
      * Metodo che inserisce una sostanza nel Database
      * @param sostanza Oggetto sostanza
@@ -197,4 +199,24 @@ public class SostanzaDAO implements SostanzaDataInterface {
 
         return sostanze;
     }
+
+    public ArrayList<String> getListaNomiSostanze(){
+        ArrayList<String> nomi = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(SELECT_ALL_NAMES)) {
+
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                nomi.add(nome);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nomi;
+
+    }
+
 }

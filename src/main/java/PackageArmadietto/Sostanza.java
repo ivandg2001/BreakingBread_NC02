@@ -141,7 +141,10 @@ public class Sostanza {
      * Metodo che gestisce la persistenza per l'oggetto Sostanza, inserisce la sostanza nel database
      */
     public void storeSostanza(){
-        sostanzaDataInterface.addSostanza(this);
+        if(!sostanzaDataInterface.addSostanza(this)){
+            throw new IllegalArgumentException("Sostanza gia' presente");
+        }
+
     }
 
     /**
@@ -160,6 +163,10 @@ public class Sostanza {
      * Metodo che gestisce la persistenza per l'oggetto Sostanza, aggiorna un oggetto sostanza nel database
      */
     public void updateSostanza(){
-        sostanzaDataInterface.updateSostanza(this);
+
+        if(!sostanzaDataInterface.updateSostanza(this)){
+            throw new IllegalArgumentException("Update della sostanza fallito");
+        }
+
     }
 }

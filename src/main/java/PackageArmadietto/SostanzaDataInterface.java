@@ -45,4 +45,10 @@ public interface SostanzaDataInterface {
      * @return Lista delle sostanze
      */
     ArrayList<Sostanza> getListaSostanze();
+
+    /**
+     * Metodo che ritorna la lista dei nomi di tutte le sostanze
+     * @return lista nomi
+     */
+    ArrayList<String> getListaNomiSostanze();
 }

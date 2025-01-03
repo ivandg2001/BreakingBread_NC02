@@ -7,10 +7,9 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
 
     private final static LottoDataInterface lottoDataInterface = new LottoDAO();
     private final static SostanzaDataInterface sostanzaDataInterface = new SostanzaDAO();
-    private final Armadietto armadietto;
+
 
     public ArmadiettoFacade() {
-        this.armadietto = new Armadietto(lottoDataInterface.getListaLotti());
     }
 
     //-- GetDataInterface --
@@ -22,7 +21,7 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
 
     @Override
     public ArrayList<Lotto> getListaLotti() {
-        return this.armadietto.getLotti();
+        return lottoDataInterface.getListaLotti();
     }
 
     @Override
@@ -40,12 +39,16 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
         return sostanzaDataInterface.getListaSostanze();
     }
 
+    @Override
+    public ArrayList<String> getListaNomiSostanze(){
+        return sostanzaDataInterface.getListaNomiSostanze();
+    }
+
     //-- SetDataInterface --
     @Override
     public void saveLotto(LocalDate dataScadenza, double quantita, Sostanza sostanza) {
         Lotto lotto = new Lotto(dataScadenza, quantita, sostanza);
         lotto.storeLotto();
-        updateArmadietto();
     }
 
     @Override
@@ -56,10 +59,4 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
 
     //--------
 
-    /**
-     * Metodo che aggiorna l'armadietto, viene chiamato quando si ha un aggiunta di un lotto.
-     */
-    public void updateArmadietto() {
-        this.armadietto.setLotti(lottoDataInterface.getListaLotti());
-    }
 }

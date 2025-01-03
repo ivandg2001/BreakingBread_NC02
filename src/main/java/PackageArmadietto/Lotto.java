@@ -193,7 +193,10 @@ public class Lotto {
      * Metodo che gestisce la persistenza per l'oggetto lotto, inserisce il lotto nel database
      */
     public void storeLotto(){
-        lottoDataInterface.setLotto(this);
+        if(!lottoDataInterface.setLotto(this)){
+            throw new IllegalArgumentException("Lotto gia' presente");
+        }
+
     }
 
     /**
@@ -209,6 +212,8 @@ public class Lotto {
      * Metodo che gestisce la persistenza per l'oggetto lotto, fa un'update sull'oggetto lotto
      */
     public void update(){
-        lottoDataInterface.updateLotto(this);
+        if(!lottoDataInterface.updateLotto(this)){
+            throw new IllegalArgumentException("Update del lotto fallito");
+        }
     }
 }

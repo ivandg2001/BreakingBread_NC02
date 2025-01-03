@@ -38,4 +38,6 @@ public interface ArmadiettoGetDataInterface {
      * @return lista di oggetti Sostanza
      */
     public ArrayList<Sostanza> getListaSostanza();
+
+    public ArrayList<String> getListaNomiSostanze();
 }
