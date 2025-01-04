@@ -83,9 +83,7 @@ public class LottoDAO implements LottoDataInterface {
                 lotto.setDataScadenza(rs.getDate("data_scadenza").toLocalDate());
                 lotto.setQuantita(rs.getDouble("quantita"));
 
-                // Assumendo che la sostanza sia una relazione esterna
-                Sostanza sostanza = new Sostanza();
-                sostanza.setID(rs.getInt("sostanza_id"));
+                Sostanza sostanza = Sostanza.loadSostanzaByID(rs.getInt("sostanza_id"));
                 lotto.setSostanza(sostanza);
 
                 return lotto;
@@ -114,9 +112,8 @@ public class LottoDAO implements LottoDataInterface {
                 lotto.setDataScadenza(rs.getDate("data_scadenza").toLocalDate());
                 lotto.setQuantita(rs.getDouble("quantita"));
 
-                // Assumendo che la sostanza sia una relazione esterna
-                Sostanza sostanza = new Sostanza();
-                sostanza.setID(rs.getInt("sostanza_id"));
+
+                Sostanza sostanza = Sostanza.loadSostanzaByID(rs.getInt("sostanza_id"));
                 lotto.setSostanza(sostanza);
 
                 lotti.add(lotto);

@@ -88,7 +88,8 @@ public class OrdineDAO implements OrdineDataInterface {
                 ordine.setCosto(rs.getDouble("costo"));
                 ordine.setPriorita(rs.getInt("priorita"));
 
-                Lotto lotto = new LottoDAO().getLottoById(rs.getInt("lotto_id"));
+                ArmadiettoGetDataInterface i = new ArmadiettoFacade();
+                Lotto lotto = i.getLottoByID(rs.getInt("lotto_id"));
                 ordine.setLotto(lotto);
 
                 Responsabile responsabile = new ResponsabileDAO().getResponsabileById(rs.getInt("responsabile_id"));

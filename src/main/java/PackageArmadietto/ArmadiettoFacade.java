@@ -57,6 +57,5 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
         sostanza.storeSostanza();
     }
 
-    //--------
 
 }
