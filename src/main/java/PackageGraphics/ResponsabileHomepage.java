@@ -1,5 +1,6 @@
+package PackageGraphics;
+
 import PackageResponsabile.NuovoOrdineButton;
-import PackageResponsabile.Responsabile;
 
 import javax.swing.*;
 
@@ -11,7 +12,7 @@ public class ResponsabileHomepage {
 
     public void display() {
         JPanel panel = new JPanel();
-        NuovoOrdineButton nuovoOrdineButton = new NuovoOrdineButton();
+        NuovoOrdineButton nuovoOrdineButton = new NuovoOrdineButton(frame);
         panel.add(nuovoOrdineButton);
 
         // Prendere responsabile da database

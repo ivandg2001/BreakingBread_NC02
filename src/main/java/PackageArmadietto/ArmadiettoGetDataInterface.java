@@ -39,5 +39,5 @@ public interface ArmadiettoGetDataInterface {
      */
     public ArrayList<Sostanza> getListaSostanza();
 
-    public ArrayList<String> getListaNomiSostanze();
+    public String[] getListaNomiSostanze();
 }

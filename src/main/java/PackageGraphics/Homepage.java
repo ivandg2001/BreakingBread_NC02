@@ -1,3 +1,5 @@
+package PackageGraphics;
+
 import javax.swing.*;
 
 public class Homepage {

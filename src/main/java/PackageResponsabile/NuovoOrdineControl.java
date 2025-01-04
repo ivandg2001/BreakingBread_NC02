@@ -2,18 +2,20 @@ package PackageResponsabile;
 
 import PackageArmadietto.ArmadiettoFacade;
 import PackageArmadietto.ArmadiettoGetDataInterface;
-import PackageArmadietto.Sostanza;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-
-
+import PackageGraphics.AppFrame;
+import PackageGraphics.ResponsabileHomepage;
 
 public class NuovoOrdineControl {
 
-    public NuovoOrdineControl() {}
+    private AppFrame frame;
+
+    public NuovoOrdineControl(AppFrame frame) {
+        this.frame = frame;
+    }
 
     public void creaNuovoOrdine() {
+
+        creaFormOrdine();
 
         /*
         * 1. Prendere dal database la lista delle sostanze
@@ -26,24 +28,7 @@ public class NuovoOrdineControl {
         * 8. Tornare nella homepage del responsabile
         * */
 
-        // acquisizione lista sostanze
-        ArmadiettoFacade armadiettoFacade = new ArmadiettoFacade();
-        ArrayList<Sostanza> listaSostanze = armadiettoFacade.getListaSostanze();
 
-        // InputUtente = new
-
-        while (true) {
-            // InputUtente inputUtente = new InputUtente()
-
-            switch (creaFormOrdine()) {
-                case 1:
-            }
-            while (true) {
-                while (true) {
-
-                }
-            }
-        }
 
         //OrdineForm ordineForm = new OrdineForm();
         //ordineForm
@@ -75,8 +60,21 @@ public class NuovoOrdineControl {
      *
      * @return 1 se la compilazione del form è avvenuta con successo; 0 se la funzionalità è stata annullata; -1 se la compilazione va ripetuta.
      */
-    private int creaFormOrdine() {
-        return 0;
+    private void creaFormOrdine() {
+        // acquisizione lista sostanze
+        ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
+        OrdineForm ordineForm = new OrdineForm(frame);
+        Ordine ordine = ordineForm.getOrdine(armadiettoGDI.getListaNomiSostanze());
+
+        switch (1) {
+            case 1: creaRiepilogoOrdine(); break;
+            case 2: ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame);
+                responsabileHomepage.display();
+                break;
+            case 3: creaFormOrdine(); break;
+            default: break;
+        }
+
     }
 
     /**
@@ -84,8 +82,8 @@ public class NuovoOrdineControl {
      *
      * @return true se il nuovo ordine viene confermato, false se viene rifiutato
      */
-    private boolean creaRiepilogoOrdine() {
-        return false;
+    private void creaRiepilogoOrdine() {
+        return;
     }
 
     /**

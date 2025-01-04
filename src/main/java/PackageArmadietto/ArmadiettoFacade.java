@@ -40,7 +40,7 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
     }
 
     @Override
-    public ArrayList<String> getListaNomiSostanze(){
+    public String[] getListaNomiSostanze(){
         return sostanzaDataInterface.getListaNomiSostanze();
     }
 

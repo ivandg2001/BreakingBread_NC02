@@ -1,6 +1,5 @@
 package PackageArmadietto;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface SostanzaDataInterface {
@@ -48,7 +47,8 @@ public interface SostanzaDataInterface {
 
     /**
      * Metodo che ritorna la lista dei nomi di tutte le sostanze
+     *
      * @return lista nomi
      */
-    ArrayList<String> getListaNomiSostanze();
+    String[] getListaNomiSostanze();
 }

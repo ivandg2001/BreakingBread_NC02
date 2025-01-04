@@ -200,23 +200,15 @@ public class SostanzaDAO implements SostanzaDataInterface {
         return sostanze;
     }
 
-    public ArrayList<String> getListaNomiSostanze(){
-        ArrayList<String> nomi = new ArrayList<>();
+    public String[] getListaNomiSostanze() {
+        ArrayList<Sostanza> sostanze = getListaSostanze();
+        String[] nomi = new String[sostanze.size()];
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery(SELECT_ALL_NAMES)) {
-
-            while (rs.next()) {
-                String nome = rs.getString("nome");
-                nomi.add(nome);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (int i = 0; i < sostanze.size(); i++) {
+            nomi[i] = sostanze.get(i).getNome();
         }
 
         return nomi;
-
     }
 
 }
