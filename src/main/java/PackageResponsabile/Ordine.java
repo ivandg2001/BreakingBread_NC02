@@ -43,6 +43,9 @@ public class Ordine {
     private int priorita;
 
 
+    private final static OrdineDataInterface ordineDataInterface = new OrdineDAO();
+
+
     /**
      * Costruttore predefinito
      */
@@ -169,4 +172,21 @@ public class Ordine {
     public Responsabile getResponsabile() {
         return this.responsabile;
     }
+
+    public void storeOrdine(){
+        if(!ordineDataInterface.setOrdine(this)){
+            throw new IllegalArgumentException("Ordine gia' presente");
+        }
+    }
+
+    public static Ordine loadOrdineByID(int id){
+        return ordineDataInterface.getOrdineById(id);
+    }
+
+    public void update(){
+        if(!ordineDataInterface.updateOrdine(this)){
+            throw new IllegalArgumentException("Update dell'ordine fallito");
+        }
+    }
+
 }

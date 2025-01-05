@@ -45,5 +45,7 @@ public interface OrdineDataInterface {
      * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
     boolean deleteOrdine(int id);
+
+    public ArrayList<Ordine> getAllOrdiniByResponsabileId(int id);
 }
 

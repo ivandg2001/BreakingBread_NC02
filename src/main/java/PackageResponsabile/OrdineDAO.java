@@ -21,6 +21,7 @@ public class OrdineDAO implements OrdineDataInterface {
      */
     private static final String DB_PASSWORD = "breakingbread1";
 
+
     private static final String INSERT_ORDINE =
             "INSERT INTO ordine (data_ordine, costo, lotto_id, responsabile_id, priorita) VALUES (?, ?, ?, ?, ?)";
     private static final String SELECT_ORDINE_BY_ID =
@@ -31,6 +32,8 @@ public class OrdineDAO implements OrdineDataInterface {
             "UPDATE ordine SET data_ordine = ?, costo = ?, lotto_id = ?, responsabile_id = ?, priorita = ? WHERE id = ?";
     private static final String DELETE_ORDINE =
             "DELETE FROM ordine WHERE id = ?";
+    private static final String SELECT_ALL_ORDINI_BY_RESPONSABILE_ID =
+            "SELECT * FROM ordine WHERE responsabile_id = ?";
 
     @Override
     public boolean setOrdine(Ordine ordine) {
@@ -69,8 +72,9 @@ public class OrdineDAO implements OrdineDataInterface {
                 Lotto lotto = i.getLottoByID(rs.getInt("lotto_id"));
                 ordine.setLotto(lotto);
 
-               // Responsabile responsabile = new ResponsabileDAO().getResponsabileById(rs.getInt("responsabile_id"));
-               // ordine.setResponsabile(responsabile);
+                ResponsabileDataInterface responsabileDataInterface = new ResponsabileDAO();
+                Responsabile responsabile = responsabileDataInterface.getResponsabileById(rs.getInt("responsabile_id"));
+                ordine.setResponsabile(responsabile);
 
                 return ordine;
             }
@@ -98,8 +102,9 @@ public class OrdineDAO implements OrdineDataInterface {
                 Lotto lotto = i.getLottoByID(rs.getInt("lotto_id"));
                 ordine.setLotto(lotto);
 
-                //Responsabile responsabile = new ResponsabileDAO().getResponsabileById(rs.getInt("responsabile_id"));
-                //ordine.setResponsabile(responsabile);
+                ResponsabileDataInterface responsabileDataInterface = new ResponsabileDAO();
+                Responsabile responsabile = responsabileDataInterface.getResponsabileById(rs.getInt("responsabile_id"));
+                ordine.setResponsabile(responsabile);
 
                 ordini.add(ordine);
             }
@@ -108,6 +113,44 @@ public class OrdineDAO implements OrdineDataInterface {
         }
         return ordini;
     }
+
+    @Override
+    public ArrayList<Ordine> getAllOrdiniByResponsabileId(int id) {
+        ArrayList<Ordine> ordini = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ORDINI_BY_RESPONSABILE_ID)) {
+
+            // Imposta il parametro nella query
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Itera attraverso il ResultSet per costruire la lista di ordini
+            while (rs.next()) {
+                Ordine ordine = new Ordine();
+                ordine.setID(rs.getInt("id"));
+                ordine.setDataOrdine(rs.getDate("data_ordine").toLocalDate());
+                ordine.setCosto(rs.getDouble("costo"));
+                ordine.setPriorita(rs.getInt("priorita"));
+
+                // Ottieni il lotto associato
+                ArmadiettoGetDataInterface armadiettoDAO = new ArmadiettoFacade();
+                Lotto lotto = armadiettoDAO.getLottoByID(rs.getInt("lotto_id"));
+                ordine.setLotto(lotto);
+
+                // Ottieni il responsabile associato
+                ResponsabileDataInterface responsabileDAO = new ResponsabileDAO();
+                Responsabile responsabile = responsabileDAO.getResponsabileById(rs.getInt("responsabile_id"));
+                ordine.setResponsabile(responsabile);
+
+                // Aggiungi l'ordine alla lista
+                ordini.add(ordine);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ordini;
+    }
+
 
     @Override
     public boolean updateOrdine(Ordine ordine) {

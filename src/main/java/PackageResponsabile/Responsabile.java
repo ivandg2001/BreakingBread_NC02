@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 public class Responsabile {
 
+
+
     /**
      * Id dell'oggetto responsabile, chiave primaria della tabella, proprieta' di autoincrement.
      */
@@ -32,6 +34,9 @@ public class Responsabile {
      * Ordini effettuati dal responsabile
      */
     private ArrayList<Ordine> ordini;
+
+    private static final ResponsabileDataInterface responsabileDataInterface = new ResponsabileDAO();
+
     /**
      * Costruttore predefinito, serve a JPA
      */
@@ -141,5 +146,24 @@ public class Responsabile {
     public ArrayList<Ordine> getOrdini() {
         return ordini;
     }
+
+    public void storeResponsabile(){
+        if(!responsabileDataInterface.setResponsabile(this)){
+            throw new IllegalArgumentException("Responsabile già presente");
+        }
+    }
+
+    public static Responsabile loadResponsabileById(int id){
+        return responsabileDataInterface.getResponsabileById(id);
+    }
+
+
+    public void update(){
+        if(!responsabileDataInterface.updateResponsabile(this)){
+            throw new IllegalArgumentException("Errore nell'update");
+        }
+    }
+
+
 }
 
