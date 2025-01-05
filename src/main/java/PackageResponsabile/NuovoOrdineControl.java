@@ -2,7 +2,10 @@ package PackageResponsabile;
 
 import PackageArmadietto.ArmadiettoFacade;
 import PackageArmadietto.ArmadiettoGetDataInterface;
+import PackageArmadietto.Sostanza;
+import PackageArmadietto.SostanzaDataInterface;
 import PackageGraphics.AppFrame;
+import PackageGraphics.Homepage;
 import PackageGraphics.ResponsabileHomepage;
 
 public class NuovoOrdineControl {
@@ -59,29 +62,32 @@ public class NuovoOrdineControl {
 
     /**
      * Crea e stampa a schermo il form di inserimento di un nuovo ordine.
-     *
-     * @return 1 se la compilazione del form è avvenuta con successo; 0 se la funzionalità è stata annullata; -1 se la compilazione va ripetuta.
      */
     private void creaFormOrdine() {
         // acquisizione lista sostanze
-        ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
-        OrdineForm ordineForm = new OrdineForm(frame);
-        Ordine ordine = ordineForm.getOrdine(armadiettoGDI.getListaNomiSostanze());
-
-        ordineForm.getSostanza();
-
-
-
-        switch (1) {
-            case 1: creaRiepilogoOrdine(); break;
-            case 2: ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame, responsabile);
-                responsabileHomepage.display();
-                break;
-            case 3: creaFormOrdine(); break;
-            default: break;
-        }
+        ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
+        OrdineForm ordineForm = new OrdineForm(frame , this);
+        ordineForm.display(facadeInterface.getListaNomiSostanze());
 
     }
+
+    public void annullaOrdine() {
+        ResponsabileHomepage hm = new ResponsabileHomepage(this.frame , this.responsabile);
+        hm.display();
+    }
+
+    public void setInfoNuovoOrdine(String sostanza , double purezza , double quantita , String priorita){
+        // validazione
+
+
+
+        creaOggettoOrdine();
+    }
+
+    public void creaOggettoOrdine(){
+
+    }
+
 
     /**
      * Crea e stampa a schermo il riepilogo del nuovo ordine

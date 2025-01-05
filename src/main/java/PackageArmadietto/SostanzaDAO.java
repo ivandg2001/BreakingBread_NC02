@@ -8,18 +8,15 @@ import java.util.ArrayList;
  */
 public class SostanzaDAO implements SostanzaDataInterface {
 
-    /**
-     * URL del database
-     */
     private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
     /**
-     * User del profilo per il Database
+     * Username profilo per il database
      */
-    private static final String DB_USER = "root";
+    private static final String DB_USER = "breakingBread";
     /**
-     * Password del database
+     * password per il database
      */
-    private static final String DB_PASSWORD = "ivan2001";
+    private static final String DB_PASSWORD = "breakingbread1";
 
     /**
      * Query SQL per l'inserimento di una sostanza
@@ -200,6 +197,7 @@ public class SostanzaDAO implements SostanzaDataInterface {
         return sostanze;
     }
 
+    @Override
     public String[] getListaNomiSostanze() {
         ArrayList<Sostanza> sostanze = getListaSostanze();
         String[] nomi = new String[sostanze.size()];

@@ -14,12 +14,15 @@ public class OrdineForm {
 
     private Ordine ordine;
 
+    private NuovoOrdineControl control;
 
-    public OrdineForm (AppFrame frame) {
+
+    public OrdineForm (AppFrame frame, NuovoOrdineControl control) {
         this.frame = frame;
+        this.control = control;
     }
 
-    public Ordine getOrdine(String[] sostanze) {
+    public void display(String[] sostanze) {
 
         //Imposta intestazione della pagina
         JLabel titoloPagina = new JLabel("Inserisci informazioni ordine");
@@ -72,41 +75,20 @@ public class OrdineForm {
         pannelloPulsanti.add(annullaButton);
 
         // Gestione eventi
-        confermaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    // Recupera i valori dal form
-                    String nomeSostanza = (String) nomeSostanzaComboBox.getSelectedItem();
-                    double purezza = Double.parseDouble(purezzaField.getText());
-                    double quantita = Double.parseDouble(quantitaField.getText());
-                    String priorita = null;
 
-                    if (altaPrioritaRadioButton.isSelected()) priorita = "Alta";
-                    else if (mediaPrioritaRadioButton.isSelected()) priorita = "Media";
-                    else if (bassaPrioritaRadioButton.isSelected()) priorita = "Bassa";
+        String nomeSostanza = (String) nomeSostanzaComboBox.getSelectedItem();
+        double purezza = Double.parseDouble(purezzaField.getText());
+        double quantita = Double.parseDouble(quantitaField.getText());
+        String priorita = null;
 
-                    // Mostra valori di esempio
-                    System.out.println("Nome Sostanza: " + nomeSostanza);
-                    System.out.println("Purezza: " + purezza);
-                    System.out.println("Quantità: " + quantita);
-                    System.out.println("Priorità: " + priorita);
+        if (altaPrioritaRadioButton.isSelected()) priorita = "Alta";
+        else if (mediaPrioritaRadioButton.isSelected()) priorita = "Media";
+        else if (bassaPrioritaRadioButton.isSelected()) priorita = "Bassa";
 
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Inserire valori numerici validi per purezza e quantità!", "Errore", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
 
-        annullaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Operazione annullata!");
-                dispose(); // Chiude la finestra
-            }
-        });
+        confermaButton.addActionListener(new ActionListenerNuovoOrdine(this.control , nomeSostanza , purezza, quantita, priorita ));
 
-        return new Ordine();
+        annullaButton.addActionListener(new ActionListenerAnnulla(this.control));
 
         // Aggiunta componenti alla finestra
         frame.updateNorth(titoloPagina);
@@ -138,5 +120,38 @@ public class OrdineForm {
 
     private class ActionListenerNuovoOrdine implements ActionListener {
 
+        private NuovoOrdineControl control;
+        private String sostanza;
+        private double purezza;
+        private double quantita;
+        private String priorita;
+
+        public ActionListenerNuovoOrdine(NuovoOrdineControl control , String sostanza , double purezza , double quantita , String priorita){
+            this.control = control;
+            this.sostanza = sostanza;
+            this.purezza = purezza;
+            this.quantita = quantita;
+            this.priorita = priorita;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            this.control.setInfoNuovoOrdine(sostanza, purezza, quantita, priorita);
+
+        }
+    }
+
+    private class ActionListenerAnnulla implements ActionListener {
+        private NuovoOrdineControl control;
+
+        public ActionListenerAnnulla(NuovoOrdineControl control ){
+            this.control = control;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            this.control.annullaOrdine();
+        }
     }
 }

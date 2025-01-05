@@ -12,8 +12,14 @@ import java.util.ArrayList;
 public class OrdineDAO implements OrdineDataInterface {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "ivan2001";
+    /**
+     * Username profilo per il database
+     */
+    private static final String DB_USER = "breakingBread";
+    /**
+     * password per il database
+     */
+    private static final String DB_PASSWORD = "breakingbread1";
 
     private static final String INSERT_ORDINE =
             "INSERT INTO ordine (data_ordine, costo, lotto_id, responsabile_id, priorita) VALUES (?, ?, ?, ?, ?)";
@@ -63,8 +69,8 @@ public class OrdineDAO implements OrdineDataInterface {
                 Lotto lotto = i.getLottoByID(rs.getInt("lotto_id"));
                 ordine.setLotto(lotto);
 
-                Responsabile responsabile = new ResponsabileDAO().getResponsabileById(rs.getInt("responsabile_id"));
-                ordine.setResponsabile(responsabile);
+               // Responsabile responsabile = new ResponsabileDAO().getResponsabileById(rs.getInt("responsabile_id"));
+               // ordine.setResponsabile(responsabile);
 
                 return ordine;
             }
@@ -92,8 +98,8 @@ public class OrdineDAO implements OrdineDataInterface {
                 Lotto lotto = i.getLottoByID(rs.getInt("lotto_id"));
                 ordine.setLotto(lotto);
 
-                Responsabile responsabile = new ResponsabileDAO().getResponsabileById(rs.getInt("responsabile_id"));
-                ordine.setResponsabile(responsabile);
+                //Responsabile responsabile = new ResponsabileDAO().getResponsabileById(rs.getInt("responsabile_id"));
+                //ordine.setResponsabile(responsabile);
 
                 ordini.add(ordine);
             }

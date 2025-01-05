@@ -12,11 +12,11 @@ public class LottoDAO implements LottoDataInterface {
     /**
      * Username profilo per il database
      */
-    private static final String DB_USER = "root";
+    private static final String DB_USER = "breakingBread";
     /**
      * password per il database
      */
-    private static final String DB_PASSWORD = "ivan2001";
+    private static final String DB_PASSWORD = "breakingbread1";
 
     /**
      * Query SQL per inserire un nuovo lotto nel Database
