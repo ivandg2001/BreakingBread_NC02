@@ -135,4 +135,8 @@ public class OrdineForm {
             }
         });
     }
+
+    private class ActionListenerNuovoOrdine implements ActionListener {
+
+    }
 }

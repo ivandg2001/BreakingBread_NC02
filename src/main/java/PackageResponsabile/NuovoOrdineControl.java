@@ -8,9 +8,11 @@ import PackageGraphics.ResponsabileHomepage;
 public class NuovoOrdineControl {
 
     private AppFrame frame;
+    private Responsabile responsabile;
 
-    public NuovoOrdineControl(AppFrame frame) {
+    public NuovoOrdineControl(AppFrame frame, Responsabile responsabile) {
         this.frame = frame;
+        this.responsabile = responsabile;
     }
 
     public void creaNuovoOrdine() {
@@ -66,9 +68,13 @@ public class NuovoOrdineControl {
         OrdineForm ordineForm = new OrdineForm(frame);
         Ordine ordine = ordineForm.getOrdine(armadiettoGDI.getListaNomiSostanze());
 
+        ordineForm.getSostanza();
+
+
+
         switch (1) {
             case 1: creaRiepilogoOrdine(); break;
-            case 2: ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame);
+            case 2: ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame, responsabile);
                 responsabileHomepage.display();
                 break;
             case 3: creaFormOrdine(); break;

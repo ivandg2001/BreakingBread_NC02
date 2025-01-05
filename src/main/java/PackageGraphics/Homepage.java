@@ -1,5 +1,7 @@
 package PackageGraphics;
 
+import PackageResponsabile.Responsabile;
+
 import javax.swing.*;
 
 public class Homepage {
@@ -23,7 +25,12 @@ public class Homepage {
         JButton button = new JButton("Responsabile");
 
         button.addActionListener(e -> {
-            ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame);
+            //simula login
+            Responsabile responsabile = new Responsabile();
+            responsabile.setID(1);
+            //TODO ricorda di utilizzare un DAO
+
+            ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame, responsabile);
             responsabileHomepage.display();
         });
 
