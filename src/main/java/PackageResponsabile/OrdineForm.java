@@ -12,8 +12,6 @@ public class OrdineForm {
 
     private AppFrame frame;
 
-    private Ordine ordine;
-
     private NuovoOrdineControl control;
 
 

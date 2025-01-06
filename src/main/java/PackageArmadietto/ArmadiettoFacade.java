@@ -50,6 +50,24 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
         return lottoDataInterface.getLottoById(id).getTotal();
 
     }
+
+    @Override
+    public double getTotalCostBySostanza(String nomeSostanza , double quantita , double purezza){
+        Sostanza sostanza = getSostanzaByName(nomeSostanza);
+        return sostanza.getCosto(quantita , purezza);
+    }
+
+    @Override
+    public String getFormulaBySostanza(String nomeSostanza){
+        Sostanza sostanza = sostanzaDataInterface.getSostanzaByNome(nomeSostanza);
+        return sostanza.getFormula();
+    }
+
+    @Override
+    public Lotto createLottoObjectNoPersistance(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza){
+        return new Lotto(dataDiScadenza , quantita , sostanza , purezza);
+
+    }
     //-- SetDataInterface --
     @Override
     public void saveLotto(LocalDate dataScadenza, double quantita, String sostanzaNome , double purezza) {

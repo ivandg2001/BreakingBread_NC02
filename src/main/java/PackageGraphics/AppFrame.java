@@ -72,6 +72,12 @@ public class AppFrame {
         this.frame.add(this.centerComponent, BorderLayout.CENTER);
     }
 
+    public void resetAppFrame(){
+        this.frame.remove(this.centerComponent);
+        this.frame.remove(this.northComponent);
+        this.frame.remove(this.southComponent);
+    }
+
     /**
      * Visualizza le modifiche apportate nel frame
      */
@@ -82,5 +88,9 @@ public class AppFrame {
 
     public void showErrorDialog(String message) {
         JOptionPane.showMessageDialog(frame, message, "Errore", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showConfirmDialog(String message){
+        JOptionPane.showConfirmDialog(frame , message);
     }
 }

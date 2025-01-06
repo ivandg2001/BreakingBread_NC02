@@ -62,19 +62,20 @@ public class Ordine {
      * @param priorita priorita' data all'ordine
      * @param costo costo dell'ordine
      */
-    public Ordine(LocalDate dataOrdine,  int priorita , double costo) {
+    public Ordine(LocalDate dataOrdine,  int priorita , double costo , Responsabile responsabile) {
         this.dataOrdine = dataOrdine;
         this.priorita = priorita;
         this.costo = costo;
+        this.responsabile = responsabile;
     }
 
-    public Ordine(LocalDate dataOrdine,  int priorita , double costo , Responsabile responsabile , int lottoID) {
+    public Ordine(LocalDate dataOrdine,  int priorita , double costo , Responsabile responsabile , Lotto lotto) {
         this.dataOrdine = dataOrdine;
         this.priorita = priorita;
         this.costo = costo;
         this.responsabile = responsabile;
         ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
-        this.lotto = facadeInterface.getLottoByID(lottoID);
+        this.lotto = lotto;
     }
 
     //--Getters and Setters--

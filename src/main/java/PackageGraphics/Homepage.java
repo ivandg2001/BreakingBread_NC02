@@ -1,6 +1,7 @@
 package PackageGraphics;
 
 import PackageResponsabile.Responsabile;
+import PackageResponsabile.ResponsabileDAO;
 
 import javax.swing.*;
 
@@ -26,9 +27,8 @@ public class Homepage {
 
         button.addActionListener(e -> {
             //simula login
-            Responsabile responsabile = new Responsabile();
-            responsabile.setID(1);
-            //TODO ricorda di utilizzare un DAO
+            ResponsabileDAO responsabileDAO = new ResponsabileDAO();
+            Responsabile responsabile = responsabileDAO.getResponsabileById(1);
 
             ResponsabileHomepage responsabileHomepage = new ResponsabileHomepage(frame, responsabile);
             responsabileHomepage.display();

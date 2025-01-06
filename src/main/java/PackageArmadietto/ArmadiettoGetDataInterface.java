@@ -1,5 +1,6 @@
 package PackageArmadietto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -42,4 +43,10 @@ public interface ArmadiettoGetDataInterface {
     public String[] getListaNomiSostanze();
 
     public double getLottoTotalCost(int id);
+
+    public Lotto createLottoObjectNoPersistance(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza);
+
+    public double getTotalCostBySostanza(String nomeSostanza , double quantita , double purezza);
+
+    public String getFormulaBySostanza(String nomeSostanza);
 }
