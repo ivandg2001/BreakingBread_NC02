@@ -59,10 +59,6 @@ public class ResponsabileControl implements ResponsabileInterface{
 
     public boolean isValidOrdineInfos(String sostanza , double purezza , double quantita , Integer priorita){
 
-        System.out.println(sostanza);
-        System.out.println(purezza);
-        System.out.println(quantita);
-        System.out.println(priorita);
         ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
 
         if(!(facadeInterface.getSostanzaByName(sostanza) != null)){

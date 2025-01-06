@@ -5,7 +5,7 @@ public class PrelievoSostanzaControl implements RicercatoreInterface {
     /**
      * Implementazione della funzionalità di prelievo di una sostanza
      */
-    @Override
+
     public static void prelevaSostanza(Ricercatore ricercatore) {
 
         // acquisire lista di team e porgetti
@@ -14,6 +14,11 @@ public class PrelievoSostanzaControl implements RicercatoreInterface {
 
         // creazione dell'interfaccia grafica dell'utente
 
+
+    }
+
+    @Override
+    public void prelevaSostanza() {
 
     }
 }
