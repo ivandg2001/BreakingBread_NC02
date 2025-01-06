@@ -21,7 +21,7 @@ public class LottoDAO implements LottoDataInterface {
     /**
      * Query SQL per inserire un nuovo lotto nel Database
      */
-    private static final String INSERT_LOTTO_SQL = "INSERT INTO lotti (data_scadenza, quantita, sostanza_id) VALUES (?, ?, ?)";
+    private static final String INSERT_LOTTO_SQL = "INSERT INTO lotti (data_scadenza, quantita, sostanza_id , purezza) VALUES (?, ?, ? , ?)";
     /**
      * Query SQL per la ricerca di un lotto per ID
      */
@@ -33,7 +33,7 @@ public class LottoDAO implements LottoDataInterface {
     /**
      * Query SQL per l'aggiornamento di un lotto
      */
-    private static final String UPDATE_LOTTO_SQL = "UPDATE lotti SET data_scadenza = ?, quantita = ?, sostanza_id = ? WHERE id = ?";
+    private static final String UPDATE_LOTTO_SQL = "UPDATE lotti SET data_scadenza = ?, quantita = ?, sostanza_id = ? , purezza = ? WHERE id = ?";
     /**
      * Query SQL per la cancellazione di un lotto
      */
@@ -53,6 +53,7 @@ public class LottoDAO implements LottoDataInterface {
             stmt.setDate(1, Date.valueOf(lotto.getDataScadenza()));
             stmt.setDouble(2, lotto.getQuantita());
             stmt.setInt(3, lotto.getSostanza().getID());
+            stmt.setDouble(4 , lotto.getPurezza());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -82,6 +83,7 @@ public class LottoDAO implements LottoDataInterface {
                 lotto.setID(rs.getInt("id"));
                 lotto.setDataScadenza(rs.getDate("data_scadenza").toLocalDate());
                 lotto.setQuantita(rs.getDouble("quantita"));
+                lotto.setPurezza(rs.getDouble("purezza"));
 
                 Sostanza sostanza = Sostanza.loadSostanzaByID(rs.getInt("sostanza_id"));
                 lotto.setSostanza(sostanza);
@@ -111,6 +113,7 @@ public class LottoDAO implements LottoDataInterface {
                 lotto.setID(rs.getInt("id"));
                 lotto.setDataScadenza(rs.getDate("data_scadenza").toLocalDate());
                 lotto.setQuantita(rs.getDouble("quantita"));
+                lotto.setPurezza(rs.getDouble("purezza"));
 
 
                 Sostanza sostanza = Sostanza.loadSostanzaByID(rs.getInt("sostanza_id"));
@@ -140,6 +143,7 @@ public class LottoDAO implements LottoDataInterface {
             stmt.setDouble(2, lotto.getQuantita());
             stmt.setInt(3, lotto.getSostanza().getID());
             stmt.setInt(4, lotto.getID());
+            stmt.setDouble(5 , lotto.getPurezza());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -170,4 +174,36 @@ public class LottoDAO implements LottoDataInterface {
             return false;
         }
     }
+
+    @Override
+    public Lotto saveAndRetrieveLotto(Lotto lotto) {
+        String generatedColumns[] = {"id"}; // Indica che vogliamo recuperare la colonna ID generata.
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(INSERT_LOTTO_SQL, generatedColumns)) {
+
+            // Imposta i parametri per l'inserimento
+            stmt.setDate(1, Date.valueOf(lotto.getDataScadenza()));
+            stmt.setDouble(2, lotto.getQuantita());
+            stmt.setInt(3, lotto.getSostanza().getID());
+
+            // Esegui la query di inserimento
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Recupera l'ID generato
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int generatedId = generatedKeys.getInt(1); // Ottieni l'ID generato
+                        lotto.setID(generatedId); // Aggiorna l'oggetto Lotto con il nuovo ID
+                    }
+                }
+            }
+            return lotto; // Ritorna l'oggetto Lotto con l'ID aggiornato
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

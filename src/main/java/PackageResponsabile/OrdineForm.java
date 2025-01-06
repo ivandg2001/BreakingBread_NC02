@@ -79,11 +79,11 @@ public class OrdineForm {
         String nomeSostanza = (String) nomeSostanzaComboBox.getSelectedItem();
         double purezza = Double.parseDouble(purezzaField.getText());
         double quantita = Double.parseDouble(quantitaField.getText());
-        String priorita = null;
+        Integer priorita = null;
 
-        if (altaPrioritaRadioButton.isSelected()) priorita = "Alta";
-        else if (mediaPrioritaRadioButton.isSelected()) priorita = "Media";
-        else if (bassaPrioritaRadioButton.isSelected()) priorita = "Bassa";
+        if (altaPrioritaRadioButton.isSelected()) priorita = 3;
+        else if (mediaPrioritaRadioButton.isSelected()) priorita = 2;
+        else if (bassaPrioritaRadioButton.isSelected()) priorita = 1;
 
 
         confermaButton.addActionListener(new ActionListenerNuovoOrdine(this.control , nomeSostanza , purezza, quantita, priorita ));
@@ -124,9 +124,9 @@ public class OrdineForm {
         private String sostanza;
         private double purezza;
         private double quantita;
-        private String priorita;
+        private Integer priorita;
 
-        public ActionListenerNuovoOrdine(NuovoOrdineControl control , String sostanza , double purezza , double quantita , String priorita){
+        public ActionListenerNuovoOrdine(NuovoOrdineControl control , String sostanza , double purezza , double quantita , Integer priorita){
             this.control = control;
             this.sostanza = sostanza;
             this.purezza = purezza;

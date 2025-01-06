@@ -45,4 +45,6 @@ public interface LottoDataInterface {
      * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
     boolean deleteLotto(int id);
+
+    public Lotto saveAndRetrieveLotto(Lotto lotto);
 }

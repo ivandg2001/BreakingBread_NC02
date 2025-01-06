@@ -12,7 +12,9 @@ public interface ArmadiettoSetDataInterface {
      * @param quantita quantita nel lotto
      * @param sostanza sostanza nel lotto
      */
-    public void saveLotto(LocalDate dataScadenza , double quantita , Sostanza sostanza );
+    public void saveLotto(LocalDate dataScadenza , double quantita , String sostanza , double purezza);
+
+    public Lotto saveAndRetrievelotto(LocalDate dataScadenza, double quantita, String sostanza , double purezza);
 
     /**
      * Metodo che crea un nuovo oggetto sostanza e lo salva nel database

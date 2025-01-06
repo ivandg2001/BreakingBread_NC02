@@ -1,12 +1,12 @@
 package PackageResponsabile;
 
-import PackageArmadietto.ArmadiettoFacade;
-import PackageArmadietto.ArmadiettoGetDataInterface;
-import PackageArmadietto.Sostanza;
-import PackageArmadietto.SostanzaDataInterface;
+import PackageArmadietto.*;
 import PackageGraphics.AppFrame;
 import PackageGraphics.Homepage;
 import PackageGraphics.ResponsabileHomepage;
+
+import java.time.LocalDate;
+import java.time.temporal.TemporalAmount;
 
 public class NuovoOrdineControl {
 
@@ -21,6 +21,7 @@ public class NuovoOrdineControl {
     public void creaNuovoOrdine() {
 
         creaFormOrdine();
+
 
         /*
         * 1. Prendere dal database la lista delle sostanze
@@ -76,15 +77,73 @@ public class NuovoOrdineControl {
         hm.display();
     }
 
-    public void setInfoNuovoOrdine(String sostanza , double purezza , double quantita , String priorita){
-        // validazione
+    /**
+     *
+     * @param sostanza
+     * @param purezza
+     * @param quantita
+     * @param priorita
+     * @return
+     */
+    public Ordine setInfoNuovoOrdine(String sostanza , double purezza , double quantita , Integer priorita){
 
 
+        if( isValidOrdineInfos(sostanza,purezza,quantita,priorita) ){
+            return creaOggettoOrdine(sostanza,purezza,quantita,priorita);
+        }else {
+            creaPopup();
+        }
 
-        creaOggettoOrdine();
+        return null;
+
     }
 
-    public void creaOggettoOrdine(){
+    public boolean isValidOrdineInfos(String sostanza , double purezza , double quantita , Integer priorita){
+
+        ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
+
+        if(!(facadeInterface.getSostanzaByName(sostanza) != null)){
+
+            return false;
+
+        }
+
+        else if(purezza > 100 || purezza < 0){
+            return false;
+        }
+
+        else if (quantita > 100000 || quantita < 0){
+            return false;
+        }
+
+        else if (priorita == null){
+            return false;
+        }
+
+        else
+            return true;
+
+
+    }
+
+    public Ordine creaOggettoOrdine(String sostanza , double purezza , double quantita , Integer priorita){
+
+        ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
+        int nuovoLottoID = creaOggettoNuovoLotto(sostanza , quantita , purezza);
+
+        double costo = facadeInterface.getLottoTotalCost(nuovoLottoID);
+
+        return new Ordine(LocalDate.now() , priorita , costo , this.responsabile , nuovoLottoID);
+
+
+    }
+
+    public int creaOggettoNuovoLotto(String sostanza , double quantita , double purezza){
+
+        ArmadiettoSetDataInterface facadeSetInterface = new ArmadiettoFacade();
+
+        LocalDate dataDiScadenza = LocalDate.now().plusYears(5);
+        return facadeSetInterface.saveAndRetrievelotto(dataDiScadenza , quantita , sostanza , purezza).getID();
 
     }
 
@@ -94,8 +153,18 @@ public class NuovoOrdineControl {
      *
      * @return true se il nuovo ordine viene confermato, false se viene rifiutato
      */
-    private void creaRiepilogoOrdine() {
-        return;
+    private void creaRiepilogoOrdine(Ordine nuovoOrdine) {
+
+        // qui devee creare la schermata riepilogo e la schermata dovra' chiamare un metodo per finalizzare l'inserimneto
+
+    }
+
+    /**
+     * Metodo che finalizza l'inserimneto del nuovo ordine, viene chiamato dall'action listener per la conferma nel riepilogo finale
+     * @param nuovoOrdine nuovo ordine che si tenta di inserire
+     */
+    private void finalizzaOrdine(Ordine nuovoOrdine) {
+        nuovoOrdine.storeOrdine();
     }
 
     /**

@@ -1,5 +1,7 @@
 package PackageResponsabile;
 
+import PackageArmadietto.ArmadiettoFacade;
+import PackageArmadietto.ArmadiettoGetDataInterface;
 import PackageArmadietto.Lotto;
 import java.time.LocalDate;
 
@@ -64,6 +66,15 @@ public class Ordine {
         this.dataOrdine = dataOrdine;
         this.priorita = priorita;
         this.costo = costo;
+    }
+
+    public Ordine(LocalDate dataOrdine,  int priorita , double costo , Responsabile responsabile , int lottoID) {
+        this.dataOrdine = dataOrdine;
+        this.priorita = priorita;
+        this.costo = costo;
+        this.responsabile = responsabile;
+        ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
+        this.lotto = facadeInterface.getLottoByID(lottoID);
     }
 
     //--Getters and Setters--

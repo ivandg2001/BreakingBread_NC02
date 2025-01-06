@@ -53,6 +53,11 @@ public class Lotto {
     private Armadietto armadietto;
 
     /**
+     * Purezza della sostanza nel lotto
+     */
+    private double purezza;
+
+    /**
      * Costruttore predefinito
      */
     public Lotto() {
@@ -65,10 +70,11 @@ public class Lotto {
      * @param quantita quantità rimanente della sostanza nel lotto
      * @param sostanza sostanza contenuta nel lotto
      */
-    public Lotto(LocalDate dataScadenza , double quantita , Sostanza sostanza){
+    public Lotto(LocalDate dataScadenza , double quantita , Sostanza sostanza , double purezza){
         this.dataScadenza = dataScadenza;
         this.sostanza = sostanza;
         this.quantita = quantita;
+        this.purezza = purezza;
         this.prelievi = new ArrayList<>();
     }
 
@@ -187,6 +193,14 @@ public class Lotto {
         return armadietto;
     }
 
+    public double getPurezza() {
+        return this.purezza;
+    }
+
+    public void setPurezza(double purezza) {
+        this.purezza = purezza;
+    }
+
     //--Persistenza--
 
     /**
@@ -215,5 +229,11 @@ public class Lotto {
         if(!lottoDataInterface.updateLotto(this)){
             throw new IllegalArgumentException("Update del lotto fallito");
         }
+    }
+
+    public double getTotal(){
+        double purezza = this.purezza / 100;
+        double costo = this.sostanza.getCostoUnitario() * this.quantita;
+        return costo * purezza;
     }
 }

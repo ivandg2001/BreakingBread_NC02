@@ -40,4 +40,6 @@ public interface ArmadiettoGetDataInterface {
     public ArrayList<Sostanza> getListaSostanza();
 
     public String[] getListaNomiSostanze();
+
+    public double getLottoTotalCost(int id);
 }
