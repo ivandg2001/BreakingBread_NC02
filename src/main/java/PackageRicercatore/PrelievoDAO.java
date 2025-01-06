@@ -1,5 +1,7 @@
 package PackageRicercatore;
 
+import java.util.ArrayList;
+
 public class PrelievoDAO implements PrelievoDataInterface {
 
     /**
@@ -30,6 +32,26 @@ public class PrelievoDAO implements PrelievoDataInterface {
 
     @Override
     public boolean setPrelievo(Prelievo prelievo) {
+        return false;
+    }
+
+    @Override
+    public Prelievo getPrelievo(int id) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Prelievo> getAllPrelievi() {
+        return null;
+    }
+
+    @Override
+    public boolean updatePrelievo(Prelievo p) {
+        return false;
+    }
+
+    @Override
+    public boolean deletePrelievo(Prelievo p) {
         return false;
     }
 }

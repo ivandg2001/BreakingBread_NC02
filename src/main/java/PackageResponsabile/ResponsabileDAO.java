@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ResponsabileDAO implements ResponsabileDataInterface {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
-    private static final String DB_USERNAME = "brakingBread"; // Cambia con il tuo username
+    private static final String DB_USERNAME = "breakingBread"; // Cambia con il tuo username
     private static final String DB_PASSWORD = "breakingbread1"; // Cambia con la tua password
 
     private static final String INSERT_RESPONSABILE = "INSERT INTO responsabile (nome, username, password) VALUES (?, ?, ?)";
@@ -42,14 +42,11 @@ public class ResponsabileDAO implements ResponsabileDataInterface {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Responsabile responsabile = new Responsabile();
-                int idTMP = resultSet.getInt("id");
-                responsabile.setID(idTMP);
+                responsabile.setID(resultSet.getInt("id"));
                 responsabile.setNome(resultSet.getString("nome"));
                 responsabile.setUsername(resultSet.getString("username"));
                 responsabile.setPassword(resultSet.getString("password"));
 
-                OrdineDataInterface ordineDataInterface = new OrdineDAO();
-                responsabile.setOrdini(ordineDataInterface.getAllOrdiniByResponsabileId(idTMP));
 
                 return responsabile;
             }

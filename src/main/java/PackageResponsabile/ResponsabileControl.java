@@ -6,7 +6,7 @@ import PackageGraphics.ResponsabileHomepage;
 
 import java.time.LocalDate;
 
-public class ResponsabileControl {
+public class ResponsabileControl implements ResponsabileInterface{
 
     private AppFrame frame;
     private Responsabile responsabile;
@@ -18,7 +18,6 @@ public class ResponsabileControl {
     }
 
     public void creaNuovoOrdine() {
-
         creaFormOrdine();
     }
 
@@ -56,29 +55,35 @@ public class ResponsabileControl {
             creaFormOrdine();
         }
 
-
-
     }
 
     public boolean isValidOrdineInfos(String sostanza , double purezza , double quantita , Integer priorita){
 
+        System.out.println(sostanza);
+        System.out.println(purezza);
+        System.out.println(quantita);
+        System.out.println(priorita);
         ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
 
         if(!(facadeInterface.getSostanzaByName(sostanza) != null)){
 
+            System.out.println(1);
             return false;
 
         }
 
-        else if(!validatePurezza(purezza)){
+        if(purezza > 100 || purezza < 0){
+            System.out.println(2);
             return false;
         }
 
-        else if (!validateQuantita(quantita)){
+        if (quantita > 100000 || quantita < 0){
+            System.out.println(3);
             return false;
         }
 
-        else if (validatePriorita(priorita)){
+        else if (priorita == null){
+            System.out.println(4);
             return false;
         }
 
@@ -88,27 +93,6 @@ public class ResponsabileControl {
 
     }
 
-    private boolean validatePriorita(Integer priorita){
-        if (priorita == null) {
-            return false;
-        }else
-            return true;
-    }
-
-    private boolean validateQuantita(Double quantita){
-        if (quantita > 100000 || quantita < 0 || quantita == null){
-            return false;
-        }else
-            return true;
-    }
-
-    private boolean validatePurezza(Double purezza){
-        if(purezza > 100 || purezza < 0 || purezza == null){
-            return false;
-        } else
-            return true;
-
-    }
 
     public Ordine creaOggettoOrdine(String sostanza , double purezza , double quantita , Integer priorita){
 
@@ -117,9 +101,7 @@ public class ResponsabileControl {
         double costo = facadeInterface.getTotalCostBySostanza(sostanza , quantita , purezza);
         return new Ordine(LocalDate.now() , priorita , costo , this.responsabile);
 
-
     }
-
 
     /**
      * Crea e stampa a schermo il riepilogo del nuovo ordine
@@ -127,7 +109,6 @@ public class ResponsabileControl {
      * @return true se il nuovo ordine viene confermato, false se viene rifiutato
      */
     public void creaRiepilogoOrdine(Ordine nuovoOrdine , String sostanza , double purezza , double quantita , Integer priorita) {
-
 
         RiepilogoOrdine riepilogo = new RiepilogoOrdine(this.frame , this , nuovoOrdine , sostanza , purezza , quantita , priorita);
         riepilogo.display();

@@ -73,9 +73,13 @@ public class AppFrame {
     }
 
     public void resetAppFrame(){
-        this.frame.remove(this.centerComponent);
-        this.frame.remove(this.northComponent);
-        this.frame.remove(this.southComponent);
+        if (this.centerComponent != null)
+            this.frame.remove(this.centerComponent);
+        if (this.southComponent != null)
+            this.frame.remove(this.southComponent);
+        if (this.northComponent != null)
+            this.frame.remove(this.northComponent);
+
     }
 
     /**
@@ -91,6 +95,6 @@ public class AppFrame {
     }
 
     public void showConfirmDialog(String message){
-        JOptionPane.showConfirmDialog(frame , message);
+        JOptionPane.showMessageDialog(frame , message);
     }
 }
