@@ -12,10 +12,10 @@ public class OrdineForm {
 
     private AppFrame frame;
 
-    private NuovoOrdineControl control;
+    private ResponsabileControl control;
 
 
-    public OrdineForm (AppFrame frame, NuovoOrdineControl control) {
+    public OrdineForm (AppFrame frame, ResponsabileControl control) {
         this.frame = frame;
         this.control = control;
     }
@@ -78,6 +78,7 @@ public class OrdineForm {
         annullaButton.addActionListener(new ActionListenerAnnulla(this.control));
 
         // Aggiunta componenti alla finestra
+        frame.resetAppFrame();
         frame.updateNorth(titoloPagina);
         frame.updateCenter(pannelloPrincipale);
         frame.updateSouth(pannelloPulsanti);
@@ -108,7 +109,7 @@ public class OrdineForm {
 
     private class ActionListenerNuovoOrdine implements ActionListener {
 
-        private NuovoOrdineControl control;
+        private ResponsabileControl control;
         private JComboBox<String> nomeSostanzaComboBox;
         private JTextField purezzaField;
         private JTextField quantitaField;
@@ -116,7 +117,7 @@ public class OrdineForm {
         private JRadioButton mediaPrioritaRadioButton;
         private JRadioButton bassaPrioritaRadioButton;
 
-        public ActionListenerNuovoOrdine(NuovoOrdineControl control, JComboBox<String> nomeSostanzaComboBox, JTextField purezzaField, JTextField quantitaField,
+        public ActionListenerNuovoOrdine(ResponsabileControl control, JComboBox<String> nomeSostanzaComboBox, JTextField purezzaField, JTextField quantitaField,
                                          JRadioButton altaPrioritaRadioButton, JRadioButton mediaPrioritaRadioButton, JRadioButton bassaPrioritaRadioButton) {
             this.control = control;
             this.nomeSostanzaComboBox = nomeSostanzaComboBox;
@@ -164,9 +165,9 @@ public class OrdineForm {
 
 
     private class ActionListenerAnnulla implements ActionListener {
-        private NuovoOrdineControl control;
+        private ResponsabileControl control;
 
-        public ActionListenerAnnulla(NuovoOrdineControl control ){
+        public ActionListenerAnnulla(ResponsabileControl control ){
             this.control = control;
         }
 

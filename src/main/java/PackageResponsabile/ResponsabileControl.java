@@ -2,18 +2,17 @@ package PackageResponsabile;
 
 import PackageArmadietto.*;
 import PackageGraphics.AppFrame;
-import PackageGraphics.Homepage;
 import PackageGraphics.ResponsabileHomepage;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
 
-public class NuovoOrdineControl {
+public class ResponsabileControl {
 
     private AppFrame frame;
     private Responsabile responsabile;
 
-    public NuovoOrdineControl(AppFrame frame, Responsabile responsabile) {
+
+    public ResponsabileControl(AppFrame frame, Responsabile responsabile) {
         this.frame = frame;
         this.responsabile = responsabile;
     }
@@ -21,7 +20,6 @@ public class NuovoOrdineControl {
     public void creaNuovoOrdine() {
 
         creaFormOrdine();
-
     }
 
     /**

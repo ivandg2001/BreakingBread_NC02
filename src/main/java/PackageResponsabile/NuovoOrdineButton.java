@@ -8,7 +8,7 @@ public class NuovoOrdineButton extends JButton {
     public NuovoOrdineButton(AppFrame frame, Responsabile responsabile) {
         super("Nuovo Ordine");
         this.addActionListener(e -> {
-            NuovoOrdineControl nuovoOrdineControl = new NuovoOrdineControl(frame, responsabile);
+            ResponsabileControl nuovoOrdineControl = new ResponsabileControl(frame, responsabile);
             nuovoOrdineControl.creaNuovoOrdine();
         });
     }
