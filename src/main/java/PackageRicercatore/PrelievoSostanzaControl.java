@@ -1,10 +1,11 @@
 package PackageRicercatore;
 
-public class PrelievoSostanzaControl {
+public class PrelievoSostanzaControl implements RicercatoreInterface {
 
     /**
      * Implementazione della funzionalità di prelievo di una sostanza
      */
+    @Override
     public static void prelevaSostanza(Ricercatore ricercatore) {
 
         // acquisire lista di team e porgetti
