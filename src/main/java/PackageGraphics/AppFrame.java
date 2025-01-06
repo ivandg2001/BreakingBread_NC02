@@ -79,4 +79,8 @@ public class AppFrame {
         this.frame.revalidate();
         this.frame.repaint();
     }
+
+    public void showErrorDialog(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Errore", JOptionPane.ERROR_MESSAGE);
+    }
 }

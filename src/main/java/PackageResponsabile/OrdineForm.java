@@ -24,10 +24,10 @@ public class OrdineForm {
 
     public void display(String[] sostanze) {
 
-        //Imposta intestazione della pagina
+        // Imposta intestazione della pagina
         JLabel titoloPagina = new JLabel("Inserisci informazioni ordine");
 
-        //Imposta pannello principale
+        // Imposta pannello principale
         JPanel pannelloPrincipale = new JPanel();
         pannelloPrincipale.setLayout(new GridLayout(5, 2));
 
@@ -43,7 +43,7 @@ public class OrdineForm {
         setNumericInput(purezzaField); // Valida input numerico
         pannelloPrincipale.add(purezzaLabel);
         pannelloPrincipale.add(purezzaField);
-        
+
         // Quantità
         JLabel quantitaLabel = new JLabel("Quantità:");
         JTextField quantitaField = new JTextField();
@@ -75,18 +75,7 @@ public class OrdineForm {
         pannelloPulsanti.add(annullaButton);
 
         // Gestione eventi
-
-        String nomeSostanza = (String) nomeSostanzaComboBox.getSelectedItem();
-        double purezza = Double.parseDouble(purezzaField.getText());
-        double quantita = Double.parseDouble(quantitaField.getText());
-        Integer priorita = null;
-
-        if (altaPrioritaRadioButton.isSelected()) priorita = 3;
-        else if (mediaPrioritaRadioButton.isSelected()) priorita = 2;
-        else if (bassaPrioritaRadioButton.isSelected()) priorita = 1;
-
-
-        confermaButton.addActionListener(new ActionListenerNuovoOrdine(this.control , nomeSostanza , purezza, quantita, priorita ));
+        confermaButton.addActionListener(new ActionListenerNuovoOrdine(this.control, nomeSostanzaComboBox, purezzaField, quantitaField, altaPrioritaRadioButton, mediaPrioritaRadioButton, bassaPrioritaRadioButton));
 
         annullaButton.addActionListener(new ActionListenerAnnulla(this.control));
 
@@ -96,6 +85,7 @@ public class OrdineForm {
         frame.updateSouth(pannelloPulsanti);
         frame.loadUpdates();
     }
+
 
     /**
      * Imposta un filtro per accettare solo input numerici (inclusi i decimali).
@@ -121,26 +111,59 @@ public class OrdineForm {
     private class ActionListenerNuovoOrdine implements ActionListener {
 
         private NuovoOrdineControl control;
-        private String sostanza;
-        private double purezza;
-        private double quantita;
-        private Integer priorita;
+        private JComboBox<String> nomeSostanzaComboBox;
+        private JTextField purezzaField;
+        private JTextField quantitaField;
+        private JRadioButton altaPrioritaRadioButton;
+        private JRadioButton mediaPrioritaRadioButton;
+        private JRadioButton bassaPrioritaRadioButton;
 
-        public ActionListenerNuovoOrdine(NuovoOrdineControl control , String sostanza , double purezza , double quantita , Integer priorita){
+        public ActionListenerNuovoOrdine(NuovoOrdineControl control, JComboBox<String> nomeSostanzaComboBox, JTextField purezzaField, JTextField quantitaField,
+                                         JRadioButton altaPrioritaRadioButton, JRadioButton mediaPrioritaRadioButton, JRadioButton bassaPrioritaRadioButton) {
             this.control = control;
-            this.sostanza = sostanza;
-            this.purezza = purezza;
-            this.quantita = quantita;
-            this.priorita = priorita;
+            this.nomeSostanzaComboBox = nomeSostanzaComboBox;
+            this.purezzaField = purezzaField;
+            this.quantitaField = quantitaField;
+            this.altaPrioritaRadioButton = altaPrioritaRadioButton;
+            this.mediaPrioritaRadioButton = mediaPrioritaRadioButton;
+            this.bassaPrioritaRadioButton = bassaPrioritaRadioButton;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            // Prendi i valori al momento di confermare
+            String nomeSostanza = (String) nomeSostanzaComboBox.getSelectedItem();
+            String purezzaText = purezzaField.getText();
+            String quantitaText = quantitaField.getText();
 
-            this.control.setInfoNuovoOrdine(sostanza, purezza, quantita, priorita);
+            // Verifica se i campi sono vuoti o non validi
+            if (purezzaText.isEmpty() || quantitaText.isEmpty()) {
+                this.control.creaPopup("I campi 'Purezza' e 'Quantità' non possono essere vuoti.");
+                return; // Non proseguire se i campi sono vuoti
+            } else if (!altaPrioritaRadioButton.isSelected() && !mediaPrioritaRadioButton.isSelected() && !bassaPrioritaRadioButton.isSelected()) {
+                this.control.creaPopup("Devi selezionare almeno una priorità");
+                return;
+            }
 
+
+            try {
+                double purezza = Double.parseDouble(purezzaText);
+                double quantita = Double.parseDouble(quantitaText);
+                Integer priorita = null;
+
+                if (altaPrioritaRadioButton.isSelected()) priorita = 3;
+                else if (mediaPrioritaRadioButton.isSelected()) priorita = 2;
+                else if (bassaPrioritaRadioButton.isSelected()) priorita = 1;
+
+                // Passa i dati al controller
+                this.control.setInfoNuovoOrdine(nomeSostanza, purezza, quantita, priorita);
+            } catch (NumberFormatException ex) {
+                this.control.creaPopup("Inserisci valori numerici validi per Purezza e Quantità.");
+            }
         }
     }
+
+
 
     private class ActionListenerAnnulla implements ActionListener {
         private NuovoOrdineControl control;

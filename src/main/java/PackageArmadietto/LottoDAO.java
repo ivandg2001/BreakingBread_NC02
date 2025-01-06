@@ -21,23 +21,23 @@ public class LottoDAO implements LottoDataInterface {
     /**
      * Query SQL per inserire un nuovo lotto nel Database
      */
-    private static final String INSERT_LOTTO_SQL = "INSERT INTO lotti (data_scadenza, quantita, sostanza_id , purezza) VALUES (?, ?, ? , ?)";
+    private static final String INSERT_LOTTO_SQL = "INSERT INTO lotto (data_scadenza, quantita, sostanza_id , purezza) VALUES (?, ?, ? ,?)";
     /**
      * Query SQL per la ricerca di un lotto per ID
      */
-    private static final String SELECT_LOTTO_BY_ID = "SELECT * FROM lotti WHERE id = ?";
+    private static final String SELECT_LOTTO_BY_ID = "SELECT * FROM lotto WHERE id = ?";
     /**
      * QUery SQL per ottenere tutti i lotti
      */
-    private static final String SELECT_ALL_LOTTI = "SELECT * FROM lotti";
+    private static final String SELECT_ALL_LOTTI = "SELECT * FROM lotto";
     /**
      * Query SQL per l'aggiornamento di un lotto
      */
-    private static final String UPDATE_LOTTO_SQL = "UPDATE lotti SET data_scadenza = ?, quantita = ?, sostanza_id = ? , purezza = ? WHERE id = ?";
+    private static final String UPDATE_LOTTO_SQL = "UPDATE lotto SET data_scadenza = ?, quantita = ?, sostanza_id = ? , purezza = ? WHERE id = ?";
     /**
      * Query SQL per la cancellazione di un lotto
      */
-    private static final String DELETE_LOTTO_SQL = "DELETE FROM lotti WHERE id = ?";
+    private static final String DELETE_LOTTO_SQL = "DELETE FROM lotto WHERE id = ?";
 
     /**
      * Inserisce un nuovo lotto nel database.
@@ -185,6 +185,7 @@ public class LottoDAO implements LottoDataInterface {
             stmt.setDate(1, Date.valueOf(lotto.getDataScadenza()));
             stmt.setDouble(2, lotto.getQuantita());
             stmt.setInt(3, lotto.getSostanza().getID());
+            stmt.setDouble(4, lotto.getPurezza());
 
             // Esegui la query di inserimento
             int rowsAffected = stmt.executeUpdate();

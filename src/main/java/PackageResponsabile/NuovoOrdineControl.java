@@ -85,16 +85,17 @@ public class NuovoOrdineControl {
      * @param priorita
      * @return
      */
-    public Ordine setInfoNuovoOrdine(String sostanza , double purezza , double quantita , Integer priorita){
+    public void setInfoNuovoOrdine(String sostanza , double purezza , double quantita , Integer priorita){
 
-
+        System.out.println(isValidOrdineInfos(sostanza,purezza,quantita,priorita));
         if( isValidOrdineInfos(sostanza,purezza,quantita,priorita) ){
-            return creaOggettoOrdine(sostanza,purezza,quantita,priorita);
+            creaRiepilogoOrdine(creaOggettoOrdine(sostanza,purezza,quantita,priorita));
         }else {
-            creaPopup();
+            creaPopup("Qualcosa e'andato storto");
+            creaFormOrdine();
         }
 
-        return null;
+
 
     }
 
@@ -170,8 +171,8 @@ public class NuovoOrdineControl {
     /**
      * Crea popup di conferma di avvenuto inserimento del nuovo ordine nel sistema
      */
-    private void creaPopup() {
-        return;
+    public void creaPopup(String message) {
+        this.frame.showErrorDialog(message);
     }
 }
 
