@@ -91,21 +91,21 @@ public class NuovoOrdineControl {
     }
 
     private boolean validatePriorita(Integer priorita){
-        if (priorita == null){
+        if (priorita == null) {
             return false;
         }else
             return true;
     }
 
-    private boolean validateQuantita(double quantita){
-        if (quantita > 100000 || quantita < 0){
+    private boolean validateQuantita(Double quantita){
+        if (quantita > 100000 || quantita < 0 || quantita == null){
             return false;
         }else
             return true;
     }
 
-    private boolean validatePurezza(double purezza){
-        if(purezza > 100 || purezza < 0){
+    private boolean validatePurezza(Double purezza){
+        if(purezza > 100 || purezza < 0 || purezza == null){
             return false;
         } else
             return true;
