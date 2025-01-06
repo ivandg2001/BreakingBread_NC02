@@ -3,10 +3,8 @@ package PackageResponsabile;
 import PackageArmadietto.ArmadiettoFacade;
 import PackageArmadietto.ArmadiettoGetDataInterface;
 import PackageArmadietto.Lotto;
-import PackageArmadietto.LottoDAO;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OrdineDAO implements OrdineDataInterface {
