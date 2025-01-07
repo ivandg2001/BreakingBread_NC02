@@ -25,7 +25,7 @@ public class NuovoOrdineButton extends JButton {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ResponsabileControl nuovoOrdineControl = new ResponsabileControl(frame, responsabile);
+            NuovoOrdineControl nuovoOrdineControl = new NuovoOrdineControl(frame, responsabile);
             nuovoOrdineControl.creaNuovoOrdine();
         }
     }

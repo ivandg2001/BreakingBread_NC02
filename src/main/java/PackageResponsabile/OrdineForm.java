@@ -12,10 +12,10 @@ public class OrdineForm {
 
     private AppFrame frame;
 
-    private ResponsabileControl control;
+    private NuovoOrdineControl control;
 
 
-    public OrdineForm (AppFrame frame, ResponsabileControl control) {
+    public OrdineForm (AppFrame frame, NuovoOrdineControl control) {
         this.frame = frame;
         this.control = control;
     }
@@ -109,7 +109,7 @@ public class OrdineForm {
 
     private class ActionListenerNuovoOrdine implements ActionListener {
 
-        private ResponsabileControl control;
+        private NuovoOrdineControl control;
         private JComboBox<String> nomeSostanzaComboBox;
         private JTextField purezzaField;
         private JTextField quantitaField;
@@ -117,7 +117,7 @@ public class OrdineForm {
         private JRadioButton mediaPrioritaRadioButton;
         private JRadioButton bassaPrioritaRadioButton;
 
-        public ActionListenerNuovoOrdine(ResponsabileControl control, JComboBox<String> nomeSostanzaComboBox, JTextField purezzaField, JTextField quantitaField,
+        public ActionListenerNuovoOrdine(NuovoOrdineControl control, JComboBox<String> nomeSostanzaComboBox, JTextField purezzaField, JTextField quantitaField,
                                          JRadioButton altaPrioritaRadioButton, JRadioButton mediaPrioritaRadioButton, JRadioButton bassaPrioritaRadioButton) {
             this.control = control;
             this.nomeSostanzaComboBox = nomeSostanzaComboBox;
@@ -165,9 +165,9 @@ public class OrdineForm {
 
 
     private class ActionListenerAnnulla implements ActionListener {
-        private ResponsabileControl control;
+        private NuovoOrdineControl control;
 
-        public ActionListenerAnnulla(ResponsabileControl control ){
+        public ActionListenerAnnulla(NuovoOrdineControl control ){
             this.control = control;
         }
 

@@ -6,13 +6,13 @@ import PackageGraphics.ResponsabileHomepage;
 
 import java.time.LocalDate;
 
-public class ResponsabileControl implements ResponsabileInterface{
+public class NuovoOrdineControl implements ResponsabileInterface{
 
     private AppFrame frame;
     private Responsabile responsabile;
 
 
-    public ResponsabileControl(AppFrame frame, Responsabile responsabile) {
+    public NuovoOrdineControl(AppFrame frame, Responsabile responsabile) {
         this.frame = frame;
         this.responsabile = responsabile;
     }

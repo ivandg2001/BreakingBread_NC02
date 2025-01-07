@@ -13,7 +13,7 @@ import javax.swing.*;
 public class RiepilogoOrdine {
 
     private AppFrame frame;
-    private ResponsabileControl cotrol;
+    private NuovoOrdineControl cotrol;
 
     private Ordine ordine;
     private String sostanza;
@@ -22,7 +22,7 @@ public class RiepilogoOrdine {
     private Integer priorita;
 
 
-    public RiepilogoOrdine(AppFrame frame , ResponsabileControl control , Ordine nuovoOrdine , String sostanza , double purezza , double quantita , Integer priorita){
+    public RiepilogoOrdine(AppFrame frame , NuovoOrdineControl control , Ordine nuovoOrdine , String sostanza , double purezza , double quantita , Integer priorita){
         this.cotrol = control;
         this.frame = frame;
         this.ordine = nuovoOrdine;
@@ -108,7 +108,7 @@ public class RiepilogoOrdine {
 
     private static class ConfermaActionListener implements ActionListener{
 
-        private ResponsabileControl control;
+        private NuovoOrdineControl control;
 
         private Ordine ordine;
         private String sostanza;
@@ -116,7 +116,7 @@ public class RiepilogoOrdine {
         private double quantita;
         private Integer priorita;
 
-        public ConfermaActionListener(ResponsabileControl control , Ordine ordine , String sostanza , double purezza , double quantita , Integer priorita){
+        public ConfermaActionListener(NuovoOrdineControl control , Ordine ordine , String sostanza , double purezza , double quantita , Integer priorita){
             this.control = control;
             this.ordine = ordine;
             this.sostanza = sostanza;
@@ -134,9 +134,9 @@ public class RiepilogoOrdine {
 
     private static class AnnullaActionListener implements ActionListener{
 
-        private ResponsabileControl control;
+        private NuovoOrdineControl control;
 
-        public AnnullaActionListener(ResponsabileControl control){
+        public AnnullaActionListener(NuovoOrdineControl control){
             this.control = control;
         }
 
