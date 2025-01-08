@@ -7,10 +7,10 @@ public interface TeamDataInterface {
     /**
      * Inserisce un nuovo Team nel database.
      *
-     * @param t Oggetto Team da inserire.
+     * @param team Oggetto Team da inserire.
      * @return true se l'inserimento è avvenuto con successo, false altrimenti.
      */
-    boolean setTeam(Team t);
+    boolean setTeam(Team team);
 
     /**
      * Recupera un Team dal database tramite il suo ID.
@@ -30,17 +30,17 @@ public interface TeamDataInterface {
     /**
      * Aggiorna le informazioni di un Team nel database.
      *
-     * @param t Oggetto Team con le nuove informazioni.
+     * @param team Oggetto Team con le nuove informazioni.
      * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
      */
-    boolean updateTeam(Team t);
+    boolean updateTeam(Team team);
 
     /**
      * Elimina un Team dal database.
      *
-     * @param t Il Team da eliminare.
+     * @param team Il Team da eliminare.
      * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
-    boolean deleteTeam(Team t);
+    boolean deleteTeam(Team team);
 
 }

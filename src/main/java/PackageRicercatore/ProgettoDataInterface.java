@@ -7,10 +7,10 @@ public interface ProgettoDataInterface {
     /**
      * Inserisce un nuovo Progetto nel database.
      *
-     * @param p Oggetto Progetto da inserire.
+     * @param progetto Oggetto Progetto da inserire.
      * @return true se l'inserimento è avvenuto con successo, false altrimenti.
      */
-    boolean setProgetto(Progetto p);
+    boolean setProgetto(Progetto progetto);
 
     /**
      * Recupera un Progetto dal database tramite il suo ID.
@@ -30,16 +30,16 @@ public interface ProgettoDataInterface {
     /**
      * Aggiorna le informazioni di un Progetto nel database.
      *
-     * @param p Oggetto Progetto con le nuove informazioni.
+     * @param progetto Oggetto Progetto con le nuove informazioni.
      * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
      */
-    boolean updateProgetto(Progetto p);
+    boolean updateProgetto(Progetto progetto);
 
     /**
      * Elimina un Progetto dal database.
      *
-     * @param p Il Progetto da eliminare.
+     * @param progetto Il Progetto da eliminare.
      * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
-    boolean deleteProgetto(Progetto p);
+    boolean deleteProgetto(Progetto progetto);
 }

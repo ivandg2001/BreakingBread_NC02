@@ -7,10 +7,10 @@ public interface RicercatoreDataInterface {
     /**
      * Inserisce un nuovo Ricercatore nel database.
      *
-     * @param r Oggetto Ricercatore da inserire.
+     * @param ricercatore Oggetto Ricercatore da inserire.
      * @return true se l'inserimento è avvenuto con successo, false altrimenti.
      */
-    boolean setRicercatore(Ricercatore r);
+    boolean setRicercatore(Ricercatore ricercatore);
 
     /**
      * Recupera un Ricercatore dal database tramite il suo ID.
@@ -30,17 +30,17 @@ public interface RicercatoreDataInterface {
     /**
      * Aggiorna le informazioni di un Ricercatore nel database.
      *
-     * @param r Oggetto Ricercatore con le nuove informazioni.
+     * @param ricercatore Oggetto Ricercatore con le nuove informazioni.
      * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
      */
-    boolean updateRicercatore(Ricercatore r);
+    boolean updateRicercatore(Ricercatore ricercatore);
 
     /**
      * Elimina un Ricercatore dal database.
      *
-     * @param r Il Ricercatore da eliminare.
+     * @param ricercatore Il Ricercatore da eliminare.
      * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
-    boolean deleteRicercatore(Ricercatore r);
+    boolean deleteRicercatore(Ricercatore ricercatore);
 
 }

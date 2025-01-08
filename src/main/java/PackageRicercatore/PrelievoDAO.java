@@ -5,8 +5,17 @@ import java.util.ArrayList;
 
 public class PrelievoDAO implements PrelievoDataInterface {
 
+    /**
+     * URL database
+     */
     private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
+    /**
+     * Username profilo per il database
+     */
     private static final String DB_USER = "breakingBread";
+    /**
+     * Password per il database
+     */
     private static final String DB_PASSWORD = "breakingbread1";
 
     private static final String INSERT =
@@ -20,14 +29,20 @@ public class PrelievoDAO implements PrelievoDataInterface {
     private static final String DELETE =
             "DELETE FROM prelievo WHERE id = ?";
 
-    public PrelievoDAO() {
+    public PrelievoDAO() {}
 
-    }
-
+    /**
+     * Inserisce un nuovo Prelievo nel database.
+     *
+     * @param prelievo Oggetto Prelievo da inserire.
+     * @return true se l'inserimento è avvenuto con successo, false altrimenti.
+     */
     @Override
     public boolean setPrelievo(Prelievo prelievo) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
+        try {
+
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
 
             preparedStatement.setDate(1, Date.valueOf(prelievo.getData()));
             preparedStatement.setDouble(2, prelievo.getQuantita());
@@ -41,10 +56,17 @@ public class PrelievoDAO implements PrelievoDataInterface {
         }
     }
 
+    /**
+     * Recupera un Prelievo dal database tramite il suo ID.
+     *
+     * @param id L'ID del Prelievo da recuperare.
+     * @return Oggetto Prelievo corrispondente all'ID; null in caso di errore.
+     */
     @Override
     public Prelievo getPrelievo(int id) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
 
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -76,12 +98,18 @@ public class PrelievoDAO implements PrelievoDataInterface {
         return null;
     }
 
+    /**
+     * Recupera tutti i Prelievo presenti nel database.
+     *
+     * @return Una lista di oggetti Prelievo.
+     */
     @Override
     public ArrayList<Prelievo> getAllPrelievi() {
         ArrayList<Prelievo> prelievi = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery(SELECT_ALL)) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(SELECT_ALL);
 
             while (rs.next()) {
                 Prelievo prelievo = new Prelievo();
@@ -109,10 +137,17 @@ public class PrelievoDAO implements PrelievoDataInterface {
         return prelievi;
     }
 
+    /**
+     * Aggiorna le informazioni di un Prelievo nel database.
+     *
+     * @param prelievo Oggetto Prelievo con le nuove informazioni.
+     * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
+     */
     @Override
     public boolean updatePrelievo(Prelievo prelievo) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
 
             preparedStatement.setDate(1, Date.valueOf(prelievo.getData()));
             preparedStatement.setDouble(2, prelievo.getQuantita());
@@ -127,10 +162,17 @@ public class PrelievoDAO implements PrelievoDataInterface {
         }
     }
 
+    /**
+     * Elimina un Prelievo dal database.
+     *
+     * @param prelievo Il Prelievo da eliminare.
+     * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
+     */
     @Override
     public boolean deletePrelievo(Prelievo prelievo) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
 
             preparedStatement.setInt(1, prelievo.getID());
             return preparedStatement.executeUpdate() > 0;

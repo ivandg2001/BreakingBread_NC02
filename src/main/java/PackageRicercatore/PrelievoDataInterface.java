@@ -7,10 +7,10 @@ public interface PrelievoDataInterface {
     /**
      * Inserisce un nuovo Prelievo nel database.
      *
-     * @param p Oggetto Prelievo da inserire.
+     * @param prelievo Oggetto Prelievo da inserire.
      * @return true se l'inserimento è avvenuto con successo, false altrimenti.
      */
-    boolean setPrelievo(Prelievo p);
+    boolean setPrelievo(Prelievo prelievo);
 
     /**
      * Recupera un Prelievo dal database tramite il suo ID.
@@ -30,17 +30,17 @@ public interface PrelievoDataInterface {
     /**
      * Aggiorna le informazioni di un Prelievo nel database.
      *
-     * @param p Oggetto Prelievo con le nuove informazioni.
+     * @param prelievo Oggetto Prelievo con le nuove informazioni.
      * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
      */
-    boolean updatePrelievo(Prelievo p);
+    boolean updatePrelievo(Prelievo prelievo);
 
     /**
      * Elimina un Prelievo dal database.
      *
-     * @param p Il Prelievo da eliminare.
+     * @param prelievo Il Prelievo da eliminare.
      * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
-    boolean deletePrelievo(Prelievo p);
+    boolean deletePrelievo(Prelievo prelievo);
 
 }
