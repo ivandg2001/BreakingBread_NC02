@@ -57,37 +57,56 @@ public class NuovoOrdineControl implements ResponsabileInterface{
 
     }
 
-    public boolean isValidOrdineInfos(String sostanza , double purezza , double quantita , Integer priorita){
+    public boolean isValidOrdineInfos(String sostanza, double purezza, double quantita, Integer priorita) {
 
         ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
 
-        if(!(facadeInterface.getSostanzaByName(sostanza) != null)){
-
+        if (!isValidSostanza(sostanza, facadeInterface)) {
             System.out.println(1);
             return false;
-
         }
 
-        if(purezza > 100 || purezza < 0){
+        if (!isValidPurezza(purezza)) {
             System.out.println(2);
             return false;
         }
 
-        if (quantita > 100000 || quantita < 0){
+        if (!isValidQuantita(quantita)) {
             System.out.println(3);
             return false;
         }
 
-        else if (priorita == null){
+        if (!isValidPriorita(priorita)) {
             System.out.println(4);
             return false;
         }
 
-        else
-            return true;
-
-
+        return true;
     }
+
+    public boolean isValidSostanza(String sostanza, ArmadiettoGetDataInterface facadeInterface) {
+        return facadeInterface.getSostanzaByName(sostanza) != null;
+    }
+
+    public boolean isValidPurezza(double purezza) {
+        return purezza > 0 && purezza <= 100;
+    }
+
+    public boolean isValidQuantita(double quantita) {
+        return quantita > 0 && quantita <= 100000;
+    }
+
+    public boolean isValidPriorita(Integer priorita) {
+        return priorita != null && (priorita == 1 || priorita == 2 || priorita == 3);
+    }
+
+
+
+
+
+
+
+
 
 
     public Ordine creaOggettoOrdine(String sostanza , double purezza , double quantita , Integer priorita){
