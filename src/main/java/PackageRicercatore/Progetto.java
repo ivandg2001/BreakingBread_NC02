@@ -1,6 +1,8 @@
 package PackageRicercatore;
 
 
+import java.util.ArrayList;
+
 /**
  * Classe POJO che rappresenta un progetto nel sistema, mappato da un adapter JPA.
  */
@@ -19,7 +21,7 @@ public class Progetto {
     /**
      * Team a cui è stato assegnato il progetto.
      */
-    private Team team;
+    private ArrayList<Team> team;
 
     /**
      * Costruttore predefinito.

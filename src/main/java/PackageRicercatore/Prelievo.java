@@ -31,7 +31,7 @@ public class Prelievo {
     private Lotto lotto;
 
     /**
-     * ricercatore che ha effettuato l'ordine
+     * Ricercatore che ha effettuato l'ordine
      */
     private Ricercatore ricercatore;
 

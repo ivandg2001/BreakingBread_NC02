@@ -29,7 +29,7 @@ public class Ricercatore {
     /**
      * Team a cui appartiene il ricercatore
      */
-    private Team team;
+    private ArrayList<Team> teams;
 
     /**
      * Lista dei rpelievi effettuati dal ricercatore
@@ -113,7 +113,7 @@ public class Ricercatore {
     }
 
     /**
-     * setta ID del ricercatore
+     * Setta ID del ricercatore
      * @param ID id del ricercatore
      */
     public void setID(int ID) {
@@ -137,18 +137,26 @@ public class Ricercatore {
     }
 
     /**
-     * Setta il team associato al ricercatore
-     * @param team team ricercatore
+     * Aggiunge un team associato a tale ricercatore.
+     * @param team nuovo team del ricercatore.
      */
-    public void setTeam(Team team) {
-        this.team = team;
+    public void addTeam(Team team) {
+        this.teams.add(team);
     }
 
     /**
-     * Ritorna il team associato al ricercatore
-     * @return team ricercatore
+     * Rimuove un team da tale ricercatore.
+     * @param team team da eliminare.
      */
-    public Team getTeam() {
-        return this.team;
+    public void removeTeam(Team team) {
+        this.teams.remove(team);
+    }
+
+    /**
+     * Ritorna la lista di team associati al ricercatore.
+     * @return teams del ricercatore.
+     */
+    public ArrayList<Team> getTeam() {
+        return this.teams;
     }
 }
