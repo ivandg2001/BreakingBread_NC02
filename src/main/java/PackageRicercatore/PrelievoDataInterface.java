@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface PrelievoDataInterface {
 
     /**
-     * Inserisce un nuovo prelievo nel database.
+     * Inserisce un nuovo Prelievo nel database.
      *
      * @param p Oggetto Prelievo da inserire.
      * @return true se l'inserimento è avvenuto con successo, false altrimenti.
@@ -16,7 +16,7 @@ public interface PrelievoDataInterface {
      * Recupera un Prelievo dal database tramite il suo ID.
      *
      * @param id L'ID del Prelievo da recuperare.
-     * @return Oggetto Responsabile corrispondente all'ID; null in caso di errore.
+     * @return Oggetto Prelievo corrispondente all'ID; null in caso di errore.
      */
     Prelievo getPrelievo(int id);
 

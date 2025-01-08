@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/PackageArmadietto/LottoDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/PackageArmadietto/SostanzaDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/PackageResponsabile/OrdineDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/PackageRicercatore/PrelievoDAO.java" dialect="GenericSQL" />
   </component>
 </project>
