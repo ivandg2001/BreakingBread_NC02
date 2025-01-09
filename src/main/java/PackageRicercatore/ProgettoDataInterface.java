@@ -42,4 +42,9 @@ public interface ProgettoDataInterface {
      * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
      */
     boolean deleteProgetto(Progetto progetto);
+
+    /**
+     * TODO
+     */
+    ArrayList<Progetto> getAllProgettiByTeam(Team team);
 }

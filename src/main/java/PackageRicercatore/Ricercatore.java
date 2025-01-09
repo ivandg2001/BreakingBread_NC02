@@ -166,22 +166,24 @@ public class Ricercatore {
     }
 
     /**
-     * .
+     * Aggiorna la corrente istanza di Ricercatore con le informazioni contenute nel database.
      */
     public void load () {
         RicercatoreDataInterface ricercatoreDI = new RicercatoreDAO();
-        Ricercatore ricercatore = ricercatoreDI.getRicercatore(ID);
+        Ricercatore ricercatoreTemp = ricercatoreDI.getRicercatore(ID);
+        this.setID(ricercatoreTemp.getID());
+        this.setNome(ricercatoreTemp.getNome());
+        this.setUsername(ricercatoreTemp.getUsername());
+        this.setPassword(ricercatoreTemp.getPassword());
 
         TeamDataInterface teamDI = new TeamDAO();
-        ricercatore.setTeams(teamDI.getAllTeamsByRicercatore(ricercatore));
+        this.setTeams(teamDI.getAllTeamsByRicercatore(this));
 
         PrelievoDataInterface prelievoDI = new PrelievoDAO();
-        ricercatore.setPrelievi(prelievoDI.getAllPrelieviByRicercatore(ricercatore));
-
-        return ricercatore;
+        this.setPrelievi(prelievoDI.getAllPrelieviByRicercatore(this));
     }
 
     public void update () {
-        //TODO
+        //NON IMPLEMENTATO IN QUESTA VERSIONE DEL SISTEMA
     }
 }

@@ -28,6 +28,10 @@ public class TeamDAO implements TeamDataInterface {
             "UPDATE team SET nome_team = ? WHERE id = ?";
     private static final String DELETE =
             "DELETE FROM team WHERE id = ?";
+    private static final String SELECT_ALL_BY_RICERCATORE =
+            "SELECT t.* FROM team t JOIN team_ricercatore tr ON t.id = tr.team_id WHERE tr.ricercatore_id = ?";
+    private static final String SELECT_ALL_BY_PROGETTO =
+            "SELECT t.* FROM team t JOIN team_progetto tp ON t.id = tp.team_id WHERE tp.ricercatore_id = ?";
 
     public TeamDAO() {}
 
@@ -99,7 +103,7 @@ public class TeamDAO implements TeamDataInterface {
                 Team team = new Team();
 
                 team.setID(rs.getInt("id"));
-                team.setNomeTeam(rs.getString("nome_progetto"));
+                team.setNomeTeam(rs.getString("nome_team"));
 
                 //inserimento di altri campi da gestire nell'oggetto entity stesso
 
@@ -151,5 +155,58 @@ public class TeamDAO implements TeamDataInterface {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * TODO
+     */
+    @Override
+    public ArrayList<Team> getAllTeamsByRicercatore(Ricercatore ricercatore) {
+        ArrayList<Team> teams = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_RICERCATORE);
+
+            preparedStatement.setInt(1, ricercatore.getID());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Team team = new Team();
+
+                team.setID(rs.getInt("id"));
+                team.setNomeTeam(rs.getString("nome_team"));
+
+                teams.add(team);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teams;
+    }
+
+    /**
+     * TODO
+     */
+    public ArrayList<Team> getAllTeamsByProgetto(Progetto progetto) {
+        ArrayList<Team> teams = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_PROGETTO);
+
+            preparedStatement.setInt(1, progetto.getID());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Team team = new Team();
+
+                team.setID(rs.getInt("id"));
+                team.setNomeTeam(rs.getString("nome_team"));
+
+                teams.add(team);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teams;
     }
 }

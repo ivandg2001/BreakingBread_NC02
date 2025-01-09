@@ -28,6 +28,8 @@ public class ProgettoDAO implements ProgettoDataInterface {
             "UPDATE progetto SET nome_progetto = ?, team_id = ? WHERE id = ?";
     private static final String DELETE =
             "DELETE FROM progetto WHERE id = ?";
+    private static final String SELECT_ALL_BY_TEAM =
+            "SELECT p.* FROM progetto p JOIN team_progetto tp ON p.id = tp.progetto_id WHERE tr.team_id = ?";
 
     public ProgettoDAO() {}
 
@@ -153,5 +155,32 @@ public class ProgettoDAO implements ProgettoDataInterface {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * TODO
+     */
+    @Override
+    public ArrayList<Progetto> getAllProgettiByTeam(Team team) {
+        ArrayList<Progetto> progetti = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_TEAM);
+
+            preparedStatement.setInt(1, team.getID());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Progetto progetto = new Progetto();
+
+                progetto.setID(rs.getInt("id"));
+                progetto.setNomeProgetto(rs.getString("nome_progetto"));
+
+                progetti.add(progetto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return progetti;
     }
 }

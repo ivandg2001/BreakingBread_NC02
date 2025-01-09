@@ -106,31 +106,22 @@ public class Team {
     }
 
     /**
-     * Ritorna la lista di team associati al ricercatore.
-     * @return teams del ricercatore.
-     */
-    public ArrayList<Team> getTeams() {
-        return this.teams;
-    }
-
-    /**
-     * Restituisce un oggetto Team totalmente inizializzato con le informazioni contenute nel database.
-     *
+     * Aggiorna la corrente istanza di Team con le informazioni contenute nel database.
      */
     public void load () {
-        RicercatoreDataInterface ricercatoreDI = new RicercatoreDAO();
-        Ricercatore ricercatore = ricercatoreDI.getRicercatore(ID);
-
         TeamDataInterface teamDI = new TeamDAO();
-        ricercatore.setTeams(teamDI.getAllTeamsByRicercatore(ricercatore));
+        Team teamTemp = teamDI.getTeam(ID);
+        this.setID(teamTemp.getID());
+        this.setNomeTeam(teamTemp.getNomeTeam());
 
-        PrelievoDataInterface prelievoDI = new PrelievoDAO();
-        ricercatore.setPrelievi(prelievoDI.getAllPrelieviByRicercatore(ricercatore));
+        RicercatoreDataInterface ricercatoreDI = new RicercatoreDAO();
+        this.setRicercatori(ricercatoreDI.getAllRicercatoriByTeam(this));
 
-        return ricercatore;
+        ProgettoDataInterface progettoDI = new ProgettoDAO();
+        this.setProgetti(progettoDI.getAllProgettiByTeam(this));
     }
 
     public void update () {
-        //TODO
+        //NON IMPLEMENTATO IN QUESTA VERSIONE DEL SISTEMA
     }
 }

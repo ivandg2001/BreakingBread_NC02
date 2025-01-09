@@ -21,7 +21,7 @@ public class Progetto {
     /**
      * Team a cui è stato assegnato il progetto.
      */
-    private ArrayList<Team> team;
+    private ArrayList<Team> teams;
 
     /**
      * Costruttore predefinito.
@@ -71,17 +71,34 @@ public class Progetto {
 
     /**
      * Setta il team associato al progetto
-     * @param team team progetto
+     * @param teams team progetto
      */
-    public void setTeam(ArrayList<Team> team) {
-        this.team = team;
+    public void setTeams(ArrayList<Team> teams) {
+        this.teams = teams;
     }
 
     /**
      * Ritorna il Team associato al progetto
      * @return team progetto
      */
-    public ArrayList<Team> getTeam() {
-        return team;
+    public ArrayList<Team> getTeams() {
+        return teams;
+    }
+
+    /**
+     * Aggiorna la corrente istanza di Progetto con le informazioni contenute nel database.
+     */
+    public void load () {
+        ProgettoDataInterface progettoDI = new ProgettoDAO();
+        Progetto progettoTemp = progettoDI.getProgetto(ID);
+        this.setID(progettoTemp.getID());
+        this.setNomeProgetto(progettoTemp.getNomeProgetto());
+
+        TeamDataInterface teamDI = new TeamDAO();
+        this.setTeams(teamDI.getAllTeamsByProgetto(this));
+    }
+
+    public void update () {
+        //NON IMPLEMENTATO IN QUESTA VERSIONE DEL SISTEMA
     }
 }

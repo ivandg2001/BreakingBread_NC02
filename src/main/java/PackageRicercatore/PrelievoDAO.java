@@ -28,6 +28,8 @@ public class PrelievoDAO implements PrelievoDataInterface {
             "UPDATE prelievo SET data = ?, quantita = ?, lotto_id = ?, ricercatore_id = ? WHERE id = ?";
     private static final String DELETE =
             "DELETE FROM prelievo WHERE id = ?";
+    private static final String SELECT_ALL_BY_RICERCATORE =
+            "SELECT * FROM prelievo WHERE ricercatore_id = ?";
 
     public PrelievoDAO() {}
 
@@ -114,20 +116,8 @@ public class PrelievoDAO implements PrelievoDataInterface {
             while (rs.next()) {
                 Prelievo prelievo = new Prelievo();
                 prelievo.setID(rs.getInt("id"));
-                prelievo.setData(rs.getDate("data_prelievo").toLocalDate());
+                prelievo.setData(rs.getDate("data").toLocalDate());
                 prelievo.setQuantita(rs.getDouble("quantita"));
-
-                //da gestire nell'oggetto entity stesso
-                /*
-                ArmadiettoGetDataInterface armadiettoDAO = new ArmadiettoFacade();
-                Lotto lotto = armadiettoDAO.getLottoByID(rs.getInt("lotto_id"));
-                prelievo.setLotto(lotto);
-
-                ResponsabileDataInterface responsabileDAO = new ResponsabileDAO();
-                Responsabile responsabile = responsabileDAO.getResponsabileById(rs.getInt("responsabile_id"));
-                prelievo.setResponsabile(responsabile);
-
-                 */
 
                 prelievi.add(prelievo);
             }
@@ -180,5 +170,30 @@ public class PrelievoDAO implements PrelievoDataInterface {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * TODO
+     */
+    @Override
+    public ArrayList<Prelievo> getAllPrelieviByRicercatore(Ricercatore ricercatore) {
+        ArrayList<Prelievo> prelievi = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(SELECT_ALL_BY_RICERCATORE);
+
+            while (rs.next()) {
+                Prelievo prelievo = new Prelievo();
+                prelievo.setID(rs.getInt("id"));
+                prelievo.setData(rs.getDate("data").toLocalDate());
+                prelievo.setQuantita(rs.getDouble("quantita"));
+
+                prelievi.add(prelievo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prelievi;
     }
 }

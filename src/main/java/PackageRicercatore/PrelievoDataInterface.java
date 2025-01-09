@@ -43,4 +43,9 @@ public interface PrelievoDataInterface {
      */
     boolean deletePrelievo(Prelievo prelievo);
 
+    /**
+     * TODO
+     */
+    ArrayList<Prelievo> getAllPrelieviByRicercatore(Ricercatore ricercatore);
+
 }

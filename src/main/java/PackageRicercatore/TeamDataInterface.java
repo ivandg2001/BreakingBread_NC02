@@ -43,4 +43,14 @@ public interface TeamDataInterface {
      */
     boolean deleteTeam(Team team);
 
+    /**
+     * TODO
+     */
+    ArrayList<Team> getAllTeamsByRicercatore(Ricercatore ricercatore);
+
+    /**
+     * TODO
+     */
+    ArrayList<Team> getAllTeamsByProgetto(Progetto progetto);
+
 }

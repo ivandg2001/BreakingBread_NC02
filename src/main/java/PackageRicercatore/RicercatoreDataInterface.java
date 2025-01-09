@@ -43,4 +43,9 @@ public interface RicercatoreDataInterface {
      */
     boolean deleteRicercatore(Ricercatore ricercatore);
 
+    /**
+     * TODO
+     */
+    ArrayList<Ricercatore> getAllRicercatoriByTeam(Team team);
+
 }

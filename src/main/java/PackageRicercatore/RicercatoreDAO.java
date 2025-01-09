@@ -28,6 +28,8 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
             "UPDATE ricercatore SET data = ?, quantita = ?, lotto_id = ?, ricercatore_id = ? WHERE id = ?";
     private static final String DELETE =
             "DELETE FROM ricercatore WHERE id = ?";
+    private static final String SELECT_ALL_BY_RICERCATORE =
+            "SELECT r.* FROM ricercatore r JOIN team_ricercatore tr ON r.id = tr.ricercatore_id WHERE tr.team_id = ?";
 
     public RicercatoreDAO() {}
 
@@ -104,18 +106,6 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
                 ricercatore.setNome(rs.getString("username"));
                 ricercatore.setPassword(rs.getString("password"));
 
-                //da gestire nell'oggetto entity stesso
-                /*
-                ArmadiettoGetDataInterface armadiettoDAO = new ArmadiettoFacade();
-                Lotto lotto = armadiettoDAO.getLottoByID(rs.getInt("lotto_id"));
-                prelievo.setLotto(lotto);
-
-                ResponsabileDataInterface responsabileDAO = new ResponsabileDAO();
-                Responsabile responsabile = responsabileDAO.getResponsabileById(rs.getInt("responsabile_id"));
-                prelievo.setResponsabile(responsabile);
-
-                 */
-
                 ricercatori.add(ricercatore);
             }
         } catch (SQLException e) {
@@ -167,5 +157,33 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * TODO
+     */
+    @Override
+    public ArrayList<Ricercatore> getAllRicercatoriByTeam(Team team) {
+        ArrayList<Ricercatore> ricercatori = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_RICERCATORE);
+
+            preparedStatement.setInt(1, team.getID());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Ricercatore ricercatore = new Ricercatore();
+
+                ricercatore.setID(rs.getInt("id"));
+                ricercatore.setNome(rs.getString("username"));
+                ricercatore.setPassword(rs.getString("password"));
+
+                ricercatori.add(ricercatore);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ricercatori;
     }
 }
