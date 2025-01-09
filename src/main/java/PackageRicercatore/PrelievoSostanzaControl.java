@@ -45,7 +45,7 @@ public class PrelievoSostanzaControl implements RicercatoreInterface {
      */
     public void stampaFormTeamEProgetto () {
         ArrayList<Team> teams = ricercatore.getTeams();
-        ArrayList<Progetto> progetti = ricercatore.getProgetti();
+        //ArrayList<Progetto> progetti = ricercatore.getProgetti();
 
 
     }

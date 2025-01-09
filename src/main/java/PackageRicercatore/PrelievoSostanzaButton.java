@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class PrelievoSostanzaButton extends JButton {
 
     public PrelievoSostanzaButton(AppFrame frame, Ricercatore ricercatore) {
-        super("Nuovo Ordine");
+        super("Prelievo Sostanza");
         this.addActionListener(new PrelievoSostanzaButton.ActionListenerButton(frame, ricercatore));
     }
 
