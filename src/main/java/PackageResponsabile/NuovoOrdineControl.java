@@ -88,16 +88,57 @@ public class NuovoOrdineControl implements ResponsabileInterface{
         return facadeInterface.getSostanzaByName(sostanza) != null;
     }
 
-    public boolean isValidPurezza(double purezza) {
-        return purezza > 0 && purezza <= 100;
+    public boolean isValidPurezza(Object purezza) {
+
+        try {
+
+            double valore = Double.parseDouble(purezza.toString());
+
+            return valore > 0 && valore <= 100;
+        } catch (NumberFormatException e) {
+
+            return false;
+        }
+
     }
 
-    public boolean isValidQuantita(double quantita) {
-        return quantita > 0 && quantita <= 100000;
+    public boolean isValidQuantita(Object quantita) {
+
+        if(quantita == null){
+            return false;
+        }
+
+        try {
+
+            double valore = Double.parseDouble(quantita.toString());
+
+            return valore > 0 && valore <= 100000;
+        } catch (NumberFormatException e) {
+
+            return false;
+        }
+
+
+
     }
 
-    public boolean isValidPriorita(Integer priorita) {
-        return priorita != null && (priorita == 1 || priorita == 2 || priorita == 3);
+    public boolean isValidPriorita(Object priorita) {
+
+        if (priorita == null){
+            return false;
+        }
+
+        try {
+
+            int valore = Integer.parseInt(priorita.toString());
+
+            return (valore == 1 || valore == 2 || valore == 3);
+        } catch (NumberFormatException e) {
+
+            return false;
+        }
+
+
     }
 
 

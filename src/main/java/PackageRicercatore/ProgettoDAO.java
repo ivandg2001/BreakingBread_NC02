@@ -43,7 +43,7 @@ public class ProgettoDAO implements ProgettoDataInterface {
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
 
             preparedStatement.setString(1, progetto.getNomeProgetto());
-            preparedStatement.setInt(2, progetto.getTeam().getID());
+            //preparedStatement.setInt(2, progetto.getTeam().getID());
 
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -125,7 +125,7 @@ public class ProgettoDAO implements ProgettoDataInterface {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
 
             preparedStatement.setString(1, progetto.getNomeProgetto());
-            preparedStatement.setInt(2, progetto.getTeam().getID());
+           // preparedStatement.setInt(2, progetto.getTeam().getID());
             preparedStatement.setInt(3, progetto.getID());
 
             return preparedStatement.executeUpdate() > 0;

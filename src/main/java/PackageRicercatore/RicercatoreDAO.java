@@ -45,7 +45,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
             preparedStatement.setString(1, ricercatore.getNome());
             preparedStatement.setString(2, ricercatore.getUsername());
             preparedStatement.setString(3, ricercatore.getPassword());
-            preparedStatement.setInt(4, ricercatore.getTeam().getID());
+            //preparedStatement.setInt(4, ricercatore.getTeam().getID());
 
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -140,7 +140,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
             preparedStatement.setString(1, ricercatore.getNome());
             preparedStatement.setString(2, ricercatore.getUsername());
             preparedStatement.setString(3, ricercatore.getPassword());
-            preparedStatement.setInt(4, ricercatore.getTeam().getID());
+            //preparedStatement.setInt(4, ricercatore.getTeam().getID());
 
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
