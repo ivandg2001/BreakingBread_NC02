@@ -3,6 +3,9 @@ package PackageGraphics;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe che funge da Frame per la GUI
+ */
 public class AppFrame {
 
     /**
@@ -22,6 +25,9 @@ public class AppFrame {
      */
     private JComponent centerComponent;
 
+    /**
+     * Costruttore predefinito
+     */
     public AppFrame () {
         this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -72,6 +78,9 @@ public class AppFrame {
         this.frame.add(this.centerComponent, BorderLayout.CENTER);
     }
 
+    /**
+     * Metodo che cancella tutti gli elementi dall'AppFrame, rende la GUi pulita serve in caso di update
+     */
     public void resetAppFrame(){
         if (this.centerComponent != null)
             this.frame.remove(this.centerComponent);
@@ -90,10 +99,18 @@ public class AppFrame {
         this.frame.repaint();
     }
 
+    /**
+     * Metodo che permette di visualizzare un popup di errore
+     * @param message messagio da far visualizzare al popup
+     */
     public void showErrorDialog(String message) {
         JOptionPane.showMessageDialog(frame, message, "Errore", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Metodo che permette di visualizzare un popup di conferma
+     * @param message messagio da far visualizzare al popup
+     */
     public void showConfirmDialog(String message){
         JOptionPane.showMessageDialog(frame , message);
     }

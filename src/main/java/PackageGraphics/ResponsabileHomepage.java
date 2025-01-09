@@ -7,16 +7,33 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe che implementa la GUI per la homepage del responsabile
+ */
 public class ResponsabileHomepage {
 
+    /**
+     * Oggetto AppFrame
+     */
     private AppFrame frame;
+    /**
+     * Oggetto per il responsabile loggato
+     */
     private Responsabile responsabile;
 
+    /**
+     * Costruttore parametrico che inizializza gli attributi
+     * @param frame oggetto AppFrame
+     * @param responsabile oggetto Responsabile
+     */
     public ResponsabileHomepage(AppFrame frame, Responsabile responsabile) {
         this.frame = frame;
         this.responsabile = responsabile;
     }
 
+    /**
+     * Metodo che permette di visualizzare la homepage responsabile
+     */
     public void display() {
         JPanel panel = new JPanel();
         NuovoOrdineButton nuovoOrdineButton = new NuovoOrdineButton(frame, responsabile);
