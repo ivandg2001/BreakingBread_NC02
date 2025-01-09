@@ -104,4 +104,33 @@ public class Team {
     public ArrayList<Ricercatore> getRicercatori() {
         return this.ricercatori;
     }
+
+    /**
+     * Ritorna la lista di team associati al ricercatore.
+     * @return teams del ricercatore.
+     */
+    public ArrayList<Team> getTeams() {
+        return this.teams;
+    }
+
+    /**
+     * Restituisce un oggetto Team totalmente inizializzato con le informazioni contenute nel database.
+     *
+     */
+    public void load () {
+        RicercatoreDataInterface ricercatoreDI = new RicercatoreDAO();
+        Ricercatore ricercatore = ricercatoreDI.getRicercatore(ID);
+
+        TeamDataInterface teamDI = new TeamDAO();
+        ricercatore.setTeams(teamDI.getAllTeamsByRicercatore(ricercatore));
+
+        PrelievoDataInterface prelievoDI = new PrelievoDAO();
+        ricercatore.setPrelievi(prelievoDI.getAllPrelieviByRicercatore(ricercatore));
+
+        return ricercatore;
+    }
+
+    public void update () {
+        //TODO
+    }
 }

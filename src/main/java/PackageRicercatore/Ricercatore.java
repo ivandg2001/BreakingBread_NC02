@@ -1,7 +1,6 @@
 package PackageRicercatore;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe POJO che rappresenta un ricercatore nel sistema, mappato da un adapter JPA.
@@ -14,7 +13,7 @@ public class Ricercatore {
     private int ID;
 
     /**
-     * Nome del ricecatore
+     * Nome del ricercatore
      */
     private String nome;
     /**
@@ -137,6 +136,12 @@ public class Ricercatore {
     }
 
     /**
+     * Imposta la lista di team a cui partecipa il ricercatore con il parametro passato.
+     * @param teams list di team a cui partecipa il ricercatore.
+     */
+    public void setTeams(ArrayList<Team> teams) {this.teams = teams;}
+
+    /**
      * Aggiunge un team associato a tale ricercatore.
      * @param team nuovo team del ricercatore.
      */
@@ -156,7 +161,27 @@ public class Ricercatore {
      * Ritorna la lista di team associati al ricercatore.
      * @return teams del ricercatore.
      */
-    public ArrayList<Team> getTeam() {
+    public ArrayList<Team> getTeams() {
         return this.teams;
+    }
+
+    /**
+     * .
+     */
+    public void load () {
+        RicercatoreDataInterface ricercatoreDI = new RicercatoreDAO();
+        Ricercatore ricercatore = ricercatoreDI.getRicercatore(ID);
+
+        TeamDataInterface teamDI = new TeamDAO();
+        ricercatore.setTeams(teamDI.getAllTeamsByRicercatore(ricercatore));
+
+        PrelievoDataInterface prelievoDI = new PrelievoDAO();
+        ricercatore.setPrelievi(prelievoDI.getAllPrelieviByRicercatore(ricercatore));
+
+        return ricercatore;
+    }
+
+    public void update () {
+        //TODO
     }
 }

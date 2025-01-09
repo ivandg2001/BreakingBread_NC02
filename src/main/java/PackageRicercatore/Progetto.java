@@ -26,7 +26,7 @@ public class Progetto {
     /**
      * Costruttore predefinito.
      */
-    public Progetto(){}
+    public Progetto () {}
 
     /**
      * Costruttore parametrico che inizializza i campi.

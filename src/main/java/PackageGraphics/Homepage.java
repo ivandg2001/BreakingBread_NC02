@@ -2,6 +2,8 @@ package PackageGraphics;
 
 import PackageResponsabile.Responsabile;
 import PackageResponsabile.ResponsabileDAO;
+import PackageRicercatore.Ricercatore;
+import PackageRicercatore.RicercatoreDAO;
 
 import javax.swing.*;
 
@@ -41,8 +43,12 @@ public class Homepage {
         JButton button = new JButton("Ricercatore");
 
         button.addActionListener(e -> {
-            RicercatoreHomepage ricercatoreHomepage = new RicercatoreHomepage();
-            //ricercatoreHomepage.display();
+            //simula login
+            RicercatoreDAO ricercatoreDAO = new RicercatoreDAO();
+            Ricercatore ricercatore = ricercatoreDAO.getRicercatore(1);
+
+            RicercatoreHomepage ricercatoreHomepage = new RicercatoreHomepage(frame, ricercatore);
+            ricercatoreHomepage.display();
         });
 
         return button;

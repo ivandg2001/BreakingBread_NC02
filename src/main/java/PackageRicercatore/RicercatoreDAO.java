@@ -76,8 +76,6 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
                 ricercatore.setNome(rs.getString("username"));
                 ricercatore.setPassword(rs.getString("password"));
 
-                //inserimento del team da gestire nell'oggetto entity stesso
-
                 return ricercatore;
             }
         } catch (SQLException e) {
