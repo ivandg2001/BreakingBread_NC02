@@ -49,8 +49,8 @@ public class ResponsabileControlTest {
     }
 
     @Test
-    public void TC1_1_e_purezzaNonNumerica() {
-        assertThrows(NumberFormatException.class, () -> control.isValidPurezza(Double.parseDouble("abc")));
+    public void TC1_1_d_purezzaNonNumerica() {
+        assertFalse(control.isValidPurezza("abc"));
     }
 
     @Test
@@ -72,6 +72,11 @@ public class ResponsabileControlTest {
 
         assertEquals(expected, control.isValidPriorita(priorita));
 
+    }
+
+    @Test
+    public void TC1_2_d_prioritaNonNumerica() {
+        assertFalse(control.isValidPriorita("a"));
     }
 
     @ParameterizedTest
@@ -106,7 +111,14 @@ public class ResponsabileControlTest {
     public void TC1_3_c_quantitaNulla() {
 
         assertFalse(control.isValidQuantita(0));
+        assertFalse(control.isValidQuantita(null));
 
+    }
+
+    @Test
+    public void TC1_3_d_quantitaNonNumerica() {
+
+        assertFalse(control.isValidQuantita("a"));
     }
 
     @Test
@@ -114,17 +126,23 @@ public class ResponsabileControlTest {
         assertFalse(control.isValidSostanza(null , i));
     }
 
+    @Test
+    public void TC1_4_b_sostanzaNonEsistente(){
+        assertFalse(control.isValidSostanza("sostanzaInesistente" , i));
+    }
+
     @ParameterizedTest
     @CsvSource({
-            " 'Etanolo' , 100 , 100000 , 1 , true" ,
-            " 'Acido cloridrico' , 1 , 1 , 3 , true" ,
-            " 'Acqua ossigenata' , 78 , 500 , 2 , true"
+            "'Etanolo', 100, 100000, 1, true",
+            "'Acido cloridrico', 1, 1, 3, true",
+            "'Acqua ossigenata', 50, 500, 2, true",
+            "'Etanolo', 99.99, 99999, 1, true",
+            "'Acido cloridrico', 25, 1000, 3, true"
     })
-    public void TC1_5_InputCorretto(String sostanza , double purezza , double quantita , Integer priorita , boolean expected) {
-
-        assertEquals(expected, control.isValidOrdineInfos(sostanza , purezza , quantita , priorita));
-
+    public void TC1_5_InputCorretto(String sostanza, double purezza, double quantita, Integer priorita, boolean expected) {
+        assertEquals(expected, control.isValidOrdineInfos(sostanza, purezza, quantita, priorita));
     }
+
 
 
 }
