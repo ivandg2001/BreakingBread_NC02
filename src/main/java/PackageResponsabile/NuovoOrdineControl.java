@@ -108,7 +108,6 @@ public class NuovoOrdineControl implements ResponsabileInterface{
 
 
 
-
     public Ordine creaOggettoOrdine(String sostanza , double purezza , double quantita , Integer priorita){
 
         ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();

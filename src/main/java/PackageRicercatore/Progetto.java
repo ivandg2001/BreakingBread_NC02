@@ -31,8 +31,7 @@ public class Progetto {
     /**
      * Costruttore parametrico che inizializza i campi.
      * @param nomeProgetto nome del progetto
-     * @param teamID team a cui è assegnato il progetto
-     */
+     * */
     public Progetto(String nomeProgetto){
         this.nomeProgetto = nomeProgetto;
     }
@@ -74,7 +73,7 @@ public class Progetto {
      * Setta il team associato al progetto
      * @param team team progetto
      */
-    public void setTeam(Team team) {
+    public void setTeam(ArrayList<Team> team) {
         this.team = team;
     }
 
@@ -82,7 +81,7 @@ public class Progetto {
      * Ritorna il Team associato al progetto
      * @return team progetto
      */
-    public Team getTeam() {
+    public ArrayList<Team> getTeam() {
         return team;
     }
 }

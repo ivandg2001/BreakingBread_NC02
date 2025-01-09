@@ -5,8 +5,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ResponsabileControlTest {
@@ -47,6 +46,11 @@ public class ResponsabileControlTest {
 
         assertFalse(control.isValidPurezza(0));
 
+    }
+
+    @Test
+    public void TC1_1_e_purezzaNonNumerica() {
+        assertThrows(NumberFormatException.class, () -> control.isValidPurezza(Double.parseDouble("abc")));
     }
 
     @Test
