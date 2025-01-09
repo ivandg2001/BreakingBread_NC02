@@ -39,6 +39,16 @@ public class LottoDAO implements LottoDataInterface {
      */
     private static final String DELETE_LOTTO_SQL = "DELETE FROM lotto WHERE id = ?";
 
+
+    /**
+     * Metodo che crea la connessione al database
+     * @return oggetto Connection
+     * @throws SQLException
+     */
+    private Connection createConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+    }
+
     /**
      * Inserisce un nuovo lotto nel database.
      *
@@ -47,7 +57,7 @@ public class LottoDAO implements LottoDataInterface {
      */
     @Override
     public boolean setLotto(Lotto lotto) {
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = createConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_LOTTO_SQL)) {
 
             stmt.setDate(1, Date.valueOf(lotto.getDataScadenza()));
@@ -72,7 +82,7 @@ public class LottoDAO implements LottoDataInterface {
      */
     @Override
     public Lotto getLottoById(int id) {
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = createConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_LOTTO_BY_ID)) {
 
             stmt.setInt(1, id);
@@ -104,7 +114,7 @@ public class LottoDAO implements LottoDataInterface {
     @Override
     public ArrayList<Lotto> getListaLotti() {
         ArrayList<Lotto> lotti = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = createConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_LOTTI);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -136,7 +146,7 @@ public class LottoDAO implements LottoDataInterface {
      */
     @Override
     public boolean updateLotto(Lotto lotto) {
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = createConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_LOTTO_SQL)) {
 
             stmt.setDate(1, Date.valueOf(lotto.getDataScadenza()));
@@ -162,7 +172,7 @@ public class LottoDAO implements LottoDataInterface {
      */
     @Override
     public boolean deleteLotto(int id) {
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = createConnection();
              PreparedStatement stmt = conn.prepareStatement(DELETE_LOTTO_SQL)) {
 
             stmt.setInt(1, id);
@@ -178,7 +188,7 @@ public class LottoDAO implements LottoDataInterface {
     @Override
     public Lotto saveAndRetrieveLotto(Lotto lotto) {
         String generatedColumns[] = {"id"}; // Indica che vogliamo recuperare la colonna ID generata.
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection conn = createConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_LOTTO_SQL, generatedColumns)) {
 
             // Imposta i parametri per l'inserimento

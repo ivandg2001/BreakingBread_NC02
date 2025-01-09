@@ -48,7 +48,19 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     private static final String SELECT_ALL_QUERY = "SELECT * FROM sostanza";
 
+    /**
+     * Query SQL per ottenere tutti i nomi delle sostanze
+     */
     private static final String SELECT_ALL_NAMES = "SELECT nome FROM sostanza";
+
+    /**
+     * Metodo che crea la connessione al database
+     * @return oggetto Connection
+     * @throws SQLException
+     */
+    private Connection createConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+    }
 
     /**
      * Metodo che inserisce una sostanza nel Database
@@ -57,7 +69,7 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public boolean addSostanza(Sostanza sostanza) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY)) {
 
             preparedStatement.setString(1, sostanza.getNome());
@@ -79,7 +91,7 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public Sostanza getSostanzaByNome(String nome) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_NOME_QUERY)) {
 
             preparedStatement.setString(1, nome);
@@ -107,7 +119,7 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public Sostanza getSostanzaByID(int id){
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_QUERY)) {
 
             preparedStatement.setInt(1, id);
@@ -135,7 +147,7 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public boolean updateSostanza(Sostanza sostanza){
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY)) {
 
             preparedStatement.setString(1, sostanza.getNome());
@@ -158,7 +170,7 @@ public class SostanzaDAO implements SostanzaDataInterface {
      */
     @Override
     public boolean deleteSostanza(int id){
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_QUERY)) {
 
             preparedStatement.setInt(1, id);
@@ -177,7 +189,7 @@ public class SostanzaDAO implements SostanzaDataInterface {
     @Override
     public ArrayList<Sostanza> getListaSostanze(){
         ArrayList<Sostanza> sostanze = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(SELECT_ALL_QUERY)) {
 

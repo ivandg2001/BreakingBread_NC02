@@ -8,18 +8,36 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe che implementa il form per inserire le informazioni di un nuovo ordine
+ */
 public class OrdineForm {
 
+    /**
+     * Oggetto AppFrame che contien la GUI
+     */
     private AppFrame frame;
 
+    /**
+     * Istanza dell'oggetto control che ha chiamato la procedura.
+     */
     private NuovoOrdineControl control;
 
 
+    /**
+     * Costruttore parametrico che inizializza gli attributi
+     * @param frame oggetto AppFrame
+     * @param control oggetto NuovoOrdineControl
+     */
     public OrdineForm (AppFrame frame, NuovoOrdineControl control) {
         this.frame = frame;
         this.control = control;
     }
 
+    /**
+     * Metodo che permette al form di essere visualizzato, crea la finestra form vera e propria.
+     * @param sostanze lista dei nomi delle sostanze presenti nel database da poter essere selezionate
+     */
     public void display(String[] sostanze) {
 
         // Imposta intestazione della pagina
@@ -107,16 +125,50 @@ public class OrdineForm {
         });
     }
 
+    /**
+     * Action listener che gestisce il pulsante per la conferma del form.
+     */
     private class ActionListenerNuovoOrdine implements ActionListener {
 
+        /**
+         * Control che ha chiamato la procedura.
+         */
         private NuovoOrdineControl control;
+        /**
+         * Nome della sostanza.
+         */
         private JComboBox<String> nomeSostanzaComboBox;
+        /**
+         * Field per la purezza.
+         */
         private JTextField purezzaField;
+        /**
+         * Field per la quantita.
+         */
         private JTextField quantitaField;
+        /**
+         * Radio button priorita alta
+         */
         private JRadioButton altaPrioritaRadioButton;
+        /**
+         * Radio button priorita media
+         */
         private JRadioButton mediaPrioritaRadioButton;
+        /**
+         * Radio button priorita bassa
+         */
         private JRadioButton bassaPrioritaRadioButton;
 
+        /**
+         * Costruttore parametrico che inizializza gli attributi
+         * @param control oggetto NuovoOrdineControl
+         * @param nomeSostanzaComboBox combobox coni nomi delle sostanze
+         * @param purezzaField textfield per la purezza
+         * @param quantitaField textfield per la quantita
+         * @param altaPrioritaRadioButton radiobutton priorita alta
+         * @param mediaPrioritaRadioButton radiobutton priorita alta
+         * @param bassaPrioritaRadioButton radiobutton priorita alta
+         */
         public ActionListenerNuovoOrdine(NuovoOrdineControl control, JComboBox<String> nomeSostanzaComboBox, JTextField purezzaField, JTextField quantitaField,
                                          JRadioButton altaPrioritaRadioButton, JRadioButton mediaPrioritaRadioButton, JRadioButton bassaPrioritaRadioButton) {
             this.control = control;
@@ -128,6 +180,10 @@ public class OrdineForm {
             this.bassaPrioritaRadioButton = bassaPrioritaRadioButton;
         }
 
+        /**
+         * Metodo action performed che gestisce il click sul pulsante di conferma, inizia la procedura di verifica dell'input
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             // Prendi i valori al momento di confermare
@@ -163,14 +219,27 @@ public class OrdineForm {
     }
 
 
-
+    /**
+     * Action listener per il pulsante di annullamento
+     */
     private class ActionListenerAnnulla implements ActionListener {
+        /**
+         * oggetto NuovoOrdineControl
+         */
         private NuovoOrdineControl control;
 
+        /**
+         * Metodo parametrico che inizializza gli attributi
+         * @param control oggetto NuovoOrdineControl
+         */
         public ActionListenerAnnulla(NuovoOrdineControl control ){
             this.control = control;
         }
 
+        /**
+         * Metodo che gestisce l'evento click sul pulsante di annullamento, riporta alla home
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             this.control.annullaOrdine();

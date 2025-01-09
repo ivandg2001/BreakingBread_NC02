@@ -46,6 +46,11 @@ public interface OrdineDataInterface {
      */
     boolean deleteOrdine(int id);
 
+    /**
+     * Metodo che ritorn ala lista di tutti gli ordini per un determinato responsabile
+     * @param id id del responsabile
+     * @return arraylist di ordini
+     */
     public ArrayList<Ordine> getAllOrdiniByResponsabileId(int id);
 }
 

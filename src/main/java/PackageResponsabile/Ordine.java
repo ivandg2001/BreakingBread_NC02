@@ -45,6 +45,9 @@ public class Ordine {
     private int priorita;
 
 
+    /**
+     * Interfaccia che permette di comunicare con il DAO per l'oggetto ordine
+     */
     private final static OrdineDataInterface ordineDataInterface = new OrdineDAO();
 
 
@@ -61,21 +64,13 @@ public class Ordine {
      * @param dataOrdine   data in cui è stato effettuato l'ordine.
      * @param priorita priorita' data all'ordine
      * @param costo costo dell'ordine
+     * @param responsabile responsabile che ha effettuato l'ordine
      */
     public Ordine(LocalDate dataOrdine,  int priorita , double costo , Responsabile responsabile) {
         this.dataOrdine = dataOrdine;
         this.priorita = priorita;
         this.costo = costo;
         this.responsabile = responsabile;
-    }
-
-    public Ordine(LocalDate dataOrdine,  int priorita , double costo , Responsabile responsabile , Lotto lotto) {
-        this.dataOrdine = dataOrdine;
-        this.priorita = priorita;
-        this.costo = costo;
-        this.responsabile = responsabile;
-        ArmadiettoGetDataInterface facadeInterface = new ArmadiettoFacade();
-        this.lotto = lotto;
     }
 
     //--Getters and Setters--
@@ -185,16 +180,27 @@ public class Ordine {
         return this.responsabile;
     }
 
+    /**
+     * Metodo che permette di inserire l'istanza dell'ordine nel database
+     */
     public void storeOrdine(){
         if(!ordineDataInterface.setOrdine(this)){
             throw new IllegalArgumentException("Ordine gia' presente");
         }
     }
 
+    /**
+     * Metodo statico che cerca e restituisce dal database un ordine tramite id
+     * @param id id dell'ordine da caricare
+     * @return Oggetto ordine
+     */
     public static Ordine loadOrdineByID(int id){
         return ordineDataInterface.getOrdineById(id);
     }
 
+    /**
+     * Metodo che serve ad aggiornare le informazioni dell'istanza dell'ordine nel database.
+     */
     public void update(){
         if(!ordineDataInterface.updateOrdine(this)){
             throw new IllegalArgumentException("Update dell'ordine fallito");

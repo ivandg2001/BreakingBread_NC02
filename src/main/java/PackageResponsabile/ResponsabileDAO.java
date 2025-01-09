@@ -3,23 +3,60 @@ package PackageResponsabile;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe dao che gestisce il database per gli oggetti Responsabile
+ */
 public class ResponsabileDAO implements ResponsabileDataInterface {
 
+    /**
+     * Url del database
+     */
     private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
-    private static final String DB_USERNAME = "breakingBread"; // Cambia con il tuo username
-    private static final String DB_PASSWORD = "breakingbread1"; // Cambia con la tua password
+    /**
+     * User del database
+     */
+    private static final String DB_USER = "breakingBread";
+    /**
+     * Password per l'user
+     */
+    private static final String DB_PASSWORD = "breakingbread1";
 
+    /**
+     * Query per l'inserimneto di un Responsabile
+     */
     private static final String INSERT_RESPONSABILE = "INSERT INTO responsabile (nome, username, password) VALUES (?, ?, ?)";
+    /**
+     * Query per la selezione di un Responsabile tramite ID
+     */
     private static final String SELECT_RESPONSABILE_BY_ID = "SELECT * FROM responsabile WHERE id = ?";
-    private static final String SELECT_RESPONSABILE_BY_USERNAME = "SELECT * FROM responsabile WHERE username = ?";
+    /**
+     * Query per la selezione di tutti i responsabili
+     */
     private static final String SELECT_ALL_RESPONSABILI = "SELECT * FROM responsabile";
+    /**
+     * Query per l'update di un responsabile tramite ID
+     */
     private static final String UPDATE_RESPONSABILE = "UPDATE responsabile SET nome = ?, username = ?, password = ? WHERE id = ?";
+    /**
+     * Query per l'eliminazione di un reposabile tramite ID
+     */
     private static final String DELETE_RESPONSABILE = "DELETE FROM responsabile WHERE id = ?";
 
+    /**
+     * Metodo che crea la connessione al database
+     * @return oggetto Connection
+     * @throws SQLException
+     */
     private Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
 
+    /**
+     * Inserisce un nuovo responsabile nel database.
+     *
+     * @param responsabile Oggetto Responsabile da inserire.
+     * @return true se l'inserimento è avvenuto con successo, false altrimenti.
+     */
     @Override
     public boolean setResponsabile(Responsabile responsabile) {
         try (Connection connection = createConnection();
@@ -34,6 +71,12 @@ public class ResponsabileDAO implements ResponsabileDataInterface {
         }
     }
 
+    /**
+     * Recupera un responsabile dal database tramite il suo ID.
+     *
+     * @param id L'ID del responsabile da recuperare.
+     * @return Oggetto Responsabile corrispondente all'ID.
+     */
     @Override
     public Responsabile getResponsabileById(int id) {
         try (Connection connection = createConnection();
@@ -56,6 +99,11 @@ public class ResponsabileDAO implements ResponsabileDataInterface {
         return null;
     }
 
+    /**
+     * Recupera tutti i responsabili presenti nel database.
+     *
+     * @return Una lista di oggetti Responsabile.
+     */
     @Override
     public ArrayList<Responsabile> getAllResponsabili() {
         ArrayList<Responsabile> responsabili = new ArrayList<>();
@@ -70,8 +118,7 @@ public class ResponsabileDAO implements ResponsabileDataInterface {
                 responsabile.setUsername(resultSet.getString("username"));
                 responsabile.setPassword(resultSet.getString("password"));
 
-                OrdineDataInterface ordineDataInterface = new OrdineDAO();
-                responsabile.setOrdini(ordineDataInterface.getAllOrdiniByResponsabileId(idTMP));
+
 
                 responsabili.add(responsabile);
             }
@@ -81,6 +128,12 @@ public class ResponsabileDAO implements ResponsabileDataInterface {
         return responsabili;
     }
 
+    /**
+     * Aggiorna le informazioni di un responsabile nel database.
+     *
+     * @param responsabile Oggetto Responsabile con le nuove informazioni.
+     * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
+     */
     @Override
     public boolean updateResponsabile(Responsabile responsabile) {
         try (Connection connection = createConnection();
@@ -96,6 +149,12 @@ public class ResponsabileDAO implements ResponsabileDataInterface {
         }
     }
 
+    /**
+     * Elimina un responsabile dal database tramite il suo ID.
+     *
+     * @param id L'ID del responsabile da eliminare.
+     * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
+     */
     @Override
     public boolean deleteResponsabile(int id) {
         try (Connection connection = createConnection();

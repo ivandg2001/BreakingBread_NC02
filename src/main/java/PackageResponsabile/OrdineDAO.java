@@ -7,35 +7,73 @@ import PackageArmadietto.Lotto;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe DAO che gestisce il database per gli oggetti Ordine
+ */
 public class OrdineDAO implements OrdineDataInterface {
 
+    /**
+     * Url del database
+     */
     private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
     /**
-     * Username profilo per il database
+     * Username profilo per il database.
      */
     private static final String DB_USER = "breakingBread";
     /**
-     * password per il database
+     * password per il database.
      */
     private static final String DB_PASSWORD = "breakingbread1";
 
 
+    /**
+     * Query per l'inserimento in database di un nuovo Ordine.
+     */
     private static final String INSERT_ORDINE =
             "INSERT INTO ordine (data_ordine, costo, lotto_id, responsabile_id, priorita) VALUES (?, ?, ?, ?, ?)";
+    /**
+     * QUery per riprendere un ordine dal database per ID.
+     */
     private static final String SELECT_ORDINE_BY_ID =
             "SELECT * FROM ordine WHERE id = ?";
+    /**
+     * Query per riprendere tutti gli ordini dal database.
+     */
     private static final String SELECT_ALL_ORDINI =
             "SELECT * FROM ordine";
+    /**
+     * Query per aggiornare un ordine nel database , selezionato dall'ID.
+     */
     private static final String UPDATE_ORDINE =
             "UPDATE ordine SET data_ordine = ?, costo = ?, lotto_id = ?, responsabile_id = ?, priorita = ? WHERE id = ?";
+    /**
+     * Query per eliminare un ordine dal database tramite ID.
+     */
     private static final String DELETE_ORDINE =
             "DELETE FROM ordine WHERE id = ?";
+    /**
+     * Query per rirpendere tutti gli ordini di un responsabile tramite ID del responsabile.
+     */
     private static final String SELECT_ALL_ORDINI_BY_RESPONSABILE_ID =
             "SELECT * FROM ordine WHERE responsabile_id = ?";
 
+    /**
+     * Metodo che crea la connessione al database
+     * @return oggetto Connection
+     * @throws SQLException
+     */
+    private Connection createConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+    }
+    /**
+     * Inserisce un nuovo ordine nel database.
+     *
+     * @param ordine Oggetto Ordine da inserire nel database.
+     * @return true se l'inserimento è avvenuto con successo, false altrimenti.
+     */
     @Override
     public boolean setOrdine(Ordine ordine) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDINE)) {
 
             preparedStatement.setDate(1, Date.valueOf(ordine.getDataOrdine()));
@@ -51,9 +89,15 @@ public class OrdineDAO implements OrdineDataInterface {
         }
     }
 
+    /**
+     * Recupera un ordine dal database tramite il suo ID.
+     *
+     * @param id L'ID dell'ordine da recuperare.
+     * @return Ordine corrispondente all'ID specificato.
+     */
     @Override
     public Ordine getOrdineById(int id) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDINE_BY_ID)) {
 
             preparedStatement.setInt(1, id);
@@ -82,10 +126,15 @@ public class OrdineDAO implements OrdineDataInterface {
         return null;
     }
 
+    /**
+     * Recupera tutti gli ordini presenti nel database.
+     *
+     * @return Una lista di oggetti Ordine.
+     */
     @Override
     public ArrayList<Ordine> getAllOrdini() {
         ArrayList<Ordine> ordini = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              Statement statement = connection.createStatement();
              ResultSet rs = statement.executeQuery(SELECT_ALL_ORDINI)) {
 
@@ -112,10 +161,15 @@ public class OrdineDAO implements OrdineDataInterface {
         return ordini;
     }
 
+    /**
+     * Metodo che ritorn ala lista di tutti gli ordini per un determinato responsabile
+     * @param id id del responsabile
+     * @return arraylist di ordini
+     */
     @Override
     public ArrayList<Ordine> getAllOrdiniByResponsabileId(int id) {
         ArrayList<Ordine> ordini = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ORDINI_BY_RESPONSABILE_ID)) {
 
             // Imposta il parametro nella query
@@ -149,10 +203,15 @@ public class OrdineDAO implements OrdineDataInterface {
         return ordini;
     }
 
-
+    /**
+     * Aggiorna le informazioni di un ordine nel database.
+     *
+     * @param ordine Oggetto Ordine con le nuove informazioni da aggiornare.
+     * @return true se l'aggiornamento è avvenuto con successo, false altrimenti.
+     */
     @Override
     public boolean updateOrdine(Ordine ordine) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ORDINE)) {
 
             preparedStatement.setDate(1, Date.valueOf(ordine.getDataOrdine()));
@@ -169,9 +228,15 @@ public class OrdineDAO implements OrdineDataInterface {
         }
     }
 
+    /**
+     * Elimina un ordine dal database tramite il suo ID.
+     *
+     * @param id L'ID dell'ordine da eliminare.
+     * @return true se l'eliminazione è avvenuta con successo, false altrimenti.
+     */
     @Override
     public boolean deleteOrdine(int id) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ORDINE)) {
 
             preparedStatement.setInt(1, id);

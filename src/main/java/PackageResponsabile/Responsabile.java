@@ -35,6 +35,9 @@ public class Responsabile {
      */
     private ArrayList<Ordine> ordini;
 
+    /**
+     * Interfaccia che permette di comunicare con il dao per l'oggetto responsabile
+     */
     private static final ResponsabileDataInterface responsabileDataInterface = new ResponsabileDAO();
 
     /**
@@ -147,17 +150,30 @@ public class Responsabile {
         return ordini;
     }
 
+    /**
+     * Metodo chepermette di salvare l'istanza del ricercatore nel Database
+     */
     public void storeResponsabile(){
         if(!responsabileDataInterface.setResponsabile(this)){
             throw new IllegalArgumentException("Responsabile già presente");
         }
     }
 
+    /**
+     * Metodo che carica le informazioni di un responsabile tramite il suo id, carica anche la lista degli ordini effettuati
+     * @param id id del responsabile
+     * @return oggetto Responsabile
+     */
     public static Responsabile loadResponsabileById(int id){
-        return responsabileDataInterface.getResponsabileById(id);
+        Responsabile responsabile = responsabileDataInterface.getResponsabileById(id);
+        OrdineDataInterface i = new OrdineDAO();
+        responsabile.setOrdini(i.getAllOrdiniByResponsabileId(responsabile.getID()));
+        return responsabile;
     }
 
-
+    /**
+     * Metodo che aggiorna le informazioni nel database per l'istanza dell'oggetto
+     */
     public void update(){
         if(!responsabileDataInterface.updateResponsabile(this)){
             throw new IllegalArgumentException("Errore nell'update");
