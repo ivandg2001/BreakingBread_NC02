@@ -1,22 +1,14 @@
 package PackageRicercatore;
 
+import PackageUtils.DatabaseConnectionDAO;
+import PackageUtils.DatabaseConnectionInterface;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class RicercatoreDAO implements RicercatoreDataInterface{
 
-    /**
-     * URL database
-     */
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
-    /**
-     * Username profilo per il database
-     */
-    private static final String DB_USER = "breakingBread";
-    /**
-     * Password per il database
-     */
-    private static final String DB_PASSWORD = "breakingbread1";
+
 
     private static final String INSERT =
             "INSERT INTO ricercatore (nome, username, password, team_id) VALUES (?, ?, ?, ?)";
@@ -31,6 +23,22 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
     private static final String SELECT_ALL_BY_RICERCATORE =
             "SELECT r.* FROM ricercatore r JOIN team_ricercatore tr ON r.id = tr.ricercatore_id WHERE tr.team_id = ?";
 
+
+    /**
+     * Interfaccia che accede al DAO database per creare una connessione
+     */
+    private DatabaseConnectionInterface databaseConnectionInterface = new DatabaseConnectionDAO();
+
+
+    /**
+     * Metodo che crea la connessione al database
+     * @return oggetto Connection
+     * @throws SQLException
+     */
+    private Connection createConnection() throws SQLException {
+        return databaseConnectionInterface.createConnection();
+    }
+
     public RicercatoreDAO() {}
 
     /**
@@ -41,7 +49,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
      */
     @Override
     public boolean setRicercatore(Ricercatore ricercatore) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
 
             preparedStatement.setString(1, ricercatore.getNome());
@@ -65,7 +73,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
     @Override
     public Ricercatore getRicercatore(int id) {
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
 
             preparedStatement.setInt(1, id);
@@ -95,7 +103,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
     public ArrayList<Ricercatore> getAllRicercatore() {
         ArrayList<Ricercatore> ricercatori = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(SELECT_ALL);
 
@@ -123,7 +131,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
     @Override
     public boolean updateRicercatore(Ricercatore ricercatore) {
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
 
             preparedStatement.setInt(5, ricercatore.getID());
@@ -148,7 +156,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
     @Override
     public boolean deleteRicercatore(Ricercatore ricercatore) {
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
 
             preparedStatement.setInt(1, ricercatore.getID());
@@ -166,7 +174,7 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
     public ArrayList<Ricercatore> getAllRicercatoriByTeam(Team team) {
         ArrayList<Ricercatore> ricercatori = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_RICERCATORE);
 
             preparedStatement.setInt(1, team.getID());

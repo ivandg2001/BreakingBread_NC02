@@ -1,22 +1,14 @@
 package PackageRicercatore;
 
+import PackageUtils.DatabaseConnectionDAO;
+import PackageUtils.DatabaseConnectionInterface;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class TeamDAO implements TeamDataInterface {
 
-    /**
-     * URL database
-     */
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
-    /**
-     * Username profilo per il database
-     */
-    private static final String DB_USER = "breakingBread";
-    /**
-     * Password per il database
-     */
-    private static final String DB_PASSWORD = "breakingbread1";
+
 
     private static final String INSERT =
             "INSERT INTO team (nome_team) VALUES (?)";
@@ -33,6 +25,21 @@ public class TeamDAO implements TeamDataInterface {
     private static final String SELECT_ALL_BY_PROGETTO =
             "SELECT t.* FROM team t JOIN team_progetto tp ON t.id = tp.team_id WHERE tp.ricercatore_id = ?";
 
+    /**
+     * Interfaccia che accede al DAO database per creare una connessione
+     */
+    private DatabaseConnectionInterface databaseConnectionInterface = new DatabaseConnectionDAO();
+
+
+    /**
+     * Metodo che crea la connessione al database
+     * @return oggetto Connection
+     * @throws SQLException
+     */
+    private Connection createConnection() throws SQLException {
+        return databaseConnectionInterface.createConnection();
+    }
+
     public TeamDAO() {}
 
     /**
@@ -43,7 +50,7 @@ public class TeamDAO implements TeamDataInterface {
      */
     @Override
     public boolean setTeam(Team team) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        try (Connection connection = createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
 
             preparedStatement.setString(1, team.getNomeTeam());
@@ -64,7 +71,7 @@ public class TeamDAO implements TeamDataInterface {
     @Override
     public Team getTeam(int id) {
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
 
             preparedStatement.setInt(1, id);
@@ -95,7 +102,7 @@ public class TeamDAO implements TeamDataInterface {
     public ArrayList<Team> getAllTeams() {
         ArrayList<Team> teams = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(SELECT_ALL);
 
@@ -124,7 +131,7 @@ public class TeamDAO implements TeamDataInterface {
     @Override
     public boolean updateTeam(Team team) {
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
 
             preparedStatement.setString(1, team.getNomeTeam());
@@ -146,7 +153,7 @@ public class TeamDAO implements TeamDataInterface {
     @Override
     public boolean deleteTeam(Team team) {
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection =createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
 
             preparedStatement.setInt(1, team.getID());
@@ -164,7 +171,7 @@ public class TeamDAO implements TeamDataInterface {
     public ArrayList<Team> getAllTeamsByRicercatore(Ricercatore ricercatore) {
         ArrayList<Team> teams = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_RICERCATORE);
 
             preparedStatement.setInt(1, ricercatore.getID());
@@ -190,7 +197,7 @@ public class TeamDAO implements TeamDataInterface {
     public ArrayList<Team> getAllTeamsByProgetto(Progetto progetto) {
         ArrayList<Team> teams = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_PROGETTO);
 
             preparedStatement.setInt(1, progetto.getID());

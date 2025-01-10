@@ -1,8 +1,8 @@
 package PackageResponsabile;
 
 import PackageArmadietto.*;
-import PackageGraphics.AppFrame;
-import PackageGraphics.ResponsabileHomepage;
+import PackageUtils.AppFrame;
+import PackageUtils.ResponsabileHomepage;
 
 import java.time.LocalDate;
 
@@ -70,7 +70,7 @@ public class NuovoOrdineControl implements ResponsabileInterface{
         if( isValidOrdineInfos(sostanza,purezza,quantita,priorita) ){
             creaRiepilogoOrdine(creaOggettoOrdine(sostanza,purezza,quantita,priorita) , sostanza , purezza , quantita , priorita);
         }else {
-            creaPopup("Qualcosa e'andato storto");
+            creaPopup("Qualcosa e'andato storto, valori inseriti non validi, riprova . . .");
             creaFormOrdine();
         }
 

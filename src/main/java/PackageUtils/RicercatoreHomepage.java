@@ -1,4 +1,4 @@
-package PackageGraphics;
+package PackageUtils;
 
 import PackageRicercatore.PrelievoSostanzaButton;
 import PackageRicercatore.Ricercatore;

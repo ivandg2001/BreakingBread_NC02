@@ -1,4 +1,4 @@
-package PackageGraphics;
+package PackageUtils;
 
 import PackageResponsabile.Responsabile;
 import PackageResponsabile.ResponsabileDAO;
