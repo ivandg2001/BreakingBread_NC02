@@ -82,7 +82,7 @@ public class NuovoOrdineControl implements NuovoOrdineInterface {
      * @param purezza purezza della sostanza.
      * @param quantita quantita della sostanza.
      * @param priorita priorita' dell'ordine.
-     * @return true se va tutto bene , false se qualcosa va storto.
+     * @return true se va tutto bene, false se qualcosa va storto.
      */
     public boolean isValidOrdineInfos(String sostanza, double purezza, double quantita, Integer priorita) {
 

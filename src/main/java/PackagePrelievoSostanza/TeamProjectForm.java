@@ -19,6 +19,9 @@ public class TeamProjectForm {
      */
     private PrelievoSostanzaControl control;
 
+    private JComboBox<String> comboTeam;
+    private JComboBox<String> comboProgetto;
+
     public TeamProjectForm(AppFrame frame, PrelievoSostanzaControl control) {
         this.frame = frame;
         this.control = control;
@@ -38,13 +41,13 @@ public class TeamProjectForm {
         for (int i = 0; i < teams.size(); i++) {
             nomiTeams[i] = teams.get(i).getNomeTeam();
         }
-        JComboBox<String> comboTeams = new JComboBox<>(nomiTeams);
+        comboTeam = new JComboBox<>(nomiTeams);
         pannelloPrincipale.add(selezioneTeam);
-        pannelloPrincipale.add(comboTeams);
+        pannelloPrincipale.add(comboTeam);
 
         // Selezione Progetto
         JLabel selezioneProgetto = new JLabel("Elemento:");
-        JComboBox<String> comboProgetto = new JComboBox<>();
+        comboProgetto = new JComboBox<>();
         comboProgetto.setEnabled(true);//oppure setEditable?
         pannelloPrincipale.add(selezioneProgetto);
         pannelloPrincipale.add(comboProgetto);
@@ -57,15 +60,12 @@ public class TeamProjectForm {
             for (int i = 0; i < progetti.size(); i++) {
                 nomiProgetti[i] = progetti.get(i).getNomeProgetto();
             }
-
-            for (Progetto progetto : team.getProgetti()) {
-                opzioni.put(team.getNomeTeam(), nomiProgetti);
-            }
+            opzioni.put(team.getNomeTeam(), nomiProgetti);
         }
 
         // Listener per il primo JComboBox
-        comboTeams.addActionListener(e -> {
-            String selezione = (String) comboTeams.getSelectedItem();
+        comboTeam.addActionListener(e -> {
+            String selezione = (String) comboTeam.getSelectedItem();
 
             if (selezione != null) {
                 // Abilita il secondo JComboBox
@@ -98,6 +98,13 @@ public class TeamProjectForm {
            control.abortActivity();
         });
 
+        // Listener per il pulsante annulla
+        confermaButton.addActionListener(e -> {
+            String teamSelezionato = (String) comboTeam.getSelectedItem();
+            String progettoSelezionato = (String) comboProgetto.getSelectedItem();
+            control.setSceltaTeamProgetto(teamSelezionato, progettoSelezionato);
+        });
+
         // Aggiunta componenti alla finestra
         frame.resetAppFrame();
         frame.updateNorth(titoloPagina);
@@ -105,6 +112,4 @@ public class TeamProjectForm {
         frame.updateSouth(pannelloPulsanti);
         frame.loadUpdates();
     }
-
-
 }

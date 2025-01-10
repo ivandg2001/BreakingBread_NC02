@@ -29,14 +29,6 @@ public class Progetto {
     public Progetto () {}
 
     /**
-     * Costruttore parametrico che inizializza i campi.
-     * @param nomeProgetto nome del progetto
-     * */
-    public Progetto(String nomeProgetto){
-        this.nomeProgetto = nomeProgetto;
-    }
-
-    /**
      * Ritorna l'ID del progetto
      * @return id progetto
      */

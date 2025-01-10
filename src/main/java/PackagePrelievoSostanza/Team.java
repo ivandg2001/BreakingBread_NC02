@@ -33,14 +33,6 @@ public class Team {
     public Team(){}
 
     /**
-     * Costruttore parametrico che inizializza i campi
-     * @param nomeTeam nome del team
-     */
-    public Team(String nomeTeam){
-        this.nomeTeam = nomeTeam;
-    }
-
-    /**
      * Ritorna l'id del team
      * @return id Team
      */
