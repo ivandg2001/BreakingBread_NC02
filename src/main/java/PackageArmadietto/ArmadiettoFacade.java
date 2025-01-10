@@ -68,6 +68,7 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
         return new Lotto(dataDiScadenza , quantita , sostanza , purezza);
 
     }
+
     //-- SetDataInterface --
     @Override
     public void saveLotto(LocalDate dataScadenza, double quantita, String sostanzaNome , double purezza) {
