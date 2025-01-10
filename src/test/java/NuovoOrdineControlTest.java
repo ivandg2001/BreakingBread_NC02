@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ResponsabileControlTest {
+public class NuovoOrdineControlTest {
 
     private final NuovoOrdineControl control = new NuovoOrdineControl(null, null);
     private final ArmadiettoGetDataInterface i = new ArmadiettoFacade();
