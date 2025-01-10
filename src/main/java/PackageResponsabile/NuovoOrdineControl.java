@@ -1,8 +1,8 @@
 package PackageResponsabile;
 
 import PackageArmadietto.*;
-import PackageGraphics.AppFrame;
-import PackageGraphics.ResponsabileHomepage;
+import PackageUtils.AppFrame;
+import PackageUtils.ResponsabileHomepage;
 
 import java.time.LocalDate;
 
@@ -70,7 +70,7 @@ public class NuovoOrdineControl implements ResponsabileInterface{
         if( isValidOrdineInfos(sostanza,purezza,quantita,priorita) ){
             creaRiepilogoOrdine(creaOggettoOrdine(sostanza,purezza,quantita,priorita) , sostanza , purezza , quantita , priorita);
         }else {
-            creaPopup("Qualcosa e'andato storto");
+            creaPopup("Qualcosa e'andato storto, valori inseriti non validi, riprova . . .");
             creaFormOrdine();
         }
 
@@ -236,8 +236,15 @@ public class NuovoOrdineControl implements ResponsabileInterface{
 
         ArmadiettoSetDataInterface i = new ArmadiettoFacade();
         LocalDate dataScadenzaLotto = LocalDate.now().plusYears(5);
-        nuovoOrdine.setLotto(i.saveAndRetrievelotto(dataScadenzaLotto , quantita , sostanza , purezza));
-        nuovoOrdine.storeOrdine();
+
+        try{
+            nuovoOrdine.setLotto(i.saveAndRetrievelotto(dataScadenzaLotto , quantita , sostanza , purezza));
+            nuovoOrdine.storeOrdine();
+        } catch (Exception e) {
+            creaPopup("Errore imprevisto nella finalizzazione dell'ordine, controlla il server database e riprova . . .");
+            annullaOrdine();
+        }
+
 
         ResponsabileHomepage hm = new ResponsabileHomepage(this.frame , this.responsabile);
         hm.display();

@@ -1,7 +1,7 @@
 package PackageResponsabile;
 
 import javax.swing.*;
-import PackageGraphics.AppFrame;
+import PackageUtils.AppFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

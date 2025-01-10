@@ -1,6 +1,6 @@
 package PackageRicercatore;
 
-import PackageGraphics.AppFrame;
+import PackageUtils.AppFrame;
 
 import java.util.ArrayList;
 

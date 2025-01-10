@@ -1,6 +1,6 @@
 package PackageResponsabile;
 
-import PackageGraphics.AppFrame;
+import PackageUtils.AppFrame;
 
 import javax.swing.*;
 import javax.swing.text.*;
@@ -54,14 +54,14 @@ public class OrdineForm {
         pannelloPrincipale.add(nomeSostanzaComboBox);
 
         // Purezza
-        JLabel purezzaLabel = new JLabel("Purezza:");
+        JLabel purezzaLabel = new JLabel("Purezza (Tra 1 e 100):");
         JTextField purezzaField = new JTextField();
         setNumericInput(purezzaField); // Valida input numerico
         pannelloPrincipale.add(purezzaLabel);
         pannelloPrincipale.add(purezzaField);
 
         // Quantità
-        JLabel quantitaLabel = new JLabel("Quantità:");
+        JLabel quantitaLabel = new JLabel("Quantità (tra 1 e 100000):");
         JTextField quantitaField = new JTextField();
         setNumericInput(quantitaField); // Valida input numerico
         pannelloPrincipale.add(quantitaLabel);

@@ -3,6 +3,8 @@ package PackageResponsabile;
 import PackageArmadietto.ArmadiettoFacade;
 import PackageArmadietto.ArmadiettoGetDataInterface;
 import PackageArmadietto.Lotto;
+import PackageUtils.DatabaseConnectionDAO;
+import PackageUtils.DatabaseConnectionInterface;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,18 +14,6 @@ import java.util.ArrayList;
  */
 public class OrdineDAO implements OrdineDataInterface {
 
-    /**
-     * Url del database
-     */
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/breakingbread";
-    /**
-     * Username profilo per il database.
-     */
-    private static final String DB_USER = "breakingBread";
-    /**
-     * password per il database.
-     */
-    private static final String DB_PASSWORD = "breakingbread1";
 
 
     /**
@@ -58,12 +48,18 @@ public class OrdineDAO implements OrdineDataInterface {
             "SELECT * FROM ordine WHERE responsabile_id = ?";
 
     /**
+     * Interfaccia che accede al DAO database per creare una connessione
+     */
+    private DatabaseConnectionInterface databaseConnectionInterface = new DatabaseConnectionDAO();
+
+
+    /**
      * Metodo che crea la connessione al database
      * @return oggetto Connection
      * @throws SQLException
      */
     private Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        return databaseConnectionInterface.createConnection();
     }
     /**
      * Inserisce un nuovo ordine nel database.
