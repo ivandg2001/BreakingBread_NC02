@@ -122,7 +122,6 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
 
     public void setIdLottoSelezionato(int idLottoSelezionato) {
         this.idLottoSelezionato = idLottoSelezionato;
-        System.out.println(idLottoSelezionato);
         stampaSceltaQuantita();
     }
 

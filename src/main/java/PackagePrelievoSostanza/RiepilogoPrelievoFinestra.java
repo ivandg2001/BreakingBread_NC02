@@ -59,7 +59,7 @@ public class RiepilogoPrelievoFinestra {
         frame.resetAppFrame();
         frame.updateNorth(titoloPagina);
         frame.updateCenter(pannelloPrincipale);
-        frame.updateSouth(annullaButton);
+        frame.updateSouth(pannelloPulsanti);
         frame.loadUpdates();
     }
 }

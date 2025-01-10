@@ -147,8 +147,8 @@ public class LottoDAO implements LottoDataInterface {
             stmt.setDate(1, Date.valueOf(lotto.getDataScadenza()));
             stmt.setDouble(2, lotto.getQuantita());
             stmt.setInt(3, lotto.getSostanza().getID());
-            stmt.setInt(4, lotto.getID());
-            stmt.setDouble(5 , lotto.getPurezza());
+            stmt.setDouble(4 , lotto.getPurezza());
+            stmt.setInt(5, lotto.getID());
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;

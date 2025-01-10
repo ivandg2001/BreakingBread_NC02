@@ -80,7 +80,7 @@ public class Armadietto {
 
 
         for (Lotto lotto : lotti) {
-            if (lotto.isExpired()) {
+            if (lotto.isExpired() || lotto.getQuantita() < 0.01) {
                 continue;
             }
 
