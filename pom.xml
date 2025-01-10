@@ -33,7 +33,41 @@
             <scope>test</scope>
         </dependency>
 
+
+
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <!-- Preparazione dell'agente Jacoco per la raccolta della copertura -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal> <!-- Prepara l'agente per raccogliere i dati di copertura -->
+                        </goals>
+                    </execution>
+
+                    <!-- Generazione del report Jacoco dopo la fase di test -->
+                    <execution>
+                        <id>generate-report</id>
+                        <goals>
+                            <goal>report</goal> <!-- Genera il report di copertura -->
+                        </goals>
+                        <phase>verify</phase> <!-- La fase di 'verify' è quella in cui generare il report -->
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
 
 
 </project>
