@@ -236,8 +236,15 @@ public class NuovoOrdineControl implements ResponsabileInterface{
 
         ArmadiettoSetDataInterface i = new ArmadiettoFacade();
         LocalDate dataScadenzaLotto = LocalDate.now().plusYears(5);
-        nuovoOrdine.setLotto(i.saveAndRetrievelotto(dataScadenzaLotto , quantita , sostanza , purezza));
-        nuovoOrdine.storeOrdine();
+
+        try{
+            nuovoOrdine.setLotto(i.saveAndRetrievelotto(dataScadenzaLotto , quantita , sostanza , purezza));
+            nuovoOrdine.storeOrdine();
+        } catch (Exception e) {
+            creaPopup("Errore imprevisto nella finalizzazione dell'ordine, controlla il server database e riprova . . .");
+            annullaOrdine();
+        }
+
 
         ResponsabileHomepage hm = new ResponsabileHomepage(this.frame , this.responsabile);
         hm.display();
