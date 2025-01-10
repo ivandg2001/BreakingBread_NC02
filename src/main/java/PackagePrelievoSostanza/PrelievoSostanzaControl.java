@@ -17,6 +17,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
 
     private Team teamSelezionato;
     private Progetto progettoSelezionato;
+    private int idLottoSelezionato;
 
     public PrelievoSostanzaControl(AppFrame frame, Ricercatore ricercatore) {
         this.frame = frame;
@@ -108,8 +109,19 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
 
     private void stampaListaLotti() {
         ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
-        ArrayList<HashMap<String, Object>> listaLottiFormattati = armadiettoGDI.getListaLottiFormattati();
+        ArrayList<String[]> listaLottiFormattati = armadiettoGDI.getListaLottiFormattati();
 
+        LottoPrelievoList lottoPrelievoList = new LottoPrelievoList(frame, this);
+        lottoPrelievoList.display(listaLottiFormattati);
+    }
+
+    public void setIdLottoSelezionato(int idLottoSelezionato) {
+        this.idLottoSelezionato = idLottoSelezionato;
+        System.out.println(idLottoSelezionato);
+        stampaSceltaQuantita();
+    }
+
+    private void stampaSceltaQuantita() {
 
     }
 

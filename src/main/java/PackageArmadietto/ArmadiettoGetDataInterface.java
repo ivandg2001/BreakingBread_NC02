@@ -42,13 +42,17 @@ public interface ArmadiettoGetDataInterface {
     public ArrayList<Sostanza> getListaSostanza();
 
     /**
-     * Questo metodo restituisce una lista, i cui elementi sono delle HashMap.
+     * Questo metodo restituisce una lista, i cui elementi sono degli Array di Stringhe.
      * Ciascun elemento di questo array rappresenta un lotto presente nell'armadietto.
-     * Ogni hashmap contiene due elementi: Id del lotto, alcune informazioni del lotto, formattate appositamente per esser stampate a schermo.
+     * Ogni array contiene i seguenti elementi:
+     * 1. ID del lotto;
+     * 2. Nome della sostanza contenuta nel lotto;
+     * 3. Formula chimica della sostanza contenuta nel lotto;
+     * 4. Purezza della sostanza contenuta nel lotto.
      *
-     * @return Una ArrayList di HashMap.
+     * @return Una ArrayList di Array dì stringhe.
      */
-    public ArrayList<HashMap<String, Object>> getListaLottiFormattati();
+    public ArrayList<String[]> getListaLottiFormattati();
 
     public String[] getListaNomiSostanze();
 

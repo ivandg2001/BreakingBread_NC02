@@ -243,6 +243,6 @@ public class Lotto {
      * @return true se la sostanza contenuta nel lotto è scaduta, false altrimenti.
      */
     public boolean isExpired() {
-        return dataScadenza.isAfter(LocalDate.now());
+        return dataScadenza.isBefore(LocalDate.now());
     }
 }

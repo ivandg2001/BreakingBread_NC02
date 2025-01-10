@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class TeamProjectForm {
 
     /**
-     * Oggetto AppFrame che contien la GUI
+     * Oggetto AppFrame che contiene la GUI
      */
     private AppFrame frame;
 
@@ -98,7 +98,7 @@ public class TeamProjectForm {
            control.abortActivity();
         });
 
-        // Listener per il pulsante annulla
+        // Listener per il pulsante conferma
         confermaButton.addActionListener(e -> {
             String teamSelezionato = (String) comboTeam.getSelectedItem();
             String progettoSelezionato = (String) comboProgetto.getSelectedItem();
