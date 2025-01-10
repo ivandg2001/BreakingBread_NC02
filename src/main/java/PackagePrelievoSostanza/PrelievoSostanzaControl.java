@@ -11,9 +11,24 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     private AppFrame frame;
     private Ricercatore ricercatore;
 
+    private Team teamSelezionato;
+    private Progetto progettoSelezionato;
+
     public PrelievoSostanzaControl(AppFrame frame, Ricercatore ricercatore) {
         this.frame = frame;
         this.ricercatore = ricercatore;
+        this.teamSelezionato = new Team();
+        this.progettoSelezionato = new Progetto();
+
+        // Inizializza l'oggetto ricercatore con le informazioni contenute nel database
+        this.ricercatore.load();
+        ArrayList<Team> teams = this.ricercatore.getTeams();
+        for (Team team : teams) {
+            team.load();
+            for (Progetto progetto : team.getProgetti()) {
+                progetto.load();
+            }
+        }
     }
 
     /**
@@ -23,22 +38,15 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     public void prelevaSostanza() {
 
         /*
+        Passi compiuti da questa attività
 
-        1. Inserimento di Team e Progetto --
-        2. Scelta del lotto
-        3. Piccolo riepilogo + inserimento quantità da prelevare
-        4. Riepilogo finale
-        5. Stampa del popup
+        1. Inserimento di Team e Progetto -- DONE
+        2. Scelta del lotto -- TODO
+        3. Piccolo riepilogo + inserimento quantità da prelevare -- TODO
+        4. Riepilogo finale -- TODO
+        5. Stampa del popup -- TODO
 
          */
-        ricercatore.load();
-        ArrayList<Team> teams = ricercatore.getTeams();
-        for (Team team : teams) {
-            team.load();
-            for (Progetto progetto : team.getProgetti()) {
-                progetto.load();
-            }
-        }
 
         stampaFormTeamEProgetto();
     }
@@ -46,14 +54,12 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     /**
      * Avvia la stampa del form per la selezione del Team e del Progetto scelti.
      */
-    private void stampaFormTeamEProgetto () {
+    public void stampaFormTeamEProgetto () {
         TeamProjectForm teamProjectForm = new TeamProjectForm(frame, this);
         teamProjectForm.display(ricercatore.getTeams());
     }
 
     public void setSceltaTeamProgetto (String nomeTeamSelezionato, String nomeProgettoSelezionato) {
-        Team teamSelezionato = new Team();
-        Progetto progettoSelezionato = new Progetto();
 
         if (TeamProgettoIsValid(nomeTeamSelezionato, nomeProgettoSelezionato)) {
             for (Team team : ricercatore.getTeams()) {
@@ -68,7 +74,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
                     break;
                 }
             }
-            stampaListaLotti(teamSelezionato, progettoSelezionato);
+            stampaListaLotti();
         } else {
             frame.showErrorDialog("Il team o il progetto selezionato non è valido!");
             stampaFormTeamEProgetto();
@@ -82,7 +88,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
      * @param nomeProgettoSelezionato nome del progetto selezionato dall'utente.
      * @return false se l'input dell'utente è valido, false altrimenti.
      */
-    private boolean TeamProgettoIsValid (String nomeTeamSelezionato, String nomeProgettoSelezionato) {
+    public boolean TeamProgettoIsValid (String nomeTeamSelezionato, String nomeProgettoSelezionato) {
         if (nomeTeamSelezionato == null || nomeProgettoSelezionato == null) {
             return false;
         }
@@ -96,7 +102,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         return false;
     }
 
-    private stampaListaLotti() {
+    private void stampaListaLotti() {
 
     }
 
@@ -113,6 +119,9 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     public void mostraRiepilogoOrdine () {
 
     }
+
+
+
 
     /**
      * Annulla funzionalità di prelievo sostanza, e ritorna alla Homepage del Ricercatore
