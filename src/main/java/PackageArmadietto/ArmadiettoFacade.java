@@ -8,7 +8,9 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
 
     private final static LottoDataInterface lottoDataInterface = new LottoDAO();
     private final static SostanzaDataInterface sostanzaDataInterface = new SostanzaDAO();
-
+    private Lotto lotto = null;
+    private Sostanza sostanza = null;
+    private Armadietto armadietto = null;
 
     public ArmadiettoFacade() {
     }
@@ -65,7 +67,7 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
     }
 
     @Override
-    public Lotto createLottoObjectNoPersistance(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza){
+    public Lotto createLottoObjectNoPersistence(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza){
         return new Lotto(dataDiScadenza , quantita , sostanza , purezza);
 
     }
@@ -96,15 +98,59 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
      * Questo metodo restituisce una lista, i cui elementi sono degli Array di Stringhe.
      * Ciascun elemento di questo array rappresenta un lotto presente nell'armadietto.
      * Ogni array contiene i seguenti elementi:
-     * 1. ID del lotto;
-     * 2. Nome della sostanza contenuta nel lotto;
-     * 3. Formula chimica della sostanza contenuta nel lotto;
-     * 4. Purezza della sostanza contenuta nel lotto.
+     * 0. ID del lotto;
+     * 1. Nome della sostanza contenuta nel lotto;
+     * 2. Formula chimica della sostanza contenuta nel lotto;
+     * 3. Purezza della sostanza contenuta nel lotto.
      *
      * @return Una ArrayList di Array dì stringhe.
      */
+    @Override
     public ArrayList<String[]> getListaLottiFormattati() {
         Armadietto armadietto = new Armadietto();
         return armadietto.getListaLottiFormattati();
+    }
+
+    /**
+     * Restituisce informazioni formattate riguardo un certo lotto.
+     * Le informazioni sono organizzate in un array di stringhe, e nel seguente ordine:
+     * 0. Nome della sostanza nel lotto;
+     * 1. Formula della sostanza nel lotto;
+     * 2. ID del lotto;
+     * 3. Purezza del lotto;
+     * 4. Data di scadenza del lotto;
+     * 5. Quantità attuale della sostanza nel lotto.
+     *
+     * @param idLotto Id del lotto.
+     * @return Informazioni riguardo al lotto, formattate in un array di stringhe.
+     */
+    @Override
+    public String[] getInfoLottoFormattate(int idLotto) {
+        lotto = lottoDataInterface.getLottoById(idLotto);
+        return lotto.getInfoLottoFormattate();
+    }
+
+    /**
+     * Restituisce la quantità di un certo lotto.
+     *
+     * @param idLotto Id del lotto.
+     * @return Quantità della sostanza nel lotto.
+     */
+    @Override
+    public double getQuantitaLotto(int idLotto) {
+        lotto = lottoDataInterface.getLottoById(idLotto);
+        return lotto.getQuantita();
+    }
+
+    /**
+     * Esegue il prelievo di una sostanza dall'armadietto.
+     *
+     * @param idLotto Id del lotto da cui prelevare.
+     * @param quantita Quantità della sostanza da prelevare dal lotto.
+     */
+    @Override
+    public void eseguiPrelievo(int idLotto, double quantita) {
+        armadietto = new Armadietto();
+        armadietto.eseguiPrelievo(idLotto, quantita);
     }
 }

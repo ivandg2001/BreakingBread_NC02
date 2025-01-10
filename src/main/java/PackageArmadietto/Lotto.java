@@ -245,4 +245,29 @@ public class Lotto {
     public boolean isExpired() {
         return dataScadenza.isBefore(LocalDate.now());
     }
+
+    /**
+     * Restituisce informazioni formattate riguardanti il lotto.
+     * Le informazioni sono organizzate in un array di stringhe, e nel seguente ordine:
+     * 0. Nome della sostanza nel lotto;
+     * 1. Formula della sostanza nel lotto;
+     * 2. ID del lotto;
+     * 3. Purezza del lotto;
+     * 4. Data di scadenza del lotto;
+     * 5. Quantità attuale della sostanza nel lotto.
+     *
+     * @return Informazioni riguardo al lotto, formattate in un array di stringhe.
+     */
+    public String[] getInfoLottoFormattate() {
+        String[] infoLottoFormattate = new String[6];
+
+        infoLottoFormattate[0] = sostanza.getNome();
+        infoLottoFormattate[1] = sostanza.getFormula();
+        infoLottoFormattate[2] = String.valueOf(ID);
+        infoLottoFormattate[3] = String.valueOf(purezza);
+        infoLottoFormattate[4] = dataScadenza.toString();
+        infoLottoFormattate[5] = String.valueOf(quantita);
+
+        return infoLottoFormattate;
+    }
 }

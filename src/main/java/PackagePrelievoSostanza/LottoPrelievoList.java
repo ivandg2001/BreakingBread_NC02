@@ -12,13 +12,10 @@ public class LottoPrelievoList {
      * Oggetto AppFrame che contiene la GUI
      */
     private AppFrame frame;
-
     /**
      * Istanza dell'oggetto control che ha chiamato la procedura.
      */
     private PrelievoSostanzaControl control;
-
-    private Double quantita;
 
     public LottoPrelievoList(AppFrame frame, PrelievoSostanzaControl control) {
         this.frame = frame;
@@ -53,8 +50,6 @@ public class LottoPrelievoList {
             prelevaButton.addActionListener(e -> {
                 control.setIdLottoSelezionato(Integer.parseInt(lottoFormattato[0]));
             });
-
-            // Imposta
         }
 
         // Pulsante di annullamento

@@ -95,7 +95,7 @@ public class TeamProjectForm {
 
         // Listener per il pulsante annulla
         annullaButton.addActionListener(e -> {
-           control.abortActivity();
+           control.endActivity();
         });
 
         // Listener per il pulsante conferma

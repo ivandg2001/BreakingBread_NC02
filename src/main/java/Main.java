@@ -23,7 +23,7 @@ public class Main {
         try{
             i.createConnection();
         } catch (SQLException e) {
-            frame.showErrorDialog("Errore nella connessione al database, controllare il server e riaccedere al programma.");
+            frame.showErrorDialog("Errore nella connessione al database, controllare il server e riavviare il programma.");
 
             System.exit(1);
         }

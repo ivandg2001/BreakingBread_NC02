@@ -50,11 +50,11 @@ public class PrelievoSostanzaControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-1 , false" ,
-            "-2 , false" ,
-            "-20 , false"
+            "'-1' , false" ,
+            "'-2' , false" ,
+            "'-20' , false"
     })
-    public void TC2_4a_quantitaNegativa(Double quantita , boolean expected){
+    public void TC2_4a_quantitaNegativa(String quantita , boolean expected){
 
         assertEquals(expected, control.quantitaIsValid(quantita));
 
@@ -62,11 +62,11 @@ public class PrelievoSostanzaControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "99999 , false" ,
-            "100000 , false" ,
-            "100000000 , false"
+            "'99999' , false" ,
+            "'100000' , false" ,
+            "'100000000' , false"
     })
-    public void TC2_4b_quantitaTroppoAlta(Double quantita , boolean expected){
+    public void TC2_4b_quantitaTroppoAlta(String quantita , boolean expected){
 
         assertEquals(expected, control.quantitaIsValid(quantita));
 
@@ -75,7 +75,7 @@ public class PrelievoSostanzaControlTest {
     @Test
     public void TC2_4c_quantitaugualeA0(){
 
-        assertFalse(control.quantitaIsValid(0));
+        assertFalse(control.quantitaIsValid("0"));
 
     }
 
@@ -88,10 +88,10 @@ public class PrelievoSostanzaControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1 , true"
+            "'1' , true"
     })
     @Test
-    public void TC2_5_quantitaValida(Double quantita , boolean expected){
+    public void TC2_5_quantitaValida(String quantita , boolean expected){
 
         assertEquals(expected, control.quantitaIsValid(quantita));
 

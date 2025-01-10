@@ -2,13 +2,12 @@ package PackagePrelievoSostanza;
 
 import PackageArmadietto.ArmadiettoFacade;
 import PackageArmadietto.ArmadiettoGetDataInterface;
-import PackageArmadietto.Lotto;
+import PackageArmadietto.ArmadiettoSetDataInterface;
 import PackageUtils.AppFrame;
-import PackageUtils.Homepage;
 import PackageUtils.RicercatoreHomepage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
 
@@ -18,6 +17,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     private Team teamSelezionato;
     private Progetto progettoSelezionato;
     private int idLottoSelezionato;
+    private double quantitaSelezionata;
 
     public PrelievoSostanzaControl(AppFrame frame, Ricercatore ricercatore) {
         this.frame = frame;
@@ -46,8 +46,8 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         Passi compiuti da questa attività
 
         1. Inserimento di Team e Progetto -- DONE
-        2. Scelta del lotto -- TODO
-        3. Piccolo riepilogo + inserimento quantità da prelevare -- TODO
+        2. Scelta del lotto -- DONE
+        3. Piccolo riepilogo + inserimento quantità da prelevare -- DONE
         4. Riepilogo finale -- TODO
         5. Stampa del popup -- TODO
 
@@ -65,7 +65,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     }
 
     public void setSceltaTeamProgetto (String nomeTeamSelezionato, String nomeProgettoSelezionato) {
-
+        // Validazione
         if (TeamProgettoIsValid(nomeTeamSelezionato, nomeProgettoSelezionato)) {
             for (Team team : ricercatore.getTeams()) {
                 if (team.getNomeTeam().equals(nomeTeamSelezionato)) {
@@ -97,6 +97,11 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         if (nomeTeamSelezionato == null || nomeProgettoSelezionato == null) {
             return false;
         }
+
+        if (nomeTeamSelezionato.isEmpty() || nomeProgettoSelezionato.isEmpty()) {
+            return false;
+        }
+
         for (Team team : ricercatore.getTeams()) {
             for (Progetto progetto : team.getProgetti()) {
                 if (nomeTeamSelezionato.equals(team.getNomeTeam()) && nomeProgettoSelezionato.equals(progetto.getNomeProgetto())) {
@@ -107,7 +112,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         return false;
     }
 
-    private void stampaListaLotti() {
+    public void stampaListaLotti() {
         ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
         ArrayList<String[]> listaLottiFormattati = armadiettoGDI.getListaLottiFormattati();
 
@@ -121,31 +126,85 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         stampaSceltaQuantita();
     }
 
-    private void stampaSceltaQuantita() {
+    public void stampaSceltaQuantita() {
+        ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
+        String[] infoLottoFormattate = armadiettoGDI.getInfoLottoFormattate(idLottoSelezionato);
 
+        QuantityForm quantityForm = new QuantityForm(frame, this);
+        quantityForm.display(infoLottoFormattate);
     }
 
-
-
-    public void sceltaLottoDaPrelevare (Team team, Progetto progetto) {
-
+    public void setSceltaQuantita(String quantitaSelezionata) {
+        // validazione
+        if (quantitaIsValid(quantitaSelezionata)) {
+            this.quantitaSelezionata = Double.parseDouble(quantitaSelezionata);
+            stampaRiepilogoPrelievo();
+        } else {
+            frame.showErrorDialog("Quantità selezionata non valida!");
+            stampaSceltaQuantita();
+        }
     }
 
-    public void sceltaQuantitaDaPrelevare () {
+    public boolean quantitaIsValid(String quantitaSelezionata) {
+        if (quantitaSelezionata == null || quantitaSelezionata.isEmpty()) {
+            return false;
+        }
 
+        double quantita;
+        try {
+            quantita = Double.parseDouble(quantitaSelezionata);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
+        if (quantita <= 0 || quantita > armadiettoGDI.getQuantitaLotto(idLottoSelezionato)) {
+            return false;
+        }
+
+        return true;
     }
 
-    public void mostraRiepilogoOrdine () {
+    private void stampaRiepilogoPrelievo() {
+        // Preparazione delle informazioni di riepilogo del Prelievo
+        ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
+        String[] infoLottoFormattate = armadiettoGDI.getInfoLottoFormattate(idLottoSelezionato);
+        String[] infoPrelievoFormattate = new String[6];
 
+        infoPrelievoFormattate[0] = infoLottoFormattate[0];
+        infoPrelievoFormattate[1] = infoLottoFormattate[2];
+        infoPrelievoFormattate[2] = infoLottoFormattate[3];
+        infoPrelievoFormattate[3] = infoLottoFormattate[5];
+        infoPrelievoFormattate[4] = String.valueOf(quantitaSelezionata);
+        infoPrelievoFormattate[5] = String.valueOf(Double.parseDouble(infoLottoFormattate[5]) - quantitaSelezionata);
+
+        // Stampa della finestra di riepilogo
+        RiepilogoPrelievoFinestra riepilogoPrelievoFinestra = new RiepilogoPrelievoFinestra(frame, this);
+        riepilogoPrelievoFinestra.display(infoPrelievoFormattate);
     }
 
+    public void finalizzaPrelievo() {
+        // Aggiornamento del contenuto dell'armadietto
+        ArmadiettoSetDataInterface armadiettoSDI = new ArmadiettoFacade();
+        armadiettoSDI.eseguiPrelievo(idLottoSelezionato, quantitaSelezionata);
 
+        // Inserimento del prelievo nel sistema
+        ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
+        Prelievo prelievo = new Prelievo(LocalDate.now(), quantitaSelezionata, armadiettoGDI.getLottoByID(idLottoSelezionato), ricercatore);
+        prelievo.store();
 
+        // Stampa pop-up di conferma prelievo
+        ConfermaPrelievoPopUp confermaPrelievoPopUp = new ConfermaPrelievoPopUp(frame, ricercatore);
+        confermaPrelievoPopUp.display();
+
+        // Ritorno a Homepage Ricercatore
+        endActivity();
+    }
 
     /**
-     * Annulla funzionalità di prelievo sostanza, e ritorna alla Homepage del Ricercatore
+     * Annulla funzionalità di prelievo sostanza e ritorna alla Homepage del Ricercatore
      */
-    public void abortActivity() {
+    public void endActivity() {
         RicercatoreHomepage ricercatoreHomepage = new RicercatoreHomepage(this.frame, this.ricercatore);
         ricercatoreHomepage.display();
     }

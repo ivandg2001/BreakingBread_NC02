@@ -96,4 +96,20 @@ public class Armadietto {
 
         return listaLottiFormattati;
     }
+
+    /**
+     * Esegue il prelievo di una sostanza dall'armadietto.
+     *
+     * @param idLotto Id del lotto da cui prelevare.
+     * @param quantita Quantità della sostanza da prelevare dal lotto.
+     */
+    public void eseguiPrelievo(int idLotto, double quantita) {
+        // Aggiornamento Lotto
+        LottoDataInterface lottoDI = new LottoDAO();
+        Lotto lotto = lottoDI.getLottoById(idLotto);
+
+        double nuovaQuantita = lotto.getQuantita() - quantita;
+        lotto.setQuantita(nuovaQuantita);
+        lottoDI.updateLotto(lotto);
+    }
 }

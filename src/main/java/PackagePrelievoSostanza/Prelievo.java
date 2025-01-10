@@ -1,6 +1,7 @@
 package PackagePrelievoSostanza;
 
 import PackageArmadietto.Lotto;
+import PackageArmadietto.LottoDataInterface;
 
 import java.time.LocalDate;
 
@@ -41,13 +42,18 @@ public class Prelievo {
     public Prelievo(){}
 
     /**
-     * Costruttore parametrico per inizializzare i campi
-     * @param data Data in cui è stato effettuato il prelievo
-     * @param quantita quantita' prelevata con il prelievo
+     * Costruttore parametrico per inizializzare i campi.
+     *
+     * @param data Data in cui è stato effettuato il prelievo.
+     * @param quantita quantità prelevata.
+     * @param lotto Lotto da cui è stato effettuato il prelievo.
+     * @param ricercatore Ricercatore che ha effettuato il prelievo.
      */
-    public Prelievo(LocalDate data ,  double quantita ){
+    public Prelievo(LocalDate data, double quantita, Lotto lotto, Ricercatore ricercatore) {
         this.data = data;
         this.quantita = quantita;
+        this.lotto = lotto;
+        this.ricercatore = ricercatore;
     }
 
     /**
@@ -128,5 +134,13 @@ public class Prelievo {
      */
     public Ricercatore getRicercatore() {
         return this.ricercatore;
+    }
+
+    /**
+     * Salva il Prelievo corrente nel database.
+     */
+    public void store() {
+        PrelievoDataInterface prelievoDI = new PrelievoDAO();
+        prelievoDI.setPrelievo(this);
     }
 }

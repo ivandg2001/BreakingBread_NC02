@@ -2,7 +2,6 @@ package PackageArmadietto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Interfaccia che specifica l'accesso al facade per ricevere i dati
@@ -45,10 +44,10 @@ public interface ArmadiettoGetDataInterface {
      * Questo metodo restituisce una lista, i cui elementi sono degli Array di Stringhe.
      * Ciascun elemento di questo array rappresenta un lotto presente nell'armadietto.
      * Ogni array contiene i seguenti elementi:
-     * 1. ID del lotto;
-     * 2. Nome della sostanza contenuta nel lotto;
-     * 3. Formula chimica della sostanza contenuta nel lotto;
-     * 4. Purezza della sostanza contenuta nel lotto.
+     * 0. ID del lotto;
+     * 1. Nome della sostanza contenuta nel lotto;
+     * 2. Formula chimica della sostanza contenuta nel lotto;
+     * 3. Purezza della sostanza contenuta nel lotto.
      *
      * @return Una ArrayList di Array dì stringhe.
      */
@@ -58,9 +57,32 @@ public interface ArmadiettoGetDataInterface {
 
     public double getLottoTotalCost(int id);
 
-    public Lotto createLottoObjectNoPersistance(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza);
+    public Lotto createLottoObjectNoPersistence(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza);
 
     public double getTotalCostBySostanza(String nomeSostanza , double quantita , double purezza);
 
     public String getFormulaBySostanza(String nomeSostanza);
+
+    /**
+     * Restituisce informazioni formattate riguardo un certo lotto.
+     * Le informazioni sono organizzate in un array di stringhe, e nel seguente ordine:
+     * 0. Nome della sostanza nel lotto;
+     * 1. Formula della sostanza nel lotto;
+     * 2. ID del lotto;
+     * 3. Purezza del lotto;
+     * 4. Data di scadenza del lotto;
+     * 5. Quantità attuale della sostanza nel lotto.
+     *
+     * @param idLotto Id del lotto.
+     * @return Informazioni riguardo al lotto, formattate in un array di stringhe.
+     */
+    String[] getInfoLottoFormattate(int idLotto);
+
+    /**
+     * Restituisce la quantità di un certo lotto.
+     *
+     * @param idLotto Id del lotto.
+     * @return Quantità della sostanza nel lotto.
+     */
+    public double getQuantitaLotto(int idLotto);
 }

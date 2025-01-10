@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class PrelievoDAO implements PrelievoDataInterface {
 
-
     private static final String INSERT =
             "INSERT INTO prelievo (data, quantita, lotto_id, ricercatore_id) VALUES (?, ?, ?, ?)";
     private static final String SELECT_BY_ID =
@@ -48,7 +47,6 @@ public class PrelievoDAO implements PrelievoDataInterface {
     @Override
     public boolean setPrelievo(Prelievo prelievo) {
         try {
-
             Connection connection = createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
 
@@ -174,7 +172,7 @@ public class PrelievoDAO implements PrelievoDataInterface {
         ArrayList<Prelievo> prelievi = new ArrayList<>();
         try {
             Connection connection = createConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BY_RICERCATORE);
 
             preparedStatement.setInt(1, ricercatore.getID());
             ResultSet rs = preparedStatement.executeQuery();

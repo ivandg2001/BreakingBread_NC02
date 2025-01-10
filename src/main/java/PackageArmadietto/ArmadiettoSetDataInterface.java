@@ -12,9 +12,9 @@ public interface ArmadiettoSetDataInterface {
      * @param quantita quantita nel lotto
      * @param sostanza sostanza nel lotto
      */
-    public void saveLotto(LocalDate dataScadenza , double quantita , String sostanza , double purezza);
+    void saveLotto(LocalDate dataScadenza , double quantita , String sostanza , double purezza);
 
-    public Lotto saveAndRetrievelotto(LocalDate dataScadenza, double quantita, String sostanza , double purezza);
+    Lotto saveAndRetrievelotto(LocalDate dataScadenza, double quantita, String sostanza , double purezza);
 
     /**
      * Metodo che crea un nuovo oggetto sostanza e lo salva nel database
@@ -22,6 +22,13 @@ public interface ArmadiettoSetDataInterface {
      * @param formula formula chimica della sostanza
      * @param costoUnitario costo unitario della sostanza
      */
-    public void saveSostanza(String nome , String formula , double costoUnitario);
+    void saveSostanza(String nome , String formula , double costoUnitario);
 
+    /**
+     * Esegue il prelievo di una sostanza dall'armadietto.
+     *
+     * @param idLotto Id del lotto da cui prelevare.
+     * @param quantita Quantità della sostanza da prelevare dal lotto.
+     */
+    void eseguiPrelievo(int idLotto, double quantita);
 }
