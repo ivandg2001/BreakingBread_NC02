@@ -2,6 +2,7 @@ package PackageArmadietto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ArmadiettoFacade implements ArmadiettoSetDataInterface , ArmadiettoGetDataInterface {
 
@@ -90,5 +91,15 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
         sostanza.storeSostanza();
     }
 
-
+    /**
+     * Questo metodo restituisce una lista, i cui elementi sono delle HashMap.
+     * Ciascun elemento di questo array rappresenta un lotto presente nell'armadietto.
+     * Ogni hashmap contiene due elementi: Id del lotto, alcune informazioni del lotto, formattate appositamente per esser stampate a schermo.
+     *
+     * @return Una ArrayList di HashMap.
+     */
+    public ArrayList<HashMap<String, Object>> getListaLottiFormattati() {
+        Armadietto armadietto = new Armadietto();
+        return armadietto.getListaLottiFormattati();
+    }
 }

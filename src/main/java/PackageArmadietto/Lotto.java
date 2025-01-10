@@ -20,45 +20,45 @@ public class Lotto {
     private final static LottoDataInterface lottoDataInterface = new LottoDAO();
 
     /**
-     * ID usato per identificare singolarmente i lotti
+     * ID usato per identificare singolarmente i lotti.
      */
     private int ID;
     /**
-     * Data di scadenza del lotto
+     * Data di scadenza del lotto.
      */
     private LocalDate dataScadenza;
     /**
-     * Quantità di sostanza attualmente presente nel lotto
+     * Quantità di sostanza attualmente presente nel lotto.
      */
     private double quantita;
 
     /**
-     * Sostanza contenuta nel lotto, si fa riferimento all'ID
+     * Sostanza contenuta nel lotto, si fa riferimento all'ID.
      */
     private Sostanza sostanza;
 
     /**
-     * Prelievi effettuati sul lotto
+     * Prelievi effettuati sul lotto.
      */
     private ArrayList<Prelievo> prelievi;
 
     /**
-     * Ordine associato al lotto
+     * Ordine associato al lotto.
      */
     private Ordine ordine;
 
     /**
-     * Armadietto dove si trova il lotto
+     * Armadietto dove si trova il lotto.
      */
     private Armadietto armadietto;
 
     /**
-     * Purezza della sostanza nel lotto
+     * Purezza della sostanza nel lotto.
      */
     private double purezza;
 
     /**
-     * Costruttore predefinito
+     * Costruttore predefinito.
      */
     public Lotto() {
         this.prelievi = new ArrayList<>();
@@ -79,47 +79,47 @@ public class Lotto {
     }
 
     /**
-     * Restituisce l'id del lotto
-     * @return ID del lotto
+     * Restituisce l'id del lotto.
+     * @return ID del lotto.
      */
     public int getID() {
         return this.ID;
     }
 
     /**
-     * Setta id del lotto
-     * @param ID id lotto
+     * Setta id del lotto.
+     * @param ID id lotto.
      */
     public void setID(int ID) {
         this.ID = ID;
     }
 
     /**
-     * Restituisce la data di scadenza del lotto
+     * Restituisce la data di scadenza del lotto.
      *
-     * @return data di scadenza dell'oggetto corrente
+     * @return data di scadenza dell'oggetto corrente.
      */
 
     public LocalDate getDataScadenza() {return this.dataScadenza;}
 
     /**
-     * Imposta la data di scadenza di un lotto
+     * Imposta la data di scadenza di un lotto.
      *
-     * @param dataScadenza data di scadenza
+     * @param dataScadenza data di scadenza.
      */
     public void setDataScadenza(LocalDate dataScadenza) {this.dataScadenza = dataScadenza;}
 
     /**
-     * Restituisce la quantità di sostanza presente nel lotto
+     * Restituisce la quantità di sostanza presente nel lotto.
      *
-     * @return quantità della sostanza nel lotto
+     * @return quantità della sostanza nel lotto.
      */
     public double getQuantita() {return quantita;}
 
     /**
-     * Imposta la data quantità di sostanza nel lotto
+     * Imposta la data quantità di sostanza nel lotto.
      *
-     * @param quantita quantità di sostanza nel lotto
+     * @param quantita quantità di sostanza nel lotto.
      */
     public void setQuantita(double quantita) {
 
@@ -130,64 +130,64 @@ public class Lotto {
         this.quantita = quantita;}
 
     /**
-     * Setta l'id della sostanza associata al lotto
-     * @param sostanza id sostanza
+     * Setta l'id della sostanza associata al lotto.
+     * @param sostanza id sostanza.
      */
     public void setSostanza(Sostanza sostanza) {
         this.sostanza = sostanza;
     }
 
     /**
-     * Ritorna l'id della sostanza associata al lotto
-     * @return id sostanza
+     * Ritorna l'id della sostanza associata al lotto.
+     * @return id sostanza.
      */
     public Sostanza getSostanza() {
         return this.sostanza;
     }
 
     /**
-     * Setta l'ordine associato al lotto
-     * @param ordine ordine lotto
+     * Setta l'ordine associato al lotto.
+     * @param ordine ordine lotto.
      */
     public void setOrdine(Ordine ordine) {
         this.ordine = ordine;
     }
 
     /**
-     * Ritorna l'ordine associato al lotto
-     * @return ordine lotto
+     * Ritorna l'ordine associato al lotto.
+     * @return ordine lotto.
      */
     public Ordine getOrdine() {
         return this.ordine;
     }
 
     /**
-     * Setta i prelievi associati al lotto
-     * @param prelievi prelievi lotto
+     * Setta i prelievi associati al lotto.
+     * @param prelievi prelievi lotto.
      */
     public void setPrelievi(ArrayList<Prelievo> prelievi) {
         this.prelievi = prelievi;
     }
 
     /**
-     * Ritorna i prelievi associati al lotto
-     * @return prelievi lotto
+     * Ritorna i prelievi associati al lotto.
+     * @return prelievi lotto.
      */
     public ArrayList<Prelievo> getPrelievi() {
         return this.prelievi;
     }
 
     /**
-     * Seta l'armadietto contenente il lotto
-     * @param armadietto armadietto
+     * Seta l'armadietto contenente il lotto.
+     * @param armadietto armadietto.
      */
     public void setArmadietto(Armadietto armadietto) {
         this.armadietto = armadietto;
     }
 
     /**
-     * Ritorn l'armadietto contenente il lotto
-     * @return armadietto
+     * Ritorn l'armadietto contenente il lotto.
+     * @return armadietto.
      */
     public Armadietto getArmadietto() {
         return armadietto;
@@ -204,7 +204,7 @@ public class Lotto {
     //--Persistenza--
 
     /**
-     * Metodo che gestisce la persistenza per l'oggetto lotto, inserisce il lotto nel database
+     * Metodo che gestisce la persistenza per l'oggetto lotto, inserisce il lotto nel database.
      */
     public void storeLotto(){
         if(!lottoDataInterface.setLotto(this)){
@@ -214,16 +214,16 @@ public class Lotto {
     }
 
     /**
-     * Metodo statico che gestisce la persistenza per l'oggetto lotto, carica un oggetto lotto dal database
-     * @param id id del lotto da caricare
-     * @return Oggetto lotto
+     * Metodo statico che gestisce la persistenza per l'oggetto lotto, carica un oggetto lotto dal database.
+     * @param id id del lotto da caricare.
+     * @return Oggetto lotto.
      */
     public static Lotto loadLotto(int id){
         return lottoDataInterface.getLottoById(id);
     }
 
     /**
-     * Metodo che gestisce la persistenza per l'oggetto lotto, fa un'update sull'oggetto lotto
+     * Metodo che gestisce la persistenza per l'oggetto lotto, fa un'update sull'oggetto lotto.
      */
     public void update(){
         if(!lottoDataInterface.updateLotto(this)){
@@ -235,5 +235,14 @@ public class Lotto {
         double purezza = this.purezza / 100;
         double costo = this.sostanza.getCostoUnitario() * this.quantita;
         return costo * purezza;
+    }
+
+    /**
+     * Controllo della scadenza del lotto.
+     *
+     * @return true se la sostanza contenuta nel lotto è scaduta, false altrimenti.
+     */
+    public boolean isExpired() {
+        return dataScadenza.isAfter(LocalDate.now());
     }
 }
