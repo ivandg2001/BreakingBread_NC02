@@ -39,11 +39,15 @@ public class TeamProjectForm {
             nomiTeams[i] = teams.get(i).getNomeTeam();
         }
         JComboBox<String> comboTeams = new JComboBox<>(nomiTeams);
+        pannelloPrincipale.add(selezioneTeam);
+        pannelloPrincipale.add(comboTeams);
 
         // Selezione Progetto
         JLabel selezioneProgetto = new JLabel("Elemento:");
         JComboBox<String> comboProgetto = new JComboBox<>();
         comboProgetto.setEnabled(true);//oppure setEditable?
+        pannelloPrincipale.add(selezioneProgetto);
+        pannelloPrincipale.add(comboProgetto);
 
         // Mappa per aggiornare dinamicamente i progetti presenti nella selezione
         HashMap<String, String[]> opzioni = new HashMap<>();
@@ -96,4 +100,6 @@ public class TeamProjectForm {
         frame.updateSouth(pannelloPulsanti);
         frame.loadUpdates();
     }
+
+
 }
