@@ -86,18 +86,6 @@ public class PrelievoDAO implements PrelievoDataInterface {
                 prelievo.setData(rs.getDate("data").toLocalDate());
                 prelievo.setQuantita(rs.getDouble("quantita"));
 
-                //da gestire nell'oggetto entity stesso
-                /*
-                ArmadiettoGetDataInterface armadiettoDAO = new ArmadiettoFacade();
-                Lotto lotto = armadiettoDAO.getLottoByID(rs.getInt("lotto_id"));
-                prelievo.setLotto(lotto);
-
-                RicercatoreDataInterface ricercatoreDAO = new RicercatoreDAO();
-                Ricercatore ricercatore = ricercatoreDAO.getRicercatore(rs.getInt("responsabile_id"));
-                prelievo.setRicercatore(ricercatore);
-
-                 */
-
                 return prelievo;
             }
         } catch (SQLException e) {
@@ -186,8 +174,10 @@ public class PrelievoDAO implements PrelievoDataInterface {
         ArrayList<Prelievo> prelievi = new ArrayList<>();
         try {
             Connection connection = createConnection();
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(SELECT_ALL_BY_RICERCATORE);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
+
+            preparedStatement.setInt(1, ricercatore.getID());
+            ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 Prelievo prelievo = new Prelievo();

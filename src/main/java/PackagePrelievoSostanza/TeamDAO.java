@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public class TeamDAO implements TeamDataInterface {
 
-
-
     private static final String INSERT =
             "INSERT INTO team (nome_team) VALUES (?)";
     private static final String SELECT_BY_ID =
@@ -23,7 +21,7 @@ public class TeamDAO implements TeamDataInterface {
     private static final String SELECT_ALL_BY_RICERCATORE =
             "SELECT t.* FROM team t JOIN team_ricercatore tr ON t.id = tr.team_id WHERE tr.ricercatore_id = ?";
     private static final String SELECT_ALL_BY_PROGETTO =
-            "SELECT t.* FROM team t JOIN team_progetto tp ON t.id = tp.team_id WHERE tp.ricercatore_id = ?";
+            "SELECT t.* FROM team t JOIN team_progetto tp ON t.id = tp.team_id WHERE tp.progetto_id = ?";
 
     /**
      * Interfaccia che accede al DAO database per creare una connessione

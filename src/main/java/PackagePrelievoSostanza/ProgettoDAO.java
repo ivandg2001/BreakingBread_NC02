@@ -21,7 +21,7 @@ public class ProgettoDAO implements ProgettoDataInterface {
     private static final String DELETE =
             "DELETE FROM progetto WHERE id = ?";
     private static final String SELECT_ALL_BY_TEAM =
-            "SELECT p.* FROM progetto p JOIN team_progetto tp ON p.id = tp.progetto_id WHERE tr.team_id = ?";
+            "SELECT p.* FROM progetto p JOIN team_progetto tp ON p.id = tp.progetto_id WHERE tp.team_id = ?";
 
     /**
      * Interfaccia che accede al DAO database per creare una connessione

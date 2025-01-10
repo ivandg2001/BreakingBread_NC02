@@ -35,7 +35,7 @@ public interface ArmadiettoGetDataInterface {
     public Sostanza getSostanzaByName(String nome);
 
     /**
-     * Metodo che permette di ricevere la lista delle sostanza presenti nel database
+     * Metodo che permette di ricevere la lista delle sostanze presenti nel database
      * @return lista di oggetti Sostanza
      */
     public ArrayList<Sostanza> getListaSostanza();

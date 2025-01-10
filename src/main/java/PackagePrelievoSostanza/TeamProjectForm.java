@@ -30,7 +30,7 @@ public class TeamProjectForm {
 
         // Imposta pannello principale
         JPanel pannelloPrincipale = new JPanel();
-        pannelloPrincipale.setLayout(new GridLayout(5, 2));
+        pannelloPrincipale.setLayout(new GridLayout(2, 2));
 
         // Selezione Team
         JLabel selezioneTeam = new JLabel("Categoria:");
@@ -55,44 +55,45 @@ public class TeamProjectForm {
             }
 
             for (Progetto progetto : team.getProgetti()) {
-
+                opzioni.put(team.getNomeTeam(), nomiProgetti);
             }
         }
 
+        // Listener per il primo JComboBox
+        comboTeams.addActionListener(e -> {
+            String selezione = (String) comboTeams.getSelectedItem();
 
+            if (selezione != null) {
+                // Abilita il secondo JComboBox
+                comboProgetto.setEnabled(true);
+
+                // Aggiorna il contenuto del secondo JComboBox
+                comboProgetto.removeAllItems();
+                for (String item : opzioni.get(selezione)) {
+                    comboProgetto.addItem(item);
+                }
+            } else {
+                // Se non è selezionato nulla, disabilita e svuota
+                comboProgetto.setEnabled(false);
+                comboProgetto.removeAllItems();
+            }
+        });
+
+        // Imposta pannello basso
+        JPanel pannelloPulsanti = new JPanel();
+        pannelloPulsanti.setLayout(new GridLayout(1, 2));
+
+        // Pulsanti
+        JButton annullaButton = new JButton("Annulla");
+        JButton confermaButton = new JButton("Conferma");
+        pannelloPulsanti.add(annullaButton);
+        pannelloPulsanti.add(confermaButton);
+
+        // Aggiunta componenti alla finestra
+        frame.resetAppFrame();
+        frame.updateNorth(titoloPagina);
+        frame.updateCenter(pannelloPrincipale);
+        frame.updateSouth(pannelloPulsanti);
+        frame.loadUpdates();
     }
-
-    // Primo JComboBox (categoria)
-
-
-    // Secondo JComboBox (elementi)
-    JLabel selezioneProgetto = new JLabel("Elemento:");
-    JComboBox<String> comboElemento = new JComboBox<>();
-    comboElemento.setBounds(120, 60, 150, 25);
-    comboElemento.setEnabled(false);  // Disabilitato all'inizio
-
-    // Mappa per aggiornare dinamicamente i dati
-    Map<String, String[]> opzioni = new HashMap<>();
-        opzioni.put("Frutta", new String[]{"Mela", "Banana", "Arancia"});
-        opzioni.put("Verdura", new String[]{"Carota", "Zucchina", "Lattuga"});
-
-    // Listener per il primo JComboBox
-        comboCategoria.addActionListener(e -> {
-        String selezione = (String) comboCategoria.getSelectedItem();
-
-        if (selezione != null && !selezione.equals("Seleziona")) {
-            // Abilita il secondo JComboBox
-            comboElemento.setEnabled(true);
-
-            // Aggiorna il contenuto del secondo JComboBox
-            comboElemento.removeAllItems();
-            for (String item : opzioni.get(selezione)) {
-                comboElemento.addItem(item);
-            }
-        } else {
-            // Se non è selezionato nulla, disabilita e svuota
-            comboElemento.setEnabled(false);
-            comboElemento.removeAllItems();
-        }
-    });
 }
