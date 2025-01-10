@@ -36,15 +36,23 @@ public class PrelievoSostanzaControl implements RicercatoreInterface {
 
          */
         stampaFormTeamEProgetto();
-
-
     }
 
     /**
      * Avvia la stampa del form per la selezione del Team e del Progetto scelti.
      */
     public void stampaFormTeamEProgetto () {
+        ricercatore.load();
         ArrayList<Team> teams = ricercatore.getTeams();
+        for (Team team : teams) {
+            team.load();
+            for (Progetto progetto : team.getProgetti()) {
+                progetto.load();
+            }
+        }
+
+        TeamProjectForm teamProjectForm = new TeamProjectForm(frame, this);
+        teamProjectForm.display(teams);
         //ArrayList<Progetto> progetti = ricercatore.getProgetti();
 
 
