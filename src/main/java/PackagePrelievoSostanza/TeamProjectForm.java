@@ -1,6 +1,5 @@
-package PackageRicercatore;
+package PackagePrelievoSostanza;
 
-import PackageArmadietto.Sostanza;
 import PackageGraphics.AppFrame;
 
 import javax.swing.*;

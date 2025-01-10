@@ -1,4 +1,4 @@
-package PackageRicercatore;
+package PackagePrelievoSostanza;
 
 import PackageUtils.DatabaseConnectionDAO;
 import PackageUtils.DatabaseConnectionInterface;

@@ -1,4 +1,4 @@
-package PackageResponsabile;
+package PackageNuovoOrdine;
 
 import PackageArmadietto.*;
 import PackageUtils.AppFrame;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 /**
  * Classa controller che gestisce gli eventi per l'aggiunta di un nuovo ordine.
  */
-public class NuovoOrdineControl implements ResponsabileInterface{
+public class NuovoOrdineControl implements NuovoOrdineInterface {
 
     /**
      * Frame della GUI.

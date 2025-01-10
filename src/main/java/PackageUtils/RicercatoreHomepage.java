@@ -1,7 +1,7 @@
 package PackageUtils;
 
-import PackageRicercatore.PrelievoSostanzaButton;
-import PackageRicercatore.Ricercatore;
+import PackagePrelievoSostanza.PrelievoSostanzaButton;
+import PackagePrelievoSostanza.Ricercatore;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

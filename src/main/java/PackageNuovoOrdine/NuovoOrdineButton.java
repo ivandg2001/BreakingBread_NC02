@@ -1,4 +1,4 @@
-package PackageResponsabile;
+package PackageNuovoOrdine;
 
 import javax.swing.*;
 import PackageUtils.AppFrame;
@@ -51,7 +51,7 @@ public class NuovoOrdineButton extends JButton {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            ResponsabileInterface i = new NuovoOrdineControl(frame, responsabile);
+            NuovoOrdineInterface i = new NuovoOrdineControl(frame, responsabile);
             i.creaNuovoOrdine();
         }
     }

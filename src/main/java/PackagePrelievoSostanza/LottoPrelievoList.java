@@ -1,4 +1,4 @@
-package PackageRicercatore;
+package PackagePrelievoSostanza;
 
 public class LottoPrelievoList {
 }

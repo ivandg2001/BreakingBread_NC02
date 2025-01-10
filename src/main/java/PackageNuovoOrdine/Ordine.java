@@ -1,7 +1,5 @@
-package PackageResponsabile;
+package PackageNuovoOrdine;
 
-import PackageArmadietto.ArmadiettoFacade;
-import PackageArmadietto.ArmadiettoGetDataInterface;
 import PackageArmadietto.Lotto;
 import java.time.LocalDate;
 

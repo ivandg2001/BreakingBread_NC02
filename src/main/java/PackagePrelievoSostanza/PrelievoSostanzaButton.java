@@ -1,4 +1,4 @@
-package PackageRicercatore;
+package PackagePrelievoSostanza;
 
 import PackageUtils.AppFrame;
 
@@ -25,7 +25,7 @@ public class PrelievoSostanzaButton extends JButton {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            RicercatoreInterface ricercatoreInterface = new PrelievoSostanzaControl(frame, ricercatore);
+            PrelievoSostanzaInterface ricercatoreInterface = new PrelievoSostanzaControl(frame, ricercatore);
             ricercatoreInterface.prelevaSostanza();
         }
     }

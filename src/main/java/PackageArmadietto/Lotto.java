@@ -1,7 +1,7 @@
 package PackageArmadietto;
 
-import PackageResponsabile.Ordine;
-import PackageRicercatore.Prelievo;
+import PackageNuovoOrdine.Ordine;
+import PackagePrelievoSostanza.Prelievo;
 
 
 import java.time.LocalDate;

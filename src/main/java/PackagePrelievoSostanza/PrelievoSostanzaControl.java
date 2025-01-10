@@ -1,10 +1,10 @@
-package PackageRicercatore;
+package PackagePrelievoSostanza;
 
 import PackageUtils.AppFrame;
 
 import java.util.ArrayList;
 
-public class PrelievoSostanzaControl implements RicercatoreInterface {
+public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
 
     private AppFrame frame;
     private Ricercatore ricercatore;

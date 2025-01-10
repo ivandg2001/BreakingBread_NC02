@@ -1,9 +1,9 @@
 package PackageUtils;
 
-import PackageResponsabile.Responsabile;
-import PackageResponsabile.ResponsabileDAO;
-import PackageRicercatore.Ricercatore;
-import PackageRicercatore.RicercatoreDAO;
+import PackageNuovoOrdine.Responsabile;
+import PackageNuovoOrdine.ResponsabileDAO;
+import PackagePrelievoSostanza.Ricercatore;
+import PackagePrelievoSostanza.RicercatoreDAO;
 
 import javax.swing.*;
 

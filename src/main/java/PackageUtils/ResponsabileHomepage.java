@@ -1,7 +1,7 @@
 package PackageUtils;
 
-import PackageResponsabile.NuovoOrdineButton;
-import PackageResponsabile.Responsabile;
+import PackageNuovoOrdine.NuovoOrdineButton;
+import PackageNuovoOrdine.Responsabile;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

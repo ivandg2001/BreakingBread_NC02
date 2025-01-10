@@ -1,7 +1,6 @@
-package PackageRicercatore;
+package PackagePrelievoSostanza;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe POJO che rappresenta un Team nel sistema, mappato da un adapter JPA.

@@ -1,9 +1,9 @@
-package PackageResponsabile;
+package PackageNuovoOrdine;
 
 /**
  * Interfaccia che definisce i servizi del control
  */
-public interface ResponsabileInterface {
+public interface NuovoOrdineInterface {
 
     /**
      * Metodo da cui parte l'inserimento di un nuovo ordine.
