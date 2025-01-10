@@ -1,10 +1,14 @@
 package PackagePrelievoSostanza;
 
+import PackageArmadietto.ArmadiettoFacade;
+import PackageArmadietto.ArmadiettoGetDataInterface;
+import PackageArmadietto.Lotto;
 import PackageUtils.AppFrame;
 import PackageUtils.Homepage;
 import PackageUtils.RicercatoreHomepage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
 
@@ -103,6 +107,9 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     }
 
     private void stampaListaLotti() {
+        ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
+        ArrayList<HashMap<String, Object>> listaLottiFormattati = armadiettoGDI.getListaLottiFormattati();
+
 
     }
 
