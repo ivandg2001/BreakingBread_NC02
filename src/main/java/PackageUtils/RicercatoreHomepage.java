@@ -42,14 +42,11 @@ public class RicercatoreHomepage {
         JButton homeButton = new JButton("Homepage");
         panel.add(homeButton);
 
-        homeButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Homepage homepage = new Homepage(frame);
-                homepage.display();
-            }
+        homeButton.addActionListener(e ->  {
+            Homepage homepage = new Homepage(frame);
+            homepage.display();
         });
+
         this.frame.resetAppFrame();
         this.frame.updateCenter(panel);
         this.frame.loadUpdates();

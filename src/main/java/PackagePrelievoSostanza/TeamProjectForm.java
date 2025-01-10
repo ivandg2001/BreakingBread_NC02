@@ -93,6 +93,11 @@ public class TeamProjectForm {
         pannelloPulsanti.add(annullaButton);
         pannelloPulsanti.add(confermaButton);
 
+        // Listener per il pulsante annulla
+        annullaButton.addActionListener(e -> {
+           control.abortActivity();
+        });
+
         // Aggiunta componenti alla finestra
         frame.resetAppFrame();
         frame.updateNorth(titoloPagina);

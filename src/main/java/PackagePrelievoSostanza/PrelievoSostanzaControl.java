@@ -41,7 +41,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     /**
      * Avvia la stampa del form per la selezione del Team e del Progetto scelti.
      */
-    public void stampaFormTeamEProgetto () {
+    private void stampaFormTeamEProgetto () {
         ricercatore.load();
         ArrayList<Team> teams = ricercatore.getTeams();
         for (Team team : teams) {
@@ -67,6 +67,13 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
     }
 
     public void mostraRiepilogoOrdine () {
+
+    }
+
+    /**
+     * Annulla funzionalità di prelievo sostanza, e ritorna alla Homepage del Ricercatore
+     */
+    public void abortActivity() {
 
     }
 }

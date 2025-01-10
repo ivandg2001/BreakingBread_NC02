@@ -224,7 +224,7 @@ public class OrdineForm {
      */
     private class ActionListenerAnnulla implements ActionListener {
         /**
-         * oggetto NuovoOrdineControl
+         * Oggetto NuovoOrdineControl
          */
         private NuovoOrdineControl control;
 
