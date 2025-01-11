@@ -180,6 +180,11 @@ public class LottoDAO implements LottoDataInterface {
         }
     }
 
+    /**
+     * Metodo che salva nel database il lotto e poi ne ritorn ail riferimento all'oggetto
+     * @param lotto lotto da salvare
+     * @return Oggetto lotto
+     */
     @Override
     public Lotto saveAndRetrieveLotto(Lotto lotto) {
         String generatedColumns[] = {"id"}; // Indica che vogliamo recuperare la colonna ID generata.

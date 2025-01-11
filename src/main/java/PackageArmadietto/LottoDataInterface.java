@@ -46,5 +46,10 @@ public interface LottoDataInterface {
      */
     boolean deleteLotto(int id);
 
+    /**
+     * Metodo che salva nel database il lotto e poi ne ritorn ail riferimento all'oggetto
+     * @param lotto lotto da salvare
+     * @return Oggetto lotto
+     */
     public Lotto saveAndRetrieveLotto(Lotto lotto);
 }

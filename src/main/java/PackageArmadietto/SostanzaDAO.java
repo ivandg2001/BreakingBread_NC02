@@ -209,6 +209,10 @@ public class SostanzaDAO implements SostanzaDataInterface {
         return sostanze;
     }
 
+    /**
+     * metodo che ritorna una lista dei nomi di tutte le sostanze
+     * @return lista di stringhe
+     */
     @Override
     public String[] getListaNomiSostanze() {
         ArrayList<Sostanza> sostanze = getListaSostanze();

@@ -170,6 +170,12 @@ public class Sostanza {
 
     }
 
+    /**
+     * Ritorna il costo della sostanza
+     * @param quantita quantita sostanza
+     * @param purezza purezza sostanza
+     * @return costo totale
+     */
     public double getCosto(double quantita , double purezza){
         double proporzione = purezza / 100;
         double costo = this.costoUnitario * quantita;
