@@ -203,7 +203,7 @@ public class RiepilogoOrdine {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            control.confermaPopup("L'ordine verrà inserito nel database e finalizzato!");
+            control.confermaPopup();
             control.finalizzaOrdine(ordine , sostanza , purezza , quantita , priorita);
         }
     }

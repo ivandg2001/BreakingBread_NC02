@@ -261,10 +261,10 @@ public class NuovoOrdineControl implements NuovoOrdineInterface {
 
     /**
      * Crea il popup di conferma per l'inserimento dell'ordine
-     * @param message messaggio da far visualizzare nel popup
      */
-    public void confermaPopup(String message){
-        this.frame.showConfirmDialog(message);
+    public void confermaPopup(){
+        ConfermaOrdinePopup popup = new ConfermaOrdinePopup(this.frame , this.responsabile);
+        popup.display();
     }
 }
 
