@@ -56,7 +56,7 @@ public class PrelievoSostanzaControlTest {
     })
     public void TC2_4a_quantitaNegativa(String quantita , boolean expected){
 
-        assertEquals(expected, control.quantitaIsValid(quantita));
+        assertEquals(expected, control.quantitaIsValid(quantita , 1000));
 
     }
 
@@ -68,21 +68,21 @@ public class PrelievoSostanzaControlTest {
     })
     public void TC2_4b_quantitaTroppoAlta(String quantita , boolean expected){
 
-        assertEquals(expected, control.quantitaIsValid(quantita));
+        assertEquals(expected, control.quantitaIsValid(quantita , 1000));
 
     }
 
     @Test
     public void TC2_4c_quantitaugualeA0(){
 
-        assertFalse(control.quantitaIsValid("0"));
+        assertFalse(control.quantitaIsValid("0" , 1000));
 
     }
 
     @Test
     public void TC2_4d_quantitaNulla(){
 
-        assertFalse(control.quantitaIsValid(null));
+        assertFalse(control.quantitaIsValid(null , 1000));
 
     }
 
@@ -92,7 +92,7 @@ public class PrelievoSostanzaControlTest {
     })
     public void TC2_5_quantitaValida(String quantita , boolean expected){
 
-        assertEquals(expected, control.quantitaIsValid(quantita));
+        assertEquals(expected, control.quantitaIsValid(quantita , 1));
 
     }
 

@@ -64,6 +64,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         teamProjectForm.display(ricercatore.getTeams());
     }
 
+
     public void setSceltaTeamProgetto (String nomeTeamSelezionato, String nomeProgettoSelezionato) {
         // Validazione
         if (TeamProgettoIsValid(nomeTeamSelezionato, nomeProgettoSelezionato)) {
@@ -135,7 +136,9 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
 
     public void setSceltaQuantita(String quantitaSelezionata) {
         // validazione
-        if (quantitaIsValid(quantitaSelezionata)) {
+        ArmadiettoGetDataInterface i = new ArmadiettoFacade();
+
+        if (quantitaIsValid(quantitaSelezionata , i.getQuantitaLotto(idLottoSelezionato))) {
             this.quantitaSelezionata = Double.parseDouble(quantitaSelezionata);
             stampaRiepilogoPrelievo();
         } else {
@@ -144,7 +147,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         }
     }
 
-    public boolean quantitaIsValid(String quantitaSelezionata) {
+    public boolean quantitaIsValid(String quantitaSelezionata , double quantitaLotto) {
         if (quantitaSelezionata == null || quantitaSelezionata.isEmpty()) {
             return false;
         }
@@ -157,7 +160,7 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         }
 
         ArmadiettoGetDataInterface armadiettoGDI = new ArmadiettoFacade();
-        if (quantita <= 0 || quantita > armadiettoGDI.getQuantitaLotto(idLottoSelezionato)) {
+        if (quantita <= 0 || quantita > quantitaLotto) {
             return false;
         }
 
@@ -207,4 +210,6 @@ public class PrelievoSostanzaControl implements PrelievoSostanzaInterface {
         RicercatoreHomepage ricercatoreHomepage = new RicercatoreHomepage(this.frame, this.ricercatore);
         ricercatoreHomepage.display();
     }
+
+
 }
