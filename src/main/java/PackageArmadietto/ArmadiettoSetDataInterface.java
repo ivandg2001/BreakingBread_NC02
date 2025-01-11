@@ -10,10 +10,19 @@ public interface ArmadiettoSetDataInterface {
      * Metodo che crea un nuovo oggetto lotto e lo salva nel database
      * @param dataScadenza data si scadenza
      * @param quantita quantita nel lotto
-     * @param sostanza sostanza nel lotto
+     * @param sostanzaNome sostanza nel lotto
+     * @param purezza purezza sostanza
      */
-    void saveLotto(LocalDate dataScadenza , double quantita , String sostanza , double purezza);
+    void saveLotto(LocalDate dataScadenza , double quantita , String sostanzaNome , double purezza);
 
+    /**
+     * Permette di salvare in database e far ritornare un oggetto riferimento del lotto appena creato
+     * @param dataScadenza data scadenza del lotto
+     * @param quantita quantita del lotto
+     * @param sostanza sostanza nel lotto
+     * @param purezza purezza della sostanza
+     * @return Oggetto Lotto
+     */
     Lotto saveAndRetrievelotto(LocalDate dataScadenza, double quantita, String sostanza , double purezza);
 
     /**

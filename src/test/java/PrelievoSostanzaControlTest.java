@@ -90,7 +90,6 @@ public class PrelievoSostanzaControlTest {
     @CsvSource({
             "'1' , true"
     })
-    @Test
     public void TC2_5_quantitaValida(String quantita , boolean expected){
 
         assertEquals(expected, control.quantitaIsValid(quantita));

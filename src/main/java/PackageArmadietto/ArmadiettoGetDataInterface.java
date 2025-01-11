@@ -53,14 +53,43 @@ public interface ArmadiettoGetDataInterface {
      */
     public ArrayList<String[]> getListaLottiFormattati();
 
+    /**
+     * Ritorna la lista dei nomi delle sostanze presenti
+     * @return lista Nomi sostanza
+     */
     public String[] getListaNomiSostanze();
 
+    /**
+     * Ritorna il costo totale per un lotto
+     * @param id id del lotto
+     * @return costo del lotto
+     */
     public double getLottoTotalCost(int id);
 
+    /**
+     * Crea un ogetto lotto senza persistenza
+     * @param dataDiScadenza data di scadenza del lotto
+     * @param quantita quantita del lotto
+     * @param sostanza sostanza presente nel lotto
+     * @param purezza purezza della sostanza nel lotto
+     * @return Oggetto Lotto
+     */
     public Lotto createLottoObjectNoPersistence(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza);
 
+    /**
+     * Calcola il costo partendo dalla sostamza
+     * @param nomeSostanza nome della sostanza
+     * @param quantita quantita della sostanza
+     * @param purezza purezza della sostanza
+     * @return costo totale
+     */
     public double getTotalCostBySostanza(String nomeSostanza , double quantita , double purezza);
 
+    /**
+     * Ritorn ala formula della sostanz
+     * @param nomeSostanza nome della sostanza
+     * @return formula della sostanza
+     */
     public String getFormulaBySostanza(String nomeSostanza);
 
     /**

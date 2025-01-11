@@ -4,49 +4,93 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ *Classe che implementa il design pattern facade
+ */
 public class ArmadiettoFacade implements ArmadiettoSetDataInterface , ArmadiettoGetDataInterface {
 
+    /**
+     * Interfaccia per comunicare con i DAO Lotto
+     */
     private final static LottoDataInterface lottoDataInterface = new LottoDAO();
+    /**
+     * Interfaccia per comunicare con i DAO sostanza
+     */
     private final static SostanzaDataInterface sostanzaDataInterface = new SostanzaDAO();
-    private Lotto lotto = null;
-    private Sostanza sostanza = null;
-    private Armadietto armadietto = null;
 
+
+
+
+    /**
+     * Costruttore predefinito
+     */
     public ArmadiettoFacade() {
     }
 
     //-- GetDataInterface --
 
+    /**
+     * Metodo che permette di trovareun lotto per l'id
+     * @param id id lotto
+     * @return oggetto Lotto
+     */
     @Override
     public Lotto getLottoByID(int id) {
         return lottoDataInterface.getLottoById(id);
     }
 
+    /**
+     * Metodo che permette di ricevere la lista dei lotti
+     * @return Lista dei lotti
+     */
     @Override
     public ArrayList<Lotto> getListaLotti() {
         return lottoDataInterface.getListaLotti();
     }
 
+    /**
+     * Metodo che permette di ricevere la sostanza per l'id
+     * @param id id sostanza
+     * @return Oggetto sostanza
+     */
     @Override
     public Sostanza getSostanzaByID(int id) {
         return sostanzaDataInterface.getSostanzaByID(id);
     }
 
+    /**
+     * Metodo che permette di ricevere la sostanza per il nome
+     * @param nome nome della sostanza
+     * @return Oggetto sostanza
+     */
     @Override
     public Sostanza getSostanzaByName(String nome) {
         return sostanzaDataInterface.getSostanzaByNome(nome);
     }
 
+    /**
+     * Metodo che permette di ricevere la lista delle sostanze presenti nel database
+     * @return lista di oggetti Sostanza
+     */
     @Override
     public ArrayList<Sostanza> getListaSostanza() {
         return sostanzaDataInterface.getListaSostanze();
     }
 
+    /**
+     * Ritorna la lista dei nomi delle sostanze presenti
+     * @return lista Nomi sostanza
+     */
     @Override
     public String[] getListaNomiSostanze(){
         return sostanzaDataInterface.getListaNomiSostanze();
     }
 
+    /**
+     * Ritorna il costo totale per un lotto
+     * @param id id del lotto
+     * @return costo del lotto
+     */
     @Override
     public double getLottoTotalCost(int id){
 
@@ -54,18 +98,38 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
 
     }
 
+    /**
+     * Calcola il costo partendo dalla sostamza
+     * @param nomeSostanza nome della sostanza
+     * @param quantita quantita della sostanza
+     * @param purezza purezza della sostanza
+     * @return costo totale
+     */
     @Override
     public double getTotalCostBySostanza(String nomeSostanza , double quantita , double purezza){
         Sostanza sostanza = getSostanzaByName(nomeSostanza);
         return sostanza.getCosto(quantita , purezza);
     }
 
+    /**
+     * Ritorn ala formula della sostanz
+     * @param nomeSostanza nome della sostanza
+     * @return formula della sostanza
+     */
     @Override
     public String getFormulaBySostanza(String nomeSostanza){
         Sostanza sostanza = sostanzaDataInterface.getSostanzaByNome(nomeSostanza);
         return sostanza.getFormula();
     }
 
+    /**
+     * Crea un ogetto lotto senza persistenza
+     * @param dataDiScadenza data di scadenza del lotto
+     * @param quantita quantita del lotto
+     * @param sostanza sostanza presente nel lotto
+     * @param purezza purezza della sostanza nel lotto
+     * @return Oggetto Lotto
+     */
     @Override
     public Lotto createLottoObjectNoPersistence(LocalDate dataDiScadenza , double quantita , Sostanza sostanza , double purezza){
         return new Lotto(dataDiScadenza , quantita , sostanza , purezza);
@@ -73,6 +137,14 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
     }
 
     //-- SetDataInterface --
+
+    /**
+     * Metodo che crea un nuovo oggetto lotto e lo salva nel database
+     * @param dataScadenza data si scadenza
+     * @param quantita quantita nel lotto
+     * @param sostanzaNome sostanza nel lotto
+     * @param purezza purezza sostanza
+     */
     @Override
     public void saveLotto(LocalDate dataScadenza, double quantita, String sostanzaNome , double purezza) {
         Sostanza sostanza = sostanzaDataInterface.getSostanzaByNome(sostanzaNome);
@@ -80,6 +152,14 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
         lotto.storeLotto();
     }
 
+    /**
+     * Permette di salvare in database e far ritornare un oggetto riferimento del lotto appena creato
+     * @param dataScadenza data scadenza del lotto
+     * @param quantita quantita del lotto
+     * @param sostanzaNome sostanza nel lotto
+     * @param purezza purezza della sostanza
+     * @return Oggetto Lotto
+     */
     @Override
     public Lotto saveAndRetrievelotto(LocalDate dataScadenza, double quantita, String sostanzaNome , double purezza){
 
@@ -88,6 +168,12 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
         return lottoDataInterface.saveAndRetrieveLotto(lotto);
     }
 
+    /**
+     * Metodo che crea un nuovo oggetto sostanza e lo salva nel database
+     * @param nome nome della sostanza
+     * @param formula formula chimica della sostanza
+     * @param costoUnitario costo unitario della sostanza
+     */
     @Override
     public void saveSostanza(String nome, String formula, double costoUnitario) {
         Sostanza sostanza = new Sostanza(nome, formula, costoUnitario);
@@ -126,8 +212,8 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
      */
     @Override
     public String[] getInfoLottoFormattate(int idLotto) {
-        lotto = lottoDataInterface.getLottoById(idLotto);
-        return lotto.getInfoLottoFormattate();
+        return lottoDataInterface.getLottoById(idLotto).getInfoLottoFormattate();
+
     }
 
     /**
@@ -138,8 +224,8 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
      */
     @Override
     public double getQuantitaLotto(int idLotto) {
-        lotto = lottoDataInterface.getLottoById(idLotto);
-        return lotto.getQuantita();
+        return lottoDataInterface.getLottoById(idLotto).getQuantita();
+
     }
 
     /**
@@ -150,7 +236,7 @@ public class ArmadiettoFacade implements ArmadiettoSetDataInterface , Armadietto
      */
     @Override
     public void eseguiPrelievo(int idLotto, double quantita) {
-        armadietto = new Armadietto();
+        Armadietto armadietto = new Armadietto();
         armadietto.eseguiPrelievo(idLotto, quantita);
     }
 }
