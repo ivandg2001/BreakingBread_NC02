@@ -6,9 +6,10 @@ import PackageUtils.DatabaseConnectionInterface;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe DAO che gestisce la comunicazione con il database
+ */
 public class RicercatoreDAO implements RicercatoreDataInterface{
-
-
 
     private static final String INSERT =
             "INSERT INTO ricercatore (nome, username, password, team_id) VALUES (?, ?, ?, ?)";
@@ -168,7 +169,9 @@ public class RicercatoreDAO implements RicercatoreDataInterface{
     }
 
     /**
-     * TODO
+     * Restituisce tutti i ricercatori relativi a un certo team.
+     *
+     * @param team Il team per il quale si vogliono ricavare i ricercatori.
      */
     @Override
     public ArrayList<Ricercatore> getAllRicercatoriByTeam(Team team) {

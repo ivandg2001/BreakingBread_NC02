@@ -6,6 +6,9 @@ import PackageUtils.DatabaseConnectionInterface;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe DAO che gestisce la comunicazione con il database
+ */
 public class TeamDAO implements TeamDataInterface {
 
     private static final String INSERT =
@@ -163,7 +166,9 @@ public class TeamDAO implements TeamDataInterface {
     }
 
     /**
-     * TODO
+     * Restituisce tutti i team relativi a un certo ricercatore.
+     *
+     * @param ricercatore Il ricarcatore per il quale si vogliono ricavare i team.
      */
     @Override
     public ArrayList<Team> getAllTeamsByRicercatore(Ricercatore ricercatore) {
@@ -190,7 +195,9 @@ public class TeamDAO implements TeamDataInterface {
     }
 
     /**
-     * TODO
+     * Restituisce tutti i team relativi a un certo progetto.
+     *
+     * @param progetto Il progetto per il quale si vogliono ricavare i team.
      */
     public ArrayList<Team> getAllTeamsByProgetto(Progetto progetto) {
         ArrayList<Team> teams = new ArrayList<>();

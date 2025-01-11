@@ -5,23 +5,36 @@ import PackageUtils.AppFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * Oggetto boundary che si occupa della stampa della lista dei lotti prelevabili.
+ */
 public class LottoPrelievoList {
     /**
-     * Oggetto AppFrame che contiene la GUI
+     * Frame principale dell'applicazione.
      */
     private AppFrame frame;
     /**
-     * Istanza dell'oggetto control che ha chiamato la procedura.
+     * Oggetto control che utilizza questo boundary.
      */
     private PrelievoSostanzaControl control;
 
+    /**
+     * Costruttore parametrico.
+     *
+     * @param frame Frame principale dell'applicazione.
+     * @param control Oggetto control che utilizza questo boundary.
+     */
     public LottoPrelievoList(AppFrame frame, PrelievoSostanzaControl control) {
         this.frame = frame;
         this.control = control;
     }
 
+    /**
+     * Avvia la procedura di stampa a schermo.
+     *
+     * @param listaLottiFormattati Un arraylist di array di stringhe contenenti informazioni riguardanti i lotti prelevabili.
+     */
     public void display(ArrayList<String[]> listaLottiFormattati) {
         // Imposta intestazione della pagina
         JLabel titoloPagina = new JLabel("Lista Lotti Prelevabili");

@@ -6,6 +6,9 @@ import PackageUtils.DatabaseConnectionInterface;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe DAO che gestisce la comunicazione con il database
+ */
 public class ProgettoDAO implements ProgettoDataInterface {
 
 
@@ -165,7 +168,9 @@ public class ProgettoDAO implements ProgettoDataInterface {
     }
 
     /**
-     * TODO
+     * Restituisce tutti i progetti relativi a un certo team.
+     *
+     * @param team Il team per il quale si vogliono ricavare i progetti.
      */
     @Override
     public ArrayList<Progetto> getAllProgettiByTeam(Team team) {

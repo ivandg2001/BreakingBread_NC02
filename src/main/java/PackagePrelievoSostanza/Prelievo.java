@@ -1,10 +1,8 @@
 package PackagePrelievoSostanza;
 
 import PackageArmadietto.Lotto;
-import PackageArmadietto.LottoDataInterface;
 
 import java.time.LocalDate;
-
 
 /**
  * Classe POJO che rappresenta un prelievo nel sistema, mappato da un adapter JPA.

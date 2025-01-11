@@ -112,6 +112,9 @@ public class Team {
         this.setProgetti(progettoDI.getAllProgettiByTeam(this));
     }
 
+    /**
+     * Aggiorna il database con le attuali informazioni contenute nell'oggetto.
+     */
     public void update () {
         //NON IMPLEMENTATO IN QUESTA VERSIONE DEL SISTEMA
     }

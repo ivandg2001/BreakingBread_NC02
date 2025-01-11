@@ -44,7 +44,9 @@ public interface PrelievoDataInterface {
     boolean deletePrelievo(Prelievo prelievo);
 
     /**
-     * TODO
+     * Restituisce tutti i prelievi effettuati da un Ricercatore
+     *
+     * @param ricercatore Il ricercatore per il quale si vogliono ricavare i prelievi.
      */
     ArrayList<Prelievo> getAllPrelieviByRicercatore(Ricercatore ricercatore);
 

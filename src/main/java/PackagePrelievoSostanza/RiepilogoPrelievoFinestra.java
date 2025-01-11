@@ -5,15 +5,35 @@ import PackageUtils.AppFrame;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Oggetto boundary che si occupa della stampa del riepilogo del prelievo.
+ */
 public class RiepilogoPrelievoFinestra {
+    /**
+     * Frame principale dell'applicazione.
+     */
     private AppFrame frame;
+    /**
+     * Oggetto control che utilizza questo boundary.
+     */
     private PrelievoSostanzaControl control;
 
+    /**
+     * Costruttore parametrico.
+     *
+     * @param frame Frame principale dell'applicazione.
+     * @param control Oggetto control che utilizza questo boundary.
+     */
     public RiepilogoPrelievoFinestra(AppFrame frame, PrelievoSostanzaControl control) {
         this.frame = frame;
         this.control = control;
     }
 
+    /**
+     * Avvia la procedura di stampa a schermo.
+     *
+     * @param infoPrelievoFormattate Array di stringhe contenenti informazioni riguardanti il prelievo che si intende fare.
+     */
     public void display(String[] infoPrelievoFormattate) {
 
         // Imposta intestazione della pagina

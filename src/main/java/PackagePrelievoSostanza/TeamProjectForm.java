@@ -7,26 +7,40 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Oggetto boundary che si occupa della stampa del form per la scelta del team e del progetto.
+ */
 public class TeamProjectForm {
 
     /**
-     * Oggetto AppFrame che contiene la GUI
+     * Frame principale dell'applicazione.
      */
     private AppFrame frame;
 
     /**
-     * Istanza dell'oggetto control che ha chiamato la procedura.
+     * Oggetto control che utilizza questo boundary.
      */
     private PrelievoSostanzaControl control;
 
     private JComboBox<String> comboTeam;
     private JComboBox<String> comboProgetto;
 
+    /**
+     * Costruttore parametrico.
+     *
+     * @param frame Frame principale dell'applicazione.
+     * @param control Oggetto control che utilizza questo boundary.
+     */
     public TeamProjectForm(AppFrame frame, PrelievoSostanzaControl control) {
         this.frame = frame;
         this.control = control;
     }
 
+    /**
+     * Avvia la procedura di stampa a schermo.
+     *
+     * @param teams La lista dei team.
+     */
     public void display(ArrayList<Team> teams) {
         // Imposta intestazione della pagina
         JLabel titoloPagina = new JLabel("Inserisci Team e Progetto");

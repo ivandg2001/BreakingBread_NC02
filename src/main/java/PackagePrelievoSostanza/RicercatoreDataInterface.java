@@ -44,7 +44,9 @@ public interface RicercatoreDataInterface {
     boolean deleteRicercatore(Ricercatore ricercatore);
 
     /**
-     * TODO
+     * Restituisce tutti i ricercatori relativi a un certo team.
+     *
+     * @param team Il team per il quale si vogliono ricavare i ricercatori.
      */
     ArrayList<Ricercatore> getAllRicercatoriByTeam(Team team);
 

@@ -90,6 +90,9 @@ public class Progetto {
         this.setTeams(teamDI.getAllTeamsByProgetto(this));
     }
 
+    /**
+     * Aggiorna il database con le attuali informazioni contenute nell'oggetto.
+     */
     public void update () {
         //NON IMPLEMENTATO IN QUESTA VERSIONE DEL SISTEMA
     }

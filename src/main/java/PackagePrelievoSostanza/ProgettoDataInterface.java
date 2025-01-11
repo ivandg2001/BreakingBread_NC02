@@ -44,7 +44,9 @@ public interface ProgettoDataInterface {
     boolean deleteProgetto(Progetto progetto);
 
     /**
-     * TODO
+     * Restituisce tutti i progetti relativi a un certo team.
+     *
+     * @param team Il team per il quale si vogliono ricavare i progetti.
      */
     ArrayList<Progetto> getAllProgettiByTeam(Team team);
 }

@@ -6,6 +6,9 @@ import PackageUtils.DatabaseConnectionInterface;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe DAO che gestisce la comunicazione con il database
+ */
 public class PrelievoDAO implements PrelievoDataInterface {
 
     private static final String INSERT =
@@ -165,7 +168,9 @@ public class PrelievoDAO implements PrelievoDataInterface {
     }
 
     /**
-     * TODO
+     * Restituisce tutti i prelievi effettuati da un Ricercatore
+     *
+     * @param ricercatore Il ricercatore per il quale si vogliono ricavare i prelievi.
      */
     @Override
     public ArrayList<Prelievo> getAllPrelieviByRicercatore(Ricercatore ricercatore) {

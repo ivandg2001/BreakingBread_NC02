@@ -9,23 +9,40 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import java.awt.*;
 
+/**
+ * Oggetto boundary che si occupa della stampa del form di scelta della quantità.
+ */
 public class QuantityForm {
     /**
-     * Oggetto AppFrame che contiene la GUI
+     * Frame principale dell'applicazione.
      */
     private AppFrame frame;
     /**
-     * Istanza dell'oggetto control che ha chiamato la procedura.
+     * Oggetto control che utilizza questo boundary.
      */
     private PrelievoSostanzaControl control;
 
+    /**
+     * Il campo quantità che verrà compilato dall'utente.
+     */
     private JTextField fieldQuantita;
 
+    /**
+     * Costruttore parametrico.
+     *
+     * @param frame Frame principale dell'applicazione.
+     * @param control Oggetto control che utilizza questo boundary.
+     */
     public QuantityForm(AppFrame frame, PrelievoSostanzaControl control) {
         this.frame = frame;
         this.control = control;
     }
 
+    /**
+     * Avvia la procedura di stampa a schermo.
+     *
+     * @param infoLottoFormattate Informazioni riguardanti il lotto da cui si intende prelevare.
+     */
     public void display(String[] infoLottoFormattate) {
         // Imposta intestazione della pagina
         JLabel titoloPagina = new JLabel("Scegli quantità da prelevare");
@@ -92,6 +109,8 @@ public class QuantityForm {
 
     /**
      * Imposta un filtro per accettare solo input numerici (inclusi i decimali).
+     *
+     * @param textField Il campo sul quale si intende applicare il filtro.
      */
     private void setNumericInput(JTextField textField) {
         ((AbstractDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {

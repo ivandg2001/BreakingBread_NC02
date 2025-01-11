@@ -44,12 +44,16 @@ public interface TeamDataInterface {
     boolean deleteTeam(Team team);
 
     /**
-     * TODO
+     * Restituisce tutti i team relativi a un certo ricercatore.
+     *
+     * @param ricercatore Il ricarcatore per il quale si vogliono ricavare i team.
      */
     ArrayList<Team> getAllTeamsByRicercatore(Ricercatore ricercatore);
 
     /**
-     * TODO
+     * Restituisce tutti i team relativi a un certo progetto.
+     *
+     * @param progetto Il progetto per il quale si vogliono ricavare i team.
      */
     ArrayList<Team> getAllTeamsByProgetto(Progetto progetto);
 
