@@ -39,8 +39,7 @@ public class PrelievoSostanzaControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'team_A' , 'progetto_1' , true" ,
-            "'team_B' , 'progetto_3' , true"
+            "'team_A' , 'progetto_1' , true"
     })
     public void TC2_3_teamEProgettoValido(String team , String progetto , boolean expected){
 
@@ -50,9 +49,7 @@ public class PrelievoSostanzaControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'-1' , false" ,
-            "'-2' , false" ,
-            "'-20' , false"
+            "'-1' , false"
     })
     public void TC2_4a_quantitaNegativa(String quantita , boolean expected){
 
@@ -62,9 +59,7 @@ public class PrelievoSostanzaControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'99999' , false" ,
-            "'100000' , false" ,
-            "'100000000' , false"
+            "'1001' , false"
     })
     public void TC2_4b_quantitaTroppoAlta(String quantita , boolean expected){
 

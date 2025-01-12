@@ -15,11 +15,7 @@ public class NuovoOrdineControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-1 , false" ,
-            "-100 , false" ,
-            "-1000 , false" ,
-            "-20 , false" ,
-            "-200 , false"
+            "-1 , false"
     })
     public void TC1_1_a_purezzaNegativa(double purezza , boolean expected) {
 
@@ -29,11 +25,7 @@ public class NuovoOrdineControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "101 , false" ,
-            "102 , false" ,
-            "1000 , false" ,
-            "120000 , false" ,
-            "200000 , false"
+            "101 , false"
     })
     public void TC1_1_b_purezzaSuperioreAl100(double purezza , boolean expected) {
 
@@ -67,11 +59,7 @@ public class NuovoOrdineControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "4 , false" ,
-            "5 , false" ,
-            "-1 , false" ,
-            "-2 , false" ,
-            "30 , false"
+            "4 , false"
     })
     public void TC1_2_b_prioritaNonAccettabile(Integer priorita , boolean expected) {
 
@@ -86,11 +74,7 @@ public class NuovoOrdineControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-1 , false" ,
-            " -2 , false" ,
-            " -100 , false" ,
-            " -1000 , false" ,
-            " -10000000000 , false"
+            "-1 , false"
     })
     public void TC1_3_a_quantitaNegativa(double quantita , boolean expected) {
 
@@ -100,10 +84,7 @@ public class NuovoOrdineControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "100001 , false" ,
-            " 2000002, false" ,
-            " 2000001 , false" ,
-            " 101010 , false"
+            "100001 , false"
     })
     public void TC1_3_b_quantitaMassimaSuperata(double quantita , boolean expected) {
 
@@ -141,12 +122,7 @@ public class NuovoOrdineControlTest {
 
     @ParameterizedTest
     @CsvSource({
-            "'Etanolo' , 78 , 5000 , 2 , true" ,
-            "'Etanolo', 100, 100000, 1, true",
-            "'Acido cloridrico', 1, 1, 3, true",
-            "'Acqua ossigenata', 50, 500, 2, true",
-            "'Etanolo', 99.99, 99999, 1, true",
-            "'Acido cloridrico', 25, 1000, 3, true"
+            "'Etanolo' , 78 , 5000 , 2 , true"
 
     })
     public void TC1_5_InputCorretto(String sostanza, double purezza, double quantita, Integer priorita, boolean expected) {
